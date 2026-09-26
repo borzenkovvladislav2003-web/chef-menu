@@ -260,8 +260,8 @@
       
       <!-- Профиль шефа -->
       <div class="bg-white rounded-2xl p-5 shadow-xs border border-sand-200 text-center space-y-3">
-        <div class="w-20 h-20 rounded-full mx-auto overflow-hidden ring-4 ring-brand-50 shadow-md">
-          <img class="w-full h-full object-cover" src="images/IMG_2251 3.jpg" onerror="if(this.src.indexOf('chef.jpg')===-1){this.src='images/chef.jpg';}else{this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuDQMgi9kPq7MKJR4V9Y6HzgwmLCJNeCYmSmLKuTeplCOpe8oYJr_JD4__Z29gXJhibyk1JdmW25fkVlrZzDz15u7nY2i3yzk6p4wNOBC0VTi435oS9ETODQuGqBCJYn21J9_d-PwK4X56ia3Zs2qkOkh2zQktOXz5eIOiF1Ql7L2KR9_bjHvOr_rYpZGeYyRhMxpuoXoLsPJcljdCeAY1uOS5psFe0XI0bH6MNnMhM1ZPiy5LIGBlWa';}" alt="Шеф Владислав">
+        <div class="w-full max-w-[260px] mx-auto rounded-3xl overflow-hidden ring-4 ring-brand-50 shadow-md">
+          <img class="w-full h-auto block" src="images/IMG_2251 3.jpg" onerror="if(this.src.indexOf('chef.jpg')===-1){this.src='images/chef.jpg';}else{this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuDQMgi9kPq7MKJR4V9Y6HzgwmLCJNeCYmSmLKuTeplCOpe8oYJr_JD4__Z29gXJhibyk1JdmW25fkVlrZzDz15u7nY2i3yzk6p4wNOBC0VTi435oS9ETODQuGqBCJYn21J9_d-PwK4X56ia3Zs2qkOkh2zQktOXz5eIOiF1Ql7L2KR9_bjHvOr_rYpZGeYyRhMxpuoXoLsPJcljdCeAY1uOS5psFe0XI0bH6MNnMhM1ZPiy5LIGBlWa';}" alt="Шеф Владислав">
         </div>
         <div>
           <h2 class="font-bold text-lg text-sand-900">Шеф Владислав</h2>
@@ -514,12 +514,12 @@
         card.className = 'bg-white rounded-2xl overflow-hidden shadow-xs border border-sand-200 transition-all';
         
         card.innerHTML = `
-          <div class="relative aspect-[16/10] w-full overflow-hidden bg-sand-100">
-            <img class="w-full h-full object-cover" src="${dish.img}" alt="${dish.title}" loading="lazy" onerror="if(this.src!=='${dish.fallbackImg}')this.src='${dish.fallbackImg}'">
-            <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5 flex-wrap">
-              ${dish.badges.map(b => `<span class="px-2 py-0.5 rounded-full bg-white/95 backdrop-blur-xs text-[10px] font-bold text-sand-900 shadow-2xs">${b}</span>`).join('')}
+          <div class="relative w-full overflow-hidden bg-sand-100">
+            <img class="w-full h-auto block" src="${dish.img}" alt="${dish.title}" loading="lazy" onerror="if(this.src!=='${dish.fallbackImg}')this.src='${dish.fallbackImg}'">
+            <div class="absolute top-3 left-3 flex items-center gap-1.5 flex-wrap">
+              ${dish.badges.map(b => `<span class="px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-[11px] font-bold text-sand-900 shadow-sm">${b}</span>`).join('')}
             </div>
-            <div class="absolute bottom-2 left-2.5 bg-black/60 backdrop-blur-xs text-white text-[11px] px-2 py-0.5 rounded-md font-medium">
+            <div class="absolute bottom-3 left-3 bg-black/70 backdrop-blur-md text-white text-xs px-3 py-1 rounded-lg font-semibold shadow-sm">
               ${dish.portion}
             </div>
           </div>
