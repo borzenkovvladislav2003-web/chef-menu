@@ -572,12 +572,12 @@
         card.className = 'bg-white rounded-2xl overflow-hidden shadow-xs border border-sand-200 transition-all';
         
         card.innerHTML = `
-          <div class="relative w-full overflow-hidden bg-sand-100">
-            <img class="w-full h-auto block" src="${dish.img}" alt="${dish.title}" loading="lazy" onerror="if(this.src!=='${dish.fallbackImg}')this.src='${dish.fallbackImg}'">
+          <div class="relative w-full bg-[#f4f1ea] overflow-hidden flex items-center justify-center p-2.5">
+            <img class="max-h-60 sm:max-h-64 w-auto max-w-full h-auto object-contain mx-auto block rounded-xl shadow-xs" src="${dish.img}" alt="${dish.title}" loading="lazy" onerror="if(this.src!=='${dish.fallbackImg}')this.src='${dish.fallbackImg}'">
             <div class="absolute top-3 left-3 flex items-center gap-1.5 flex-wrap">
-              ${dish.badges.map(b => `<span class="px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-[11px] font-bold text-sand-900 shadow-sm">${b}</span>`).join('')}
+              ${dish.badges.map(b => `<span class="px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-[10px] font-bold text-sand-900 shadow-2xs">${b}</span>`).join('')}
             </div>
-            <div class="absolute bottom-3 left-3 bg-black/70 backdrop-blur-md text-white text-xs px-3 py-1 rounded-lg font-semibold shadow-sm">
+            <div class="absolute bottom-3 right-3 bg-black/70 backdrop-blur-md text-white text-[11px] px-2.5 py-0.5 rounded-lg font-semibold shadow-sm">
               ${dish.portion}
             </div>
           </div>
