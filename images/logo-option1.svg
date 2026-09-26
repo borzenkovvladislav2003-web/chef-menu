@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@500;600;700&amp;display=swap');
+      .bg { fill: #F9F7F2; }
+      .primary { fill: #1E3A2F; }
+      .accent { fill: #3D5E48; }
+      .soft { fill: #6B8775; }
+      .title { font-family: 'Playfair Display', Georgia, serif; font-size: 38px; font-weight: 600; letter-spacing: 0.16em; fill: #1E3A2F; text-anchor: middle; }
+      .subtitle { font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.28em; fill: #6B8775; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <!-- Background Canvas: Warm Milk / Cream -->
+  <rect width="600" height="600" class="bg" rx="32"/>
+
+  <!-- Subtle Outer Border Accent -->
+  <rect x="24" y="24" width="552" height="552" rx="20" fill="none" stroke="#E6E0D4" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.6"/>
+
+  <!-- Monogram V Emblem with Chef Hat in Negative Space -->
+  <g transform="translate(300, 240)">
+    <!-- Base Shape: The Bold Stylized Letter V -->
+    <!-- Left diagonal stroke of V with organic rounded top -->
+    <path d="M -85,-110 C -85,-118 -77,-124 -68,-124 C -59,-124 -53,-118 -50,-110 L -12,18 C -7,35 7,35 12,18 L 50,-110 C 53,-118 59,-124 68,-124 C 77,-124 85,-118 85,-110 L 32,45 C 20,78 -20,78 -32,45 Z" class="primary"/>
+
+    <!-- Chef Toque (Hat) nested in the upper opening of the V -->
+    <!-- Puffs of the hat -->
+    <path d="M -26,-102 C -36,-102 -40,-90 -34,-80 C -42,-74 -38,-58 -28,-56 C -28,-48 -18,-44 -12,-48 C -6,-44 4,-48 4,-56 C 14,-58 18,-74 10,-80 C 16,-90 12,-102 2,-102 C -4,-112 -20,-112 -26,-102 Z" fill="#F9F7F2"/>
+    
+    <!-- Inner Chef Hat Details (Olive strokes) -->
+    <path d="M -12,-105 C -7,-114 7,-114 12,-105 C 20,-105 24,-94 18,-86 C 24,-80 20,-68 12,-66 C 12,-58 4,-55 0,-58 C -4,-55 -12,-58 -12,-66 C -20,-68 -24,-80 -18,-86 C -24,-94 -20,-105 -12,-105 Z" class="primary" transform="scale(0.85) translate(0, -10)"/>
+
+    <!-- Chef Hat Base Band -->
+    <rect x="-14" y="-56" width="28" height="6" rx="3" class="accent"/>
+
+    <!-- Whisk & Olive Leaf Graceful Arc below -->
+    <!-- Small star or sparkle -->
+    <path d="M 0,8 C 0,3 3,0 8,0 C 3,0 0,-3 0,-8 C 0,-3 -3,0 -8,0 C -3,0 0,3 0,8 Z" class="accent"/>
+  </g>
+
+  <!-- Divider Line -->
+  <line x1="220" y1="380" x2="380" y2="380" stroke="#3D5E48" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+  <circle cx="300" cy="380" r="3.5" class="accent"/>
+
+  <!-- Typography -->
+  <text x="300" y="435" class="title">CHEF VLADISLAV</text>
+  <text x="304" y="475" class="subtitle">PERSONAL CHEF • NHA TRANG</text>
+</svg>
