@@ -142,19 +142,13 @@
       <section class="px-4 py-2">
         <div class="flex gap-2 overflow-x-auto no-scrollbar py-1" id="categoryBar">
           <button onclick="filterCategory('all')" class="cat-pill active px-3.5 py-1.5 rounded-full text-xs font-bold transition-all bg-brand-600 text-white shadow-xs whitespace-nowrap" data-cat="all">
-            Все блюда
+            Все меню
           </button>
-          <button onclick="filterCategory('kids')" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-700 border border-sand-200 whitespace-nowrap" data-cat="kids">
-            👶 Для детей
+          <button onclick="filterCategory('breakfast')" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-700 border border-sand-200 whitespace-nowrap" data-cat="breakfast">
+            🥞 Завтраки
           </button>
-          <button onclick="filterCategory('seafood')" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-700 border border-sand-200 whitespace-nowrap" data-cat="seafood">
-            🦐 Улов Нячанга
-          </button>
-          <button onclick="filterCategory('meat')" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-700 border border-sand-200 whitespace-nowrap" data-cat="meat">
-            🥩 Мясо и птица
-          </button>
-          <button onclick="filterCategory('soup')" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-700 border border-sand-200 whitespace-nowrap" data-cat="soup">
-            🍲 Супы 5 литров
+          <button onclick="filterCategory('dessert')" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-700 border border-sand-200 whitespace-nowrap" data-cat="dessert">
+            🧁 Десерты &amp; Выпечка
           </button>
         </div>
       </section>
@@ -186,12 +180,12 @@
           <div class="p-3 rounded-xl bg-sand-50 border border-sand-200 flex items-center justify-between">
             <div>
               <div class="flex items-center gap-1.5">
-                <span class="font-bold text-xs text-sand-900">🍲 Борщ на говядине</span>
+                <span class="font-bold text-xs text-sand-900">🥞 Сырники из домашнего творога</span>
                 <span class="text-[10px] text-emerald-600 font-semibold">• до вс</span>
               </div>
-              <p class="text-[11px] text-stone-500 mt-0.5">Кастрюля 5 л (~6 порций осталось)</p>
+              <p class="text-[11px] text-stone-500 mt-0.5">5 крупных сырников в стеклянном боксе + ягоды</p>
             </div>
-            <button onclick="showReheat('Борщ', 'Разогревать порционно в сотейнике 3–4 минуты до закипания. Подавать со сметаной и свежей зеленью.')" class="px-2.5 py-1 rounded-lg bg-white border border-sand-200 text-[11px] font-bold text-stone-700 shadow-2xs active:scale-95">
+            <button onclick="showReheat('Сырники', 'Прогреть 40–50 секунд в СВЧ или 2 минуты на сухой сковороде под крышкой. Подавать с охлажденным кремом и ягодами.')" class="px-2.5 py-1 rounded-lg bg-white border border-sand-200 text-[11px] font-bold text-stone-700 shadow-2xs active:scale-95">
               Разогрев
             </button>
           </div>
@@ -200,12 +194,12 @@
           <div class="p-3 rounded-xl bg-sand-50 border border-sand-200 flex items-center justify-between">
             <div>
               <div class="flex items-center gap-1.5">
-                <span class="font-bold text-xs text-sand-900">🥩 Домашние котлеты</span>
-                <span class="text-[10px] text-emerald-600 font-semibold">• до сб</span>
+                <span class="font-bold text-xs text-sand-900">🧁 Синнабоны с корицей</span>
+                <span class="text-[10px] text-emerald-600 font-semibold">• свежая выпечка</span>
               </div>
-              <p class="text-[11px] text-stone-500 mt-0.5">8 сочных котлет в стеклянном боксе</p>
+              <p class="text-[11px] text-stone-500 mt-0.5">В форме под сливочной глазурью</p>
             </div>
-            <button onclick="showReheat('Котлеты', 'Прогреть 2 минуты на сковороде под крышкой на слабом огне с ложкой воды или 90 секунд в СВЧ.')" class="px-2.5 py-1 rounded-lg bg-white border border-sand-200 text-[11px] font-bold text-stone-700 shadow-2xs active:scale-95">
+            <button onclick="showReheat('Синнабоны', 'Подогреть 25–30 секунд в микроволновке — сливочная глазурь станет нежной и тающей, как из печи.')" class="px-2.5 py-1 rounded-lg bg-white border border-sand-200 text-[11px] font-bold text-stone-700 shadow-2xs active:scale-95">
               Разогрев
             </button>
           </div>
@@ -214,13 +208,13 @@
           <div class="p-3 rounded-xl bg-sand-50 border border-sand-200 flex items-center justify-between">
             <div>
               <div class="flex items-center gap-1.5">
-                <span class="font-bold text-xs text-sand-900">🐟 Филе сибаса на гриле</span>
-                <span class="text-[10px] text-amber-600 font-semibold">• съесть сегодня</span>
+                <span class="font-bold text-xs text-sand-900">🍓 Ватрушки со свежей клубникой</span>
+                <span class="text-[10px] text-amber-600 font-semibold">• съесть сегодня-завтра</span>
               </div>
-              <p class="text-[11px] text-stone-500 mt-0.5">Улов с рыбного порта, с розмарином</p>
+              <p class="text-[11px] text-stone-500 mt-0.5">С заварным кремом и клубникой</p>
             </div>
-            <button onclick="showReheat('Сибас на гриле', 'Духовка 160°C на 4 минуты. Лимонный сок отжать перед подачей.')" class="px-2.5 py-1 rounded-lg bg-white border border-sand-200 text-[11px] font-bold text-stone-700 shadow-2xs active:scale-95">
-              Разогрев
+            <button onclick="showReheat('Ватрушки с клубникой', 'Идеальны при комнатной температуре. Не перегревать в СВЧ, чтобы ягоды оставались свежими и упругими.')" class="px-2.5 py-1 rounded-lg bg-white border border-sand-200 text-[11px] font-bold text-stone-700 shadow-2xs active:scale-95">
+              Подсказка
             </button>
           </div>
         </div>
@@ -402,66 +396,82 @@
   <script>
     const tg = window.Telegram?.WebApp;
 
-    // База реальных коронных блюд шефа в Нячанге
+    // База реальных коронных блюд шефа Владислава
     const DISHES = [
       {
-        id: 'borsch',
-        cat: 'soup',
-        title: 'Наваристый домашний борщ',
-        desc: 'На говяжьем бульоне долгого томления, со свеклой, свежей капустой и мягким мясом. Подается со сметаной и зеленью.',
-        portion: 'Кастрюля 5 л (8–9 порций)',
-        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCfi43SeLTm3RJgXexhe7gqYBi1-gnnWhJFtlF-Woj6elJVaqZ66MWm4nOZekSkJ5eF0OFK3mr2wcmV3iqE7BQS7RKl0DO-9WArnGfmeEy8pWjuEXbmYASFoH2n7f873CtUBr3MWag2sSt0xabTm_Pg4GhJzUBc9kMWR8Bxz7v0IrCIUKRuxlqWt85sPBceUErk0skAUoQ6Qnz6jT73kZMsN_EWBgBWBW_u7kfov07BAxVViRX00uRo',
-        badges: ['👶 Дети любят', '🥩 Говядина', '5 литров']
-      },
-      {
-        id: 'cutlets',
-        cat: 'meat',
-        title: 'Сочные домашние котлеты',
-        desc: 'Пышные котлеты из отборной говядины и свинины (60/40), в тонкой хрустящей корочке. Нежные и сочные внутри.',
-        portion: '12 штук (~1 кг готовых)',
-        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAgff5UrjjF5e6Qy36VbUIhEsV-z4p3248Vt_xLVabJKD66e87MF0s1_xnMbkXctsjqnaUxn_QFFgjPi9b1i9d32RqtP8sFuU4uTItOOkdLiVUcbIYwT4wVeReuWxK_KHX0AZGKn9h3AN1xsR8nf2N70UjfWG1s70VqSDghcTPEavj2aECTSOR7a4UaU2QU406f1yDoCxS_hKhOvHppTqICVL5f_9nVP6hptc01pPzi5SSgjd9RMpTF',
-        badges: ['👶 Фаворит детей', '12 штук']
-      },
-      {
-        id: 'seabass',
-        cat: 'seafood',
-        title: 'Дикий сибас на гриле с травами',
-        desc: 'Свежайший утренний улов с рыбного порта Нячанга, запеченный с розмарином, тимьяном и лимоном гриль.',
-        portion: '1.2 кг (3–4 персоны)',
-        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBYzTVDwOsWhdjegKgEbbGEIembFKyjddtJrdXl6JOAnf14Fn66Z_E3eUS_bJGoeOHQ4-azQWt0ATbVAxNwct4zTODrmRbMeO7qDToRJ7jMk8l2fZAfbhq-dHq0IBJ4BOAoI5U6rmvzqPK7H-WDhfhYs0ExLFlpPOR5Yc0vHooVbyBuAXYRNvWp-U72af8b1ANmiifzwKtX0Gj-0zvjljh1zPevK0-YwTwL9ajpz45yzAgHKwuEQbLU',
-        badges: ['🌊 Рыбный порт', 'Омега-3']
-      },
-      {
-        id: 'beef_stew',
-        cat: 'meat',
-        title: 'Томленая говядина с овощами',
-        desc: 'Нежнейшая мякоть Black Angus, томленая 3 часа в собственном соку со сладким перцем, беби-морковью и томатами.',
-        portion: 'Лоток 1.8 кг (7–8 порций)',
-        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCWzmTGvWCtoejrl4MApBbljmSc0iJDvLKqamupYsYgBE5_IipO-ZDC1B_t4qV7OmDqfIoKTLjVFWElW_f0xO-IbSuBHTLru4sFiTv9nIxjjiaU6RYuqtP9vD68saF9NH2j77aVp4ODP5X81SGqDEf-5ZU2I8Mvvz62pETKtZ-qRylR5PM6wzCJAzScQLDbQNdSRiaT0JGR3U5mqP1Y9GNDMcI9iCs6vNjnLVs0k6CYAOiY1NrBBXv0',
-        badges: ['Французский стиль', 'Без глютена']
-      },
-      {
         id: 'syrniki',
-        cat: 'kids',
-        title: 'Пышные ванильные сырники',
-        desc: 'Из натурального отборного творога, с золотистой корочкой и нежной текстурой суфле. Идеально к утреннему кофе и детям.',
-        portion: '10 штук + ягодный соус',
-        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDsQ_uB7hNs5ni9kaWM-IQIvU9mx4Vkl7hShv1fuT-V9fKl5f2rqAOuvZwYPTiNgL24Pkn4aaUIJxoVc4wGLLguy86r7VwrGphYOoSyOpk90r9DBbaMGyAZf4UoMQtV4Bhe6uefooAOkN9bcMVbEV75COrPCdFjfXUcCdCFYkWvTN96zhBEh9ndhrtyPin6HsAjV5DElPxrcWSpiB3gGWPD_orjH8IfBbvp1xv7vEkdSTO812uypB7G',
-        badges: ['👶 Завтрак для всей семьи', '10 шт']
+        cat: 'breakfast',
+        title: 'Сырники из домашнего творога',
+        desc: 'Приготовлены из отборного домашнего творога с нежной текстурой суфле. Подаются с легким кремом и свежими ягодами на ваш выбор (голубика, клубника).',
+        portion: '5 крупных сырников + крем',
+        img: 'images/IMG_8935.JPG',
+        fallbackImg: 'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&auto=format&fit=crop&q=80',
+        badges: ['Домашний творог', 'Ягоды на выбор', 'Хит']
       },
       {
-        id: 'puree',
-        cat: 'kids',
-        title: 'Шелковистое картофельное пюре',
-        desc: 'Настоящее домашнее пюре на натуральном сливочном масле 82.5% и молоке, взбитое до кремовой текстуры.',
-        portion: 'Гарнир 1.2 кг (6–7 порций)',
-        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBCia9s96ELxhbFlOi4iohHmM-x1u7zHga4AJYBnWly-XRfJQ_qFGzqS6tJgEfaqg6cysJZY7bJxYZ5lUytRc4qvYg31JPsHjggsuX1YL2IFqcBLkrdJJkeo7Kh5344TEsSdNt61zBPcuieV9HiPkxKPAkOPamMOieHpbsah_JtUN6RgNsfOLTbZmr9gQRAqCaUNlAx3RFwkA6b9tv4IlVGCEFOngiUNHAcLT_x3R_81s0jMpcjmiNw',
-        badges: ['Идеальный гарнир', 'Фермерское масло']
+        id: 'pancakes',
+        cat: 'breakfast',
+        title: 'Домашние пышные оладьи с фруктами',
+        desc: 'Воздушные золотистые оладьи на кефире с нежным кремом. Подаются со свежими фруктами на ваш выбор (инжир, спелая дыня, манго).',
+        portion: 'Сет оладий + фрукты и крем',
+        img: 'images/IMG_8934.JPG',
+        fallbackImg: 'https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=600&auto=format&fit=crop&q=80',
+        badges: ['Фрукты на выбор', 'Для всей семьи']
+      },
+      {
+        id: 'crepes',
+        cat: 'breakfast',
+        title: 'Тонкие домашние блинчики',
+        desc: 'Нежные кружевные блинчики на молоке. Подаются со сгущенным молоком, кусочками шоколада и свежими ягодами на выбор.',
+        portion: 'Большой сет (на 2–3 персоны)',
+        img: 'images/IMG_8933.JPG',
+        fallbackImg: 'https://images.unsplash.com/photo-1519676867240-f03562e64548?w=600&auto=format&fit=crop&q=80',
+        badges: ['Шоколад & Сгущенка', 'Ягоды на выбор']
+      },
+      {
+        id: 'cinnabons',
+        cat: 'dessert',
+        title: 'Синнабоны с ароматной корицей',
+        desc: 'Пышные свежеиспеченные булочки с пряной корицей, покрытые тающей сливочной глазурью.',
+        portion: 'Сет 6–8 штук в форме',
+        img: 'images/IMG_8929.JPG',
+        fallbackImg: 'https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=600&auto=format&fit=crop&q=80',
+        badges: ['Сливочная глазурь', 'Свежая выпечка']
+      },
+      {
+        id: 'berry_brioche',
+        cat: 'dessert',
+        title: 'Сдобные ватрушки со свежей клубникой',
+        desc: 'Мягкая сдобная выпечка с шелковистым заварным кремом и ломтиками сочной сладкой клубники под сахарной пудрой.',
+        portion: 'Сет 6 штук',
+        img: 'images/IMG_8932.JPG',
+        fallbackImg: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80',
+        badges: ['Свежая клубника', 'Заварной крем']
+      },
+      {
+        id: 'muffins',
+        cat: 'dessert',
+        title: 'Насыщенные шоколадные маффины',
+        desc: 'Влажные шоколадные кексы из отборного какао с глубоким насыщенным вкусом шоколада. Идеально к чаю и детскому полднику.',
+        portion: 'Сет 6–7 штук',
+        img: 'images/IMG_8931.JPG',
+        fallbackImg: 'https://images.unsplash.com/photo-1607958996333-41aef7caefaa?w=600&auto=format&fit=crop&q=80',
+        badges: ['Премиум какао', 'Детям нравится']
+      },
+      {
+        id: 'cookies',
+        cat: 'dessert',
+        title: 'Мягкие американские кукис (Cookies)',
+        desc: 'Хрустящие по краям и нежные тягучие внутри домашние печенья. С кусочками шоколада на ваш выбор: темный или белый.',
+        portion: '8–10 крупных печений',
+        img: 'images/IMG_8930.JPG',
+        fallbackImg: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=600&auto=format&fit=crop&q=80',
+        badges: ['Темный или белый шоколад', 'Свежая выпечка']
       }
     ];
 
     // Выбранные блюда в рацион
-    let selectedDishes = new Set(['borsch', 'cutlets']);
+    let selectedDishes = new Set(['syrniki', 'cinnabons']);
     let currentCategory = 'all';
 
     // Инициализация Telegram WebApp
@@ -505,7 +515,7 @@
         
         card.innerHTML = `
           <div class="relative aspect-[16/10] w-full overflow-hidden bg-sand-100">
-            <img class="w-full h-full object-cover" src="${dish.img}" alt="${dish.title}" loading="lazy">
+            <img class="w-full h-full object-cover" src="${dish.img}" alt="${dish.title}" loading="lazy" onerror="if(this.src!=='${dish.fallbackImg}')this.src='${dish.fallbackImg}'">
             <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5 flex-wrap">
               ${dish.badges.map(b => `<span class="px-2 py-0.5 rounded-full bg-white/95 backdrop-blur-xs text-[10px] font-bold text-sand-900 shadow-2xs">${b}</span>`).join('')}
             </div>
