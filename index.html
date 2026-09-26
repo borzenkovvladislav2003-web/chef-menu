@@ -144,6 +144,9 @@
           <button onclick="filterCategory('all')" class="cat-pill active px-3.5 py-1.5 rounded-full text-xs font-bold transition-all bg-brand-600 text-white shadow-xs whitespace-nowrap" data-cat="all">
             Все меню
           </button>
+          <button onclick="filterCategory('salad')" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-700 border border-sand-200 whitespace-nowrap" data-cat="salad">
+            🥗 Салаты
+          </button>
           <button onclick="filterCategory('breakfast')" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-700 border border-sand-200 whitespace-nowrap" data-cat="breakfast">
             🥞 Завтраки
           </button>
@@ -398,6 +401,59 @@
 
     // База реальных коронных блюд шефа Владислава
     const DISHES = [
+      // 🥗 САЛАТЫ
+      {
+        id: 'salad_cherry',
+        cat: 'salad',
+        title: 'Салат из томатов черри с базиликом или шпинатом',
+        desc: 'Спелые томаты черри, огурцы и белый домашний соус шефа на основе майонеза (на выбор можно приготовить с нежной моцареллой). Зелень на выбор: ароматный базилик или свежий шпинат.',
+        portion: 'Салатница (~450 г, 2 порции)',
+        img: 'images/IMG_8940.JPG',
+        fallbackImg: 'https://images.unsplash.com/photo-1592417817098-8f3d69109853?w=600&auto=format&fit=crop&q=80',
+        badges: ['Базилик или шпинат', 'Соус / моцарелла на выбор', 'Черри']
+      },
+      {
+        id: 'salad_meat',
+        cat: 'salad',
+        title: 'Средиземноморский салат с ветчиной или курицей',
+        desc: 'Сытный салат со спелыми томатами, сладким перцем, зелеными оливками и молодым зеленым луком. Мясной ингредиент на выбор: ветчина или нежное куриное филе (без огурцов и феты).',
+        portion: 'Сытная салатница (~450 г)',
+        img: 'images/IMG_8941.JPG',
+        fallbackImg: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&auto=format&fit=crop&q=80',
+        badges: ['Ветчина или курица', 'Оливки & Перец', 'Без огурцов']
+      },
+      {
+        id: 'salad_beetroot',
+        cat: 'salad',
+        title: 'Салат с печеной свеклой, перцем и творожным сыром',
+        desc: 'Листья свежего салата, сладкая печеная свекла, печеный перец, нежный творожный сыр и дольки цитруса. Щедро посыпается тыквенными семечками и кунжутом.',
+        portion: 'Порция салата (~400 г)',
+        img: 'images/IMG_8949.JPG',
+        fallbackImg: 'https://images.unsplash.com/photo-1505253758473-96b3d5fe3421?w=600&auto=format&fit=crop&q=80',
+        badges: ['Печеная свекла', 'Творожный сыр', 'Тыквенные семечки & кунжут']
+      },
+      {
+        id: 'salad_olives_cheese',
+        cat: 'salad',
+        title: 'Салат со свежими томатами, оливками и сыром',
+        desc: 'Хрустящие листья салата, спелые томаты, оливки, красный лук и свежемолотый перец. Сыр на ваш выбор: нежный творожный сыр или классическая фета (без курицы).',
+        portion: 'Салатница (~500 г)',
+        img: 'images/IMG_8944.JPG',
+        fallbackImg: 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&auto=format&fit=crop&q=80',
+        badges: ['Фета или творожный сыр', 'Красный лук', 'Оливки & Томаты']
+      },
+      {
+        id: 'salad_corn_pepper',
+        cat: 'salad',
+        title: 'Хрустящий салат со сладкой кукурузой и перцем',
+        desc: 'Свежий легкий салат из сладкой кукурузы, спелого сочного перца и хрустящих листьев свежего салата в авторской оливковой заправке (без лука и картофеля).',
+        portion: 'Легкая салатница (~350 г)',
+        img: 'images/IMG_8945.JPG',
+        fallbackImg: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&auto=format&fit=crop&q=80',
+        badges: ['Сладкая кукуруза', 'Свежий перец', 'Без лука']
+      },
+
+      // 🥞 ЗАВТРАКИ
       {
         id: 'syrniki',
         cat: 'breakfast',
@@ -428,6 +484,8 @@
         fallbackImg: 'https://images.unsplash.com/photo-1519676867240-f03562e64548?w=600&auto=format&fit=crop&q=80',
         badges: ['Шоколад & Сгущенка', 'Ягоды на выбор']
       },
+
+      // 🧁 ДЕСЕРТЫ & ВЫПЕЧКА
       {
         id: 'cinnabons',
         cat: 'dessert',
@@ -471,7 +529,7 @@
     ];
 
     // Выбранные блюда в рацион
-    let selectedDishes = new Set(['syrniki', 'cinnabons']);
+    let selectedDishes = new Set(['salad_cherry', 'syrniki']);
     let currentCategory = 'all';
 
     // Инициализация Telegram WebApp
