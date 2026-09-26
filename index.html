@@ -1,105 +1,46 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
-  <meta content="mobile_tab" name="shell-type"/>
-  <title>Шеф Владислав | Личный кабинет резидента</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Шеф Владислав | Личный повар в Нячанге</title>
+  
   <!-- Telegram Web App SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-  <!-- Google Fonts & Material Symbols -->
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
 
-  <!-- Tailwind CSS -->
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script id="tailwind-config">
+  <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
           colors: {
-            'surface-dim': '#dbdad6',
-            'tertiary-fixed': '#e1e2e6',
-            'error': '#ba1a1a',
-            'on-tertiary-fixed': '#191c1f',
-            'on-tertiary-container': '#b9bbbf',
-            'on-primary-fixed': '#082011',
-            'outline': '#737972',
-            'on-error-container': '#93000a',
-            'on-primary': '#ffffff',
-            'on-secondary-fixed': '#271900',
-            'on-surface-variant': '#424843',
-            'tertiary-fixed-dim': '#c5c6ca',
-            'on-primary-fixed-variant': '#344c3a',
-            'surface-tint': '#4b6451',
-            'primary-fixed': '#ceead1',
-            'on-error': '#ffffff',
-            'outline-variant': '#c2c8c1',
-            'primary-fixed-dim': '#b2cdb6',
-            'surface-container-low': '#f4f4f0',
-            'inverse-on-surface': '#f2f1ed',
-            'secondary-fixed-dim': '#e9c07c',
-            'on-background': '#1b1c1a',
-            'surface-container-lowest': '#ffffff',
-            'on-secondary-container': '#785a20',
-            'tertiary': '#313438',
-            'error-container': '#ffdad6',
-            'secondary-container': '#fed48e',
-            'surface-container-high': '#e9e8e4',
-            'surface-bright': '#faf9f5',
-            'surface-container': '#efeeea',
-            'secondary-fixed': '#ffdeaa',
-            'on-tertiary': '#ffffff',
-            'background': '#faf9f5',
-            'inverse-surface': '#2f312e',
-            'surface-variant': '#e3e2df',
-            'primary': '#223928',
-            'on-secondary': '#ffffff',
-            'surface': '#faf9f5',
-            'on-surface': '#1b1c1a',
-            'on-secondary-fixed-variant': '#5d4208',
-            'tertiary-container': '#484b4e',
-            'surface-container-highest': '#e3e2df',
-            'on-tertiary-fixed-variant': '#44474a',
-            'primary-container': '#38503e',
-            'inverse-primary': '#b2cdb6',
-            'secondary': '#785920',
-            'on-primary-container': '#a6c1aa'
-          },
-          borderRadius: {
-            'DEFAULT': '0.25rem',
-            'lg': '0.5rem',
-            'xl': '0.75rem',
-            'full': '9999px'
-          },
-          spacing: {
-            'margin': '1.25rem',
-            'space-sm': '0.5rem',
-            'gutter': '1.5rem',
-            'margin-desktop': '5rem',
-            'margin-tablet': '2.5rem',
-            'space-xl': '3rem',
-            'space-lg': '1.75rem',
-            'space-md': '1rem',
-            'space-xs': '0.25rem',
-            'gutter-desktop': '2.5rem'
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              500: '#16a34a',
+              600: '#15803d',
+              700: '#166534',
+              900: '#14532d'
+            },
+            sand: {
+              50: '#fbfbfa',
+              100: '#f5f4f0',
+              200: '#e8e6df',
+              800: '#2b2a27',
+              900: '#1c1b18'
+            }
           },
           fontFamily: {
-            'headline-lg': ['Playfair Display', 'serif'],
-            'body-lg': ['Plus Jakarta Sans', 'sans-serif'],
-            'label-md': ['Plus Jakarta Sans', 'sans-serif'],
-            'body-sm': ['Plus Jakarta Sans', 'sans-serif'],
-            'headline-sm': ['Playfair Display', 'serif'],
-            'label-sm': ['Plus Jakarta Sans', 'sans-serif'],
-            'headline-md': ['Playfair Display', 'serif'],
-            'body-md': ['Plus Jakarta Sans', 'sans-serif'],
-            'display-lg': ['Playfair Display', 'serif'],
-            'label-lg': ['Plus Jakarta Sans', 'sans-serif']
+            sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
           }
         }
       }
@@ -107,517 +48,432 @@
   </script>
 
   <style>
-    @layer base {
-      html, body {
-        width: 100vw;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        overscroll-behavior: none;
-        -webkit-tap-highlight-color: transparent;
-      }
-      .pb-safe {
-        padding-bottom: env(safe-area-inset-bottom, 16px);
-      }
-      .pt-safe {
-        padding-top: env(safe-area-inset-top, 0px);
-      }
+    body {
+      background-color: #f7f6f2;
+      color: #1c1b18;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      overscroll-behavior-y: none;
     }
-    ::-webkit-scrollbar {
+    .pb-safe {
+      padding-bottom: max(env(safe-area-inset-bottom, 16px), 16px);
+    }
+    .pt-safe {
+      padding-top: max(env(safe-area-inset-top, 0px), 0px);
+    }
+    .no-scrollbar::-webkit-scrollbar {
       display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
   </style>
 </head>
-<body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen">
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-100">
 
-  <!-- Фиксированная верхняя панель (Header) -->
-  <header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.03)] border-b border-surface-container-high/60">
-    <div class="h-20 px-margin flex flex-col justify-center">
-      <div class="flex items-center justify-between h-10">
-        <button onclick="closeTelegramApp()" class="min-w-[44px] min-h-[44px] flex items-center justify-start text-secondary font-label-md text-xs tracking-wider uppercase transition-opacity hover:opacity-75">
-          Закрыть
-        </button>
-        <div class="flex flex-col items-center justify-center max-w-[200px]">
-          <span class="font-label-sm text-[10px] tracking-widest uppercase text-secondary font-semibold">Нячанг • Вилла-Резиденс</span>
-          <span class="font-headline-sm text-base text-on-surface truncate tracking-tight font-bold">Личный кабинет</span>
-        </div>
-        <div class="flex items-center gap-space-sm">
-          <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-secondary to-primary-container p-0.5 shadow-sm flex items-center justify-center text-white text-xs font-bold" id="userAvatar">
-            101
+  <!-- ==================== ШАПКА ШЕФА ==================== -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-sand-200/80 pt-safe transition-all shadow-xs">
+    <div class="px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="relative">
+          <div class="w-12 h-12 rounded-full overflow-hidden ring-2 ring-brand-500/20 shadow-xs">
+            <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQMgi9kPq7MKJR4V9Y6HzgwmLCJNeCYmSmLKuTeplCOpe8oYJr_JD4__Z29gXJhibyk1JdmW25fkVlrZzDz15u7nY2i3yzk6p4wNOBC0VTi435oS9ETODQuGqBCJYn21J9_d-PwK4X56ia3Zs2qkOkh2zQktOXz5eIOiF1Ql7L2KR9_bjHvOr_rYpZGeYyRhMxpuoXoLsPJcljdCeAY1uOS5psFe0XI0bH6MNnMhM1ZPiy5LIGBlWa" alt="Шеф Владислав">
           </div>
-          <button onclick="showSupportInfo()" class="min-w-[44px] min-h-[44px] flex items-center justify-end text-on-surface-variant transition-opacity hover:opacity-75">
-            <span class="material-symbols-outlined text-[20px]">more_horiz</span>
-          </button>
+          <span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></span>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <h1 class="font-bold text-base tracking-tight text-sand-900 leading-tight">Шеф Владислав</h1>
+            <span class="material-symbols-outlined text-[16px] text-brand-600 fill-1" style="font-variation-settings: 'FILL' 1;">verified</span>
+          </div>
+          <p class="text-xs text-stone-500 font-medium flex items-center gap-1 mt-0.5">
+            <span>📍</span> Нячанг • Виллы и резиденции
+          </p>
         </div>
       </div>
-      <div class="flex items-center justify-between pt-space-xs">
-        <div class="flex items-center gap-space-xs">
-          <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-          <span class="font-label-sm text-[11px] text-on-surface-variant" id="greetingLabel">Добрый вечер, Семья #101 • VIP Villa Suite</span>
-        </div>
-        <span class="font-label-sm text-[10px] text-secondary font-semibold uppercase tracking-wider">Частный сервис</span>
-      </div>
+      
+      <!-- Кнопка закрыть -->
+      <button onclick="closeApp()" class="w-9 h-9 rounded-full bg-sand-100 flex items-center justify-center text-stone-600 hover:bg-sand-200 active:scale-95 transition-all">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+    </div>
+
+    <!-- Переключатель вкладок -->
+    <div class="px-4 pb-2 flex gap-1">
+      <button onclick="switchTab('menu')" id="tabMenuBtn" class="flex-1 py-1.5 rounded-lg text-xs font-bold transition-all bg-sand-900 text-white shadow-xs">
+        🍽 Выбор меню
+      </button>
+      <button onclick="switchTab('fridge')" id="tabFridgeBtn" class="flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all text-stone-600 hover:bg-sand-100">
+        🧊 Холодильник &amp; Чеки
+      </button>
+      <button onclick="switchTab('about')" id="tabAboutBtn" class="flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all text-stone-600 hover:bg-sand-100">
+        👨‍🍳 О шефе
+      </button>
     </div>
   </header>
 
-  <!-- Главный контент -->
-  <main class="flex flex-col relative w-full pt-24 pb-32 bg-surface px-margin min-h-screen">
-    <div class="flex flex-col w-full pb-10 space-y-6">
+  <!-- ==================== ОСНОВНОЙ КОНТЕНТ ==================== -->
+  <main class="flex-1 pb-32">
 
-      <!-- 1. VIP Профиль резидента и шеф-повара -->
-      <section class="flex flex-col bg-surface-container-low rounded-xl p-space-md shadow-[0_4px_24px_-4px_rgba(24,27,30,0.04)] space-y-space-md border border-surface-container-high/60">
-        <div class="flex items-start justify-between">
-          <div class="space-y-1">
-            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed">
-              <span class="material-symbols-outlined text-[14px]">stars</span>
-              <span class="font-label-sm text-[11px] uppercase tracking-wider font-bold">Diamond Resident • Семья #101</span>
+    <!-- 1. ВКЛАДКА: МЕНЮ И ВЫБОР РАЦИОНА -->
+    <div id="tabMenu" class="block animate-fadeIn">
+      
+      <!-- Прозрачный финансовый баннер -->
+      <section class="p-4 pb-2">
+        <div class="bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 text-white rounded-2xl p-4 shadow-sm relative overflow-hidden">
+          <div class="relative z-10">
+            <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/10 text-emerald-400 text-[11px] font-bold uppercase tracking-wider mb-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Честная модель без наценок
             </div>
-            <h1 class="font-headline-md text-2xl text-on-surface pt-1 font-bold">Семейная Резиденция</h1>
-            <p class="font-body-sm text-xs text-on-surface-variant">Персональная гастрономия на вилле &amp; заготовки на неделю</p>
+            <h2 class="text-base font-bold leading-snug">Семейная еда в вашем холодильнике</h2>
+            <p class="text-xs text-stone-300 mt-1 leading-relaxed">
+              Продукты — строго по чекам Lotte Mart и рынка без переплат. Оплата шефа — от <b>200 000 ₫/час</b>.
+            </p>
           </div>
-          <div class="flex items-center gap-1.5 bg-surface-container-lowest px-3 py-1.5 rounded-full shadow-sm border border-surface-container-high">
-            <span class="w-2 h-2 rounded-full bg-surface-tint animate-ping"></span>
-            <span class="font-label-sm text-xs font-semibold text-primary">Залив Нячанг</span>
+          <div class="absolute -right-3 -bottom-4 text-6xl opacity-10 pointer-events-none">
+            🍲
           </div>
         </div>
+      </section>
 
-        <!-- Карточка шеф-повара -->
-        <div class="flex items-center justify-between bg-surface-container-lowest p-space-sm rounded-lg shadow-sm border border-surface-container-high/40">
-          <div class="flex items-center gap-3">
-            <div class="relative">
-              <img class="w-12 h-12 rounded-full object-cover shadow-sm ring-2 ring-primary/20" alt="Шеф Владислав" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQMgi9kPq7MKJR4V9Y6HzgwmLCJNeCYmSmLKuTeplCOpe8oYJr_JD4__Z29gXJhibyk1JdmW25fkVlrZzDz15u7nY2i3yzk6p4wNOBC0VTi435oS9ETODQuGqBCJYn21J9_d-PwK4X56ia3Zs2qkOkh2zQktOXz5eIOiF1Ql7L2KR9_bjHvOr_rYpZGeYyRhMxpuoXoLsPJcljdCeAY1uOS5psFe0XI0bH6MNnMhM1ZPiy5LIGBlWa"/>
-              <span class="absolute bottom-0 right-0 w-4 h-4 bg-primary rounded-full flex items-center justify-center text-on-primary">
-                <span class="material-symbols-outlined text-[11px]">verified</span>
-              </span>
-            </div>
-            <div class="flex flex-col">
-              <div class="flex items-center gap-1.5">
-                <span class="font-label-lg text-sm text-on-surface font-bold">Шеф Владислав</span>
-                <span class="font-label-sm text-[10px] px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-medium">Личный метр</span>
-              </div>
-              <span class="font-body-sm text-[11px] text-on-surface-variant flex items-center gap-1 mt-0.5">
-                <span class="material-symbols-outlined text-[14px] text-secondary">verified_user</span>
-                Консьерж активен • Вилла 101 закреплена
-              </span>
-            </div>
-          </div>
-          <button onclick="openChatWithChef()" aria-label="Написать шефу" class="flex items-center justify-center w-9 h-9 rounded-full bg-primary text-on-primary shadow-sm hover:opacity-90 active:scale-95 transition-all">
-            <span class="material-symbols-outlined text-[18px]">send</span>
+      <!-- Фильтры категорий -->
+      <section class="px-4 py-2">
+        <div class="flex gap-2 overflow-x-auto no-scrollbar py-1" id="categoryBar">
+          <button onclick="filterCategory('all')" class="cat-pill active px-3.5 py-1.5 rounded-full text-xs font-bold transition-all bg-brand-600 text-white shadow-xs whitespace-nowrap" data-cat="all">
+            Все блюда
+          </button>
+          <button onclick="filterCategory('kids')" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-700 border border-sand-200 whitespace-nowrap" data-cat="kids">
+            👶 Для детей
+          </button>
+          <button onclick="filterCategory('seafood')" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-700 border border-sand-200 whitespace-nowrap" data-cat="seafood">
+            🦐 Улов Нячанга
+          </button>
+          <button onclick="filterCategory('meat')" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-700 border border-sand-200 whitespace-nowrap" data-cat="meat">
+            🥩 Мясо и птица
+          </button>
+          <button onclick="filterCategory('soup')" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-700 border border-sand-200 whitespace-nowrap" data-cat="soup">
+            🍲 Супы 5 литров
           </button>
         </div>
       </section>
 
-      <!-- 2. Ближайший визит & Живой трекер сессии -->
-      <section class="relative overflow-hidden bg-gradient-to-br from-surface-container-lowest via-surface-container-low to-surface-container-high rounded-xl p-space-md shadow-md space-y-4 border border-secondary/20">
-        <div class="flex items-start justify-between">
-          <div class="space-y-1">
-            <span class="font-label-sm text-[11px] text-secondary uppercase tracking-widest font-bold">Ближайшая кулинарная сессия</span>
-            <h2 class="font-headline-sm text-lg text-on-surface font-bold">Пятница, 15 ноя • 14:00 – 17:30</h2>
-            <p class="font-body-sm text-xs text-on-surface-variant italic">Меню: Каменные лобстеры Нячанга &amp; Томленые говяжьи ребрышки</p>
-          </div>
-          <div class="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-xs font-semibold flex items-center gap-1 shadow-sm shrink-0">
-            <span class="material-symbols-outlined text-[14px]">timer</span>
-            До начала ~45 мин
-          </div>
-        </div>
-
-        <!-- Шаги живого трекера -->
-        <div class="bg-surface-container-lowest/80 backdrop-blur-md rounded-lg p-space-md shadow-sm space-y-4 border border-surface-container-high">
-          <div class="flex items-center justify-between text-on-surface-variant">
-            <span class="font-label-md text-xs font-semibold text-primary flex items-center gap-1">
-              <span class="material-symbols-outlined text-[16px] text-primary">local_shipping</span>
-              Этап 2 из 4 • В процессе
-            </span>
-            <span class="font-label-sm text-[11px] text-secondary font-medium">Утренний улов в порту отобран</span>
-          </div>
-
-          <!-- Линейный прогресс-бар -->
-          <div class="grid grid-cols-4 gap-2">
-            <div class="flex flex-col space-y-1.5">
-              <div class="h-1.5 w-full rounded-full bg-primary"></div>
-              <span class="font-label-sm text-[10px] font-semibold text-primary truncate">1. Меню согласовано</span>
-            </div>
-            <div class="flex flex-col space-y-1.5">
-              <div class="h-1.5 w-full rounded-full bg-primary animate-pulse"></div>
-              <span class="font-label-sm text-[10px] font-semibold text-primary truncate">2. Закупка (Рынок)</span>
-            </div>
-            <div class="flex flex-col space-y-1.5">
-              <div class="h-1.5 w-full rounded-full bg-surface-dim"></div>
-              <span class="font-label-sm text-[10px] text-on-surface-variant truncate">3. Готовка на вилле</span>
-            </div>
-            <div class="flex flex-col space-y-1.5">
-              <div class="h-1.5 w-full rounded-full bg-surface-dim"></div>
-              <span class="font-label-sm text-[10px] text-on-surface-variant truncate">4. Подача (18:00)</span>
-            </div>
-          </div>
-
-          <div class="flex items-center justify-between pt-1">
-            <div class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-surface-tint"></span>
-              <span class="font-body-sm text-xs text-on-surface">Закупка свежей зелени и беби-моркови из Далата в Lotte Mart</span>
-            </div>
-            <button onclick="showSessionLiveNote()" class="font-label-sm text-xs text-secondary hover:underline flex items-center gap-0.5 font-semibold shrink-0">
-              Заметка <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-            </button>
-          </div>
-        </div>
+      <!-- Каталог блюд -->
+      <section class="px-4 py-2 space-y-3.5" id="dishesList">
+        <!-- Блюда динамически рендерятся из JS -->
       </section>
+    </div>
 
-      <!-- 3. Умный холодильник & Рацион в резиденции (Shelf View) -->
-      <section class="flex flex-col space-y-3">
-        <div class="flex items-center justify-between">
+    <!-- 2. ВКЛАДКА: ХОЛОДИЛЬНИК & ЧЕКИ -->
+    <div id="tabFridge" class="hidden animate-fadeIn p-4 space-y-4">
+      
+      <!-- Карточка инвентаря -->
+      <div class="bg-white rounded-2xl p-4 shadow-xs border border-sand-200">
+        <div class="flex items-center justify-between mb-2">
           <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-primary text-[22px]">kitchen</span>
-            <h2 class="font-headline-sm text-lg text-on-surface font-bold">Холодильник &amp; Запас блюд на вилле</h2>
+            <span class="material-symbols-outlined text-brand-600">kitchen</span>
+            <h3 class="font-bold text-sm text-sand-900">Холодильник резидента (#101)</h3>
           </div>
-          <span class="font-label-sm text-xs px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-semibold">4 готовых блюда</span>
-        </div>
-        <p class="font-body-sm text-xs text-on-surface-variant">Стеклянные герметичные боксы под кулинарным замком свежести. Нажмите для инструкции по разогреву.</p>
-
-        <div class="grid grid-cols-1 gap-3.5">
-          <!-- Блюдо 1 -->
-          <article class="bg-surface-container-lowest rounded-xl p-3 shadow-sm flex flex-col space-y-3 border border-surface-container-high/50">
-            <div class="flex gap-3">
-              <div class="relative w-28 h-28 rounded-lg overflow-hidden shrink-0">
-                <img class="w-full h-full object-cover" alt="Томленые ребрышки" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfi43SeLTm3RJgXexhe7gqYBi1-gnnWhJFtlF-Woj6elJVaqZ66MWm4nOZekSkJ5eF0OFK3mr2wcmV3iqE7BQS7RKl0DO-9WArnGfmeEy8pWjuEXbmYASFoH2n7f873CtUBr3MWag2sSt0xabTm_Pg4GhJzUBc9kMWR8Bxz7v0IrCIUKRuxlqWt85sPBceUErk0skAUoQ6Qnz6jT73kZMsN_EWBgBWBW_u7kfov07BAxVViRX00uRo"/>
-                <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-surface/90 backdrop-blur-sm font-label-sm text-[10px] text-on-surface font-medium">4 порции</span>
-              </div>
-              <div class="flex flex-col justify-between flex-1 min-w-0">
-                <div>
-                  <div class="flex items-center justify-between">
-                    <span class="font-label-sm text-[11px] text-secondary uppercase tracking-wider font-bold">Съесть до субботы</span>
-                    <span class="material-symbols-outlined text-[16px] text-on-surface-variant">thermostat</span>
-                  </div>
-                  <h3 class="font-headline-sm text-base leading-tight text-on-surface font-bold truncate pt-1">Томленые говяжьи ребрышки</h3>
-                  <p class="font-body-sm text-xs text-on-surface-variant line-clamp-1 mt-0.5">Глазированная беби-морковь и шалот в красном демиглясе</p>
-                </div>
-                <div class="flex items-center gap-1.5 flex-wrap">
-                  <span class="px-2 py-0.5 rounded-full bg-surface-container font-label-sm text-[10px] text-on-surface font-medium">4 мин • 160°C</span>
-                  <span class="px-2 py-0.5 rounded-full bg-surface-container-high font-label-sm text-[10px] text-on-surface-variant font-medium">Фирменный соус</span>
-                </div>
-              </div>
-            </div>
-            <div class="flex items-center justify-between pt-1 bg-surface-container-low/60 p-2 rounded-lg">
-              <span class="font-label-sm text-[11px] text-on-surface-variant flex items-center gap-1">
-                <span class="material-symbols-outlined text-[14px] text-primary">microwave</span>
-                Духовка или пароконвектомат
-              </span>
-              <div class="flex items-center gap-2">
-                <button onclick="showReheatInstructions('Томленые ребрышки', 'Разогреть духовку до 160°C. Поместить контейнер без крышки на 4 минуты. Перед подачей полить соусом из отдельной баночки.')" class="font-label-sm text-xs text-primary font-bold hover:underline flex items-center">
-                  Инструкция
-                </button>
-                <span class="text-outline-variant">•</span>
-                <button onclick="showVideoModal('Томленые ребрышки')" class="font-label-sm text-xs text-secondary font-bold hover:underline flex items-center gap-0.5">
-                  Видео подачи <span class="material-symbols-outlined text-[12px]">play_circle</span>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- Блюдо 2 -->
-          <article class="bg-surface-container-lowest rounded-xl p-3 shadow-sm flex flex-col space-y-3 border border-surface-container-high/50">
-            <div class="flex gap-3">
-              <div class="relative w-28 h-28 rounded-lg overflow-hidden shrink-0">
-                <img class="w-full h-full object-cover" alt="Митболы с травами" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAfgyeP1CzQZqQoQAfp8oK5jclK8nPUKC_XU1JbWVyjEz9r3zlwGImzh2S2yfdJC79GFXfQNIX-vGqtfiVIocfM0rIaTmYW-XF2D5c-RO0DzyE2swLKJSamNRauz8yU_HizkJ3SW23qWcv5ol7L8wXQ9Xz_5OGq5H8Om6jcDpWqiijiXGIqucUzm_j3NMrC-BYxxYdTsODMsbXunFPPq2ialyL5Ro7fscmprmlmHdTIBVA7Ymy64pc"/>
-                <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-surface/90 backdrop-blur-sm font-label-sm text-[10px] text-on-surface font-medium">Детям</span>
-              </div>
-              <div class="flex flex-col justify-between flex-1 min-w-0">
-                <div>
-                  <div class="flex items-center justify-between">
-                    <span class="font-label-sm text-[11px] text-secondary uppercase tracking-wider font-bold">Съесть до воскресенья</span>
-                    <span class="material-symbols-outlined text-[16px] text-on-surface-variant">favorite</span>
-                  </div>
-                  <h3 class="font-headline-sm text-base leading-tight text-on-surface font-bold truncate pt-1">Пряные митболы с травами</h3>
-                  <p class="font-body-sm text-xs text-on-surface-variant line-clamp-1 mt-0.5">Редукция костного бульона, сладкий розмарин, мягкий перец</p>
-                </div>
-                <div class="flex items-center gap-1.5 flex-wrap">
-                  <span class="px-2 py-0.5 rounded-full bg-surface-container font-label-sm text-[10px] text-on-surface font-medium">Микроволновка 2 мин</span>
-                  <span class="px-2 py-0.5 rounded-full bg-secondary-fixed font-label-sm text-[10px] text-on-secondary-fixed font-semibold">Одобрено Лео</span>
-                </div>
-              </div>
-            </div>
-            <div class="flex items-center justify-between pt-1 bg-surface-container-low/60 p-2 rounded-lg">
-              <span class="font-label-sm text-[11px] text-on-surface-variant flex items-center gap-1">
-                <span class="material-symbols-outlined text-[14px] text-primary">skillet</span>
-                Рекомендуется разогрев на сковороде
-              </span>
-              <button onclick="showVideoModal('Пряные митболы')" class="font-label-sm text-xs text-secondary font-bold hover:underline flex items-center gap-0.5">
-                Видео подачи <span class="material-symbols-outlined text-[12px]">play_circle</span>
-              </button>
-            </div>
-          </article>
-
-          <!-- Блюда 3 и 4: мини-сетка -->
-          <div class="grid grid-cols-2 gap-3">
-            <!-- Блюдо 3 -->
-            <article class="bg-surface-container-lowest rounded-xl p-3 shadow-sm flex flex-col justify-between space-y-2 border border-surface-container-high/50">
-              <div class="relative w-full h-24 rounded-lg overflow-hidden">
-                <img class="w-full h-full object-cover" alt="Шелковистое пюре" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCia9s96ELxhbFlOi4iohHmM-x1u7zHga4AJYBnWly-XRfJQ_qFGzqS6tJgEfaqg6cysJZY7bJxYZ5lUytRc4qvYg31JPsHjggsuX1YL2IFqcBLkrdJJkeo7Kh5344TEsSdNt61zBPcuieV9HiPkxKPAkOPamMOieHpbsah_JtUN6RgNsfOLTbZmr9gQRAqCaUNlAx3RFwkA6b9tv4IlVGCEFOngiUNHAcLT_x3R_81s0jMpcjmiNw"/>
-                <span class="absolute top-1 left-1 px-1.5 py-0.5 rounded bg-primary-container text-on-primary-container font-label-sm text-[10px] font-semibold">Вегетарианское</span>
-              </div>
-              <div>
-                <span class="font-label-sm text-[10px] text-secondary uppercase font-bold">Съесть до понедельника</span>
-                <h4 class="font-headline-sm text-sm leading-tight text-on-surface font-bold line-clamp-1">Шелковистое картофельное пюре</h4>
-                <p class="font-body-sm text-[11px] text-on-surface-variant truncate">Органическое, с фермерским маслом</p>
-              </div>
-              <button onclick="showReheatInstructions('Картофельное пюре', 'Прогреть 90 секунд на среднем огне или в микроволновой печи. Добавить каплю сливочного масла для блеска.')" class="w-full py-1.5 rounded bg-surface-container text-on-surface font-label-sm text-xs font-semibold active:bg-surface-container-high">
-                Разогрев: 90 сек
-              </button>
-            </article>
-
-            <!-- Блюдо 4 -->
-            <article class="bg-surface-container-lowest rounded-xl p-3 shadow-sm flex flex-col justify-between space-y-2 border border-surface-container-high/50">
-              <div class="relative w-full h-24 rounded-lg overflow-hidden">
-                <img class="w-full h-full object-cover" alt="Ягодный тарт" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsQ_uB7hNs5ni9kaWM-IQIvU9mx4Vkl7hShv1fuT-V9fKl5f2rqAOuvZwYPTiNgL24Pkn4aaUIJxoVc4wGLLguy86r7VwrGphYOoSyOpk90r9DBbaMGyAZf4UoMQtV4Bhe6uefooAOkN9bcMVbEV75COrPCdFjfXUcCdCFYkWvTN96zhBEh9ndhrtyPin6HsAjV5DElPxrcWSpiB3gGWPD_orjH8IfBbvp1xv7vEkdSTO812uypB7G"/>
-                <span class="absolute top-1 left-1 px-1.5 py-0.5 rounded bg-secondary text-on-secondary font-label-sm text-[10px] font-semibold">Десерт</span>
-              </div>
-              <div>
-                <span class="font-label-sm text-[10px] text-secondary uppercase font-bold">Готово к подаче</span>
-                <h4 class="font-headline-sm text-sm leading-tight text-on-surface font-bold line-clamp-1">Тарт с лесными ягодами</h4>
-                <p class="font-body-sm text-[11px] text-on-surface-variant truncate">Стручковая ваниль и манго Далата</p>
-              </div>
-              <button onclick="showReheatInstructions('Ягодный тарт', 'Десерт готов к употреблению. Подавать охлажденным прямо из холодильника.')" class="w-full py-1.5 rounded bg-surface-container text-on-surface font-label-sm text-xs font-semibold active:bg-surface-container-high">
-                Подавать холодным
-              </button>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- 4. Книга чеков без наценок (Cost-Plus Grocery Ledger) -->
-      <section class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-4 border border-surface-container-high/60">
-        <div class="flex items-start justify-between">
-          <div>
-            <div class="flex items-center gap-1.5">
-              <span class="material-symbols-outlined text-[18px] text-primary">receipt_long</span>
-              <span class="font-label-sm text-[10px] text-secondary font-bold uppercase tracking-wider">100% Честность без наценок</span>
-            </div>
-            <h3 class="font-headline-sm text-lg text-on-surface pt-0.5 font-bold">Прозрачная книга чеков закупки</h3>
-          </div>
-          <span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-xs font-semibold">
-            Оплачено • VietQR
+          <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
+            Свежие запасы
           </span>
         </div>
-        <p class="font-body-sm text-xs text-on-surface-variant">
-          Вы оплачиваете строго фактические чеки из супермаркета. Услуги шефа тарифицируются строго по отработанным часам.
-        </p>
+        <p class="text-xs text-stone-500 mb-3">Блюда герметично упакованы в стеклянные боксы шефа. Нажмите для подсказки по разогреву:</p>
 
-        <!-- Финансовая разбивка -->
-        <div class="space-y-2 pt-1">
-          <div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low border border-surface-container-high/40">
-            <div class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-on-surface-variant text-[20px]">timelapse</span>
-              <div class="flex flex-col">
-                <span class="font-label-md text-xs text-on-surface font-bold">Оплата работы шефа Владислава</span>
-                <span class="font-label-sm text-[11px] text-on-surface-variant">3.5 ч @ 200 000 ₫/час</span>
+        <div class="space-y-2.5">
+          <!-- Бокс 1 -->
+          <div class="p-3 rounded-xl bg-sand-50 border border-sand-200 flex items-center justify-between">
+            <div>
+              <div class="flex items-center gap-1.5">
+                <span class="font-bold text-xs text-sand-900">🍲 Борщ на говядине</span>
+                <span class="text-[10px] text-emerald-600 font-semibold">• до вс</span>
               </div>
+              <p class="text-[11px] text-stone-500 mt-0.5">Кастрюля 5 л (~6 порций осталось)</p>
             </div>
-            <span class="font-label-lg text-sm font-bold text-on-surface">700 000 ₫</span>
-          </div>
-
-          <div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low border border-surface-container-high/40">
-            <div class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-on-surface-variant text-[20px]">shopping_basket</span>
-              <div class="flex flex-col">
-                <span class="font-label-md text-xs text-on-surface font-bold">Lotte Mart Нячанг &amp; Рыбный порт</span>
-                <span class="font-label-sm text-[11px] text-on-surface-variant">Органическое мясо, травы, сибас</span>
-              </div>
-            </div>
-            <span class="font-label-lg text-sm font-bold text-on-surface">842 500 ₫</span>
-          </div>
-
-          <!-- Прикрепленный фискальный чек -->
-          <div class="flex items-center justify-between px-3 py-2 rounded-lg bg-secondary-container/30 border border-secondary/20">
-            <div class="flex items-center gap-1.5 text-on-secondary-container">
-              <span class="material-symbols-outlined text-[16px]">verified</span>
-              <span class="font-label-sm text-[11px] font-semibold">Фискальный чек #LT-8942-VN прикреплен</span>
-            </div>
-            <button onclick="toggleReceiptModal()" class="px-2.5 py-1 rounded bg-surface-container-lowest text-secondary font-label-sm text-xs font-bold shadow-sm active:scale-95 transition-transform" id="viewReceiptBtn">
-              Посмотреть 2 чека
+            <button onclick="showReheat('Борщ', 'Разогревать порционно в сотейнике 3–4 минуты до закипания. Подавать со сметаной и свежей зеленью.')" class="px-2.5 py-1 rounded-lg bg-white border border-sand-200 text-[11px] font-bold text-stone-700 shadow-2xs active:scale-95">
+              Разогрев
             </button>
           </div>
 
-          <!-- Итоговая строка -->
-          <div class="flex items-center justify-between pt-2 px-1 border-t border-surface-container-high">
+          <!-- Бокс 2 -->
+          <div class="p-3 rounded-xl bg-sand-50 border border-sand-200 flex items-center justify-between">
             <div>
-              <span class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-wider font-semibold">Итоговый расчет сессии</span>
-              <p class="font-headline-sm text-xl text-on-surface font-bold">1 542 500 ₫</p>
+              <div class="flex items-center gap-1.5">
+                <span class="font-bold text-xs text-sand-900">🥩 Домашние котлеты</span>
+                <span class="text-[10px] text-emerald-600 font-semibold">• до сб</span>
+              </div>
+              <p class="text-[11px] text-stone-500 mt-0.5">8 сочных котлет в стеклянном боксе</p>
             </div>
-            <span class="font-label-sm text-xs text-on-surface-variant italic">Код: VILLA-101-NOV15</span>
+            <button onclick="showReheat('Котлеты', 'Прогреть 2 минуты на сковороде под крышкой на слабом огне с ложкой воды или 90 секунд в СВЧ.')" class="px-2.5 py-1 rounded-lg bg-white border border-sand-200 text-[11px] font-bold text-stone-700 shadow-2xs active:scale-95">
+              Разогрев
+            </button>
+          </div>
+
+          <!-- Бокс 3 -->
+          <div class="p-3 rounded-xl bg-sand-50 border border-sand-200 flex items-center justify-between">
+            <div>
+              <div class="flex items-center gap-1.5">
+                <span class="font-bold text-xs text-sand-900">🐟 Филе сибаса на гриле</span>
+                <span class="text-[10px] text-amber-600 font-semibold">• съесть сегодня</span>
+              </div>
+              <p class="text-[11px] text-stone-500 mt-0.5">Улов с рыбного порта, с розмарином</p>
+            </div>
+            <button onclick="showReheat('Сибас на гриле', 'Духовка 160°C на 4 минуты. Лимонный сок отжать перед подачей.')" class="px-2.5 py-1 rounded-lg bg-white border border-sand-200 text-[11px] font-bold text-stone-700 shadow-2xs active:scale-95">
+              Разогрев
+            </button>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- 5. Гастрономический паспорт семьи (Family Taste Passport) -->
-      <section class="bg-surface-container-low rounded-xl p-space-md shadow-sm space-y-3 border border-surface-container-high/60">
+      <!-- Книга чеков без наценок -->
+      <div class="bg-white rounded-2xl p-4 shadow-xs border border-sand-200 space-y-3">
         <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-secondary text-[20px]">badge</span>
-            <h3 class="font-headline-sm text-lg text-on-surface font-bold">Гастрономический паспорт семьи</h3>
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-brand-600 text-[20px]">receipt_long</span>
+            <h3 class="font-bold text-sm text-sand-900">Чеки закупки продуктов</h3>
           </div>
-          <button onclick="openSurveyEdit()" class="font-label-sm text-xs text-secondary font-bold hover:underline">Изменить</button>
+          <span class="text-[10px] font-bold text-stone-500 uppercase">Строго по чеку</span>
         </div>
-        <p class="font-body-sm text-xs text-on-surface-variant">Индивидуальная калибровка под каждого члена семьи для безопасности и безупречного вкуса.</p>
 
-        <div class="space-y-2">
-          <!-- Член семьи 1: Папа -->
-          <div class="bg-surface-container-lowest p-2.5 rounded-lg flex items-start gap-2.5 border border-surface-container-high/40">
-            <span class="w-7 h-7 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xs shrink-0">П</span>
-            <div class="flex-1 min-w-0">
-              <div class="flex items-center justify-between">
-                <span class="font-label-md text-xs font-bold text-on-surface">Папа (Александр)</span>
-                <span class="font-label-sm text-[10px] text-secondary font-bold uppercase">Приоритет</span>
-              </div>
-              <p class="font-body-sm text-xs text-on-surface-variant mt-0.5">Medium-rare прожарка, дикая морская рыба, розмарин, категорически без свежей кинзы.</p>
+        <div class="space-y-2 text-xs">
+          <div class="flex justify-between items-center p-2 rounded-lg bg-sand-50">
+            <div>
+              <p class="font-bold text-sand-900">🛒 Lotte Mart Nha Trang</p>
+              <p class="text-[10px] text-stone-500">Чек #LT-4491 • Говядина, овощи, зелень</p>
             </div>
+            <span class="font-bold text-sand-900">462 000 ₫</span>
           </div>
 
-          <!-- Член семьи 2: Мама -->
-          <div class="bg-surface-container-lowest p-2.5 rounded-lg flex items-start gap-2.5 border border-surface-container-high/40">
-            <span class="w-7 h-7 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold text-xs shrink-0">М</span>
-            <div class="flex-1 min-w-0">
-              <div class="flex items-center justify-between">
-                <span class="font-label-md text-xs font-bold text-on-surface">Мама (Елена)</span>
-                <span class="font-label-sm text-[10px] text-error font-bold uppercase">Строгая аллергия</span>
-              </div>
-              <p class="font-body-sm text-xs text-on-surface-variant mt-0.5">Без лактозы, рыба с высоким Омега-3, минимум натрия (соли), масла холодного отжима.</p>
+          <div class="flex justify-between items-center p-2 rounded-lg bg-sand-50">
+            <div>
+              <p class="font-bold text-sand-900">🐟 Рыбный порт (Утренний улов)</p>
+              <p class="text-[10px] text-stone-500">Сибас свежий (1.3 кг), креветка</p>
             </div>
-          </div>
-
-          <!-- Член семьи 3: Ребенок -->
-          <div class="bg-surface-container-lowest p-2.5 rounded-lg flex items-start gap-2.5 border border-surface-container-high/40">
-            <span class="w-7 h-7 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold text-xs shrink-0">Л</span>
-            <div class="flex-1 min-w-0">
-              <div class="flex items-center justify-between">
-                <span class="font-label-md text-xs font-bold text-on-surface">Лео (6 лет)</span>
-                <span class="font-label-sm text-[10px] text-on-surface-variant font-semibold">Детское меню</span>
-              </div>
-              <p class="font-body-sm text-xs text-on-surface-variant mt-0.5">Шелковистые нежные овощи, мини-митболы, капля меда, абсолютно без перца и остроты.</p>
-            </div>
+            <span class="font-bold text-sand-900">240 000 ₫</span>
           </div>
         </div>
-      </section>
 
-      <!-- 6. Быстрые VIP-действия -->
-      <section class="grid grid-cols-3 gap-2 pt-1">
-        <button onclick="requestNewVisit()" class="flex flex-col items-center justify-center p-3 rounded-xl bg-surface-container-lowest shadow-sm hover:bg-surface-container-low transition-all active:scale-95 space-y-1 border border-surface-container-high">
-          <span class="material-symbols-outlined text-primary text-[22px]">calendar_add_on</span>
-          <span class="font-label-sm text-xs font-bold text-on-surface text-center">Заказать визит</span>
+        <div class="pt-2 border-t border-sand-200 flex justify-between items-center text-xs">
+          <span class="text-stone-500">Итого по чекам магазинов:</span>
+          <span class="font-extrabold text-sm text-brand-700">702 000 ₫</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. ВКЛАДКА: О ШЕФЕ -->
+    <div id="tabAbout" class="hidden animate-fadeIn p-4 space-y-4">
+      
+      <!-- Профиль шефа -->
+      <div class="bg-white rounded-2xl p-5 shadow-xs border border-sand-200 text-center space-y-3">
+        <div class="w-20 h-20 rounded-full mx-auto overflow-hidden ring-4 ring-brand-50 shadow-md">
+          <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQMgi9kPq7MKJR4V9Y6HzgwmLCJNeCYmSmLKuTeplCOpe8oYJr_JD4__Z29gXJhibyk1JdmW25fkVlrZzDz15u7nY2i3yzk6p4wNOBC0VTi435oS9ETODQuGqBCJYn21J9_d-PwK4X56ia3Zs2qkOkh2zQktOXz5eIOiF1Ql7L2KR9_bjHvOr_rYpZGeYyRhMxpuoXoLsPJcljdCeAY1uOS5psFe0XI0bH6MNnMhM1ZPiy5LIGBlWa" alt="Шеф Владислав">
+        </div>
+        <div>
+          <h2 class="font-bold text-lg text-sand-900">Шеф Владислав</h2>
+          <p class="text-xs text-brand-700 font-semibold mt-0.5">Персональный шеф-повар в Нячанге</p>
+        </div>
+        <p class="text-xs text-stone-600 leading-relaxed text-left bg-sand-50 p-3 rounded-xl">
+          «Я беру на себя всё, что связано с домашней едой вашей семьи во Вьетнаме: от отбора лучшего мяса и свежайшей рыбы до стерильной уборки вашей плиты. Вы возвращаетесь домой — в холодильнике готовые любимые блюда».
+        </p>
+
+        <div class="grid grid-cols-2 gap-2 text-left pt-1">
+          <div class="p-2.5 rounded-xl bg-sand-50 border border-sand-100">
+            <span class="text-base">🧽</span>
+            <h4 class="font-bold text-xs text-sand-900 mt-1">Чистота кухни</h4>
+            <p class="text-[11px] text-stone-500">Кухня после работы остается чище, чем была.</p>
+          </div>
+          <div class="p-2.5 rounded-xl bg-sand-50 border border-sand-100">
+            <span class="text-base">👶</span>
+            <h4 class="font-bold text-xs text-sand-900 mt-1">Адаптация</h4>
+            <p class="text-[11px] text-stone-500">Без глютена, без лактозы, детские супы без остроты.</p>
+          </div>
+        </div>
+
+        <button onclick="openChatWithChef()" class="w-full py-3 rounded-xl bg-brand-600 text-white font-bold text-xs shadow-xs active:scale-98 transition-all flex items-center justify-center gap-1.5">
+          <span class="material-symbols-outlined text-[18px]">chat</span>
+          <span>Написать шефу лично в Telegram</span>
         </button>
-        <button onclick="openChatWithChef()" class="flex flex-col items-center justify-center p-3 rounded-xl bg-surface-container-lowest shadow-sm hover:bg-surface-container-low transition-all active:scale-95 space-y-1 border border-surface-container-high">
-          <span class="material-symbols-outlined text-secondary text-[22px]">forum</span>
-          <span class="font-label-sm text-xs font-bold text-on-surface text-center">Чат с шефом</span>
-        </button>
-        <button onclick="addDishIdea()" class="flex flex-col items-center justify-center p-3 rounded-xl bg-surface-container-lowest shadow-sm hover:bg-surface-container-low transition-all active:scale-95 space-y-1 border border-surface-container-high">
-          <span class="material-symbols-outlined text-primary text-[22px]">post_add</span>
-          <span class="font-label-sm text-xs font-bold text-on-surface text-center">Идея блюда</span>
-        </button>
-      </section>
+      </div>
 
     </div>
+
   </main>
 
-  <!-- Модальное окно: Просмотр чеков закупки -->
-  <div id="receiptModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-4">
-    <div class="bg-surface-container-lowest rounded-2xl w-full max-w-sm p-5 space-y-4 shadow-2xl border border-surface-container-high">
-      <div class="flex items-center justify-between border-b border-surface-container-high pb-3">
-        <div class="flex items-center gap-2">
-          <span class="material-symbols-outlined text-primary text-xl">receipt</span>
-          <h3 class="font-headline-sm text-base font-bold text-on-surface">Чеки закупки #101</h3>
+  <!-- ==================== ПЛАВАЮЩИЙ БАР ЗАКАЗА (FLOATING ISLAND) ==================== -->
+  <div id="floatingCart" class="fixed bottom-0 inset-x-0 z-40 p-4 pb-safe pointer-events-none transition-all duration-300">
+    <div class="pointer-events-auto max-w-md mx-auto bg-stone-900/95 backdrop-blur-xl text-white rounded-2xl p-3 shadow-xl border border-white/10 flex items-center justify-between">
+      <div class="pl-1">
+        <div class="flex items-center gap-1.5">
+          <span id="cartCount" class="font-extrabold text-sm text-emerald-400">0 блюд</span>
+          <span class="text-xs text-stone-400">• в рационе</span>
         </div>
-        <button onclick="toggleReceiptModal()" class="text-on-surface-variant hover:text-on-surface">
-          <span class="material-symbols-outlined">close</span>
-        </button>
+        <p id="cartEstimate" class="text-[11px] text-stone-300 font-medium">Выберите блюда выше</p>
       </div>
 
-      <div class="space-y-3 text-xs">
-        <div class="p-3 rounded-xl bg-surface-container-low border border-surface-container-high space-y-1">
-          <div class="flex justify-between font-bold text-on-surface">
-            <span>🛒 Lotte Mart Nha Trang</span>
-            <span>612 500 ₫</span>
-          </div>
-          <p class="text-[11px] text-on-surface-variant">Чек #LT-8942-VN • Говядина Black Angus, травы, спаржа, Далатская морковь</p>
-          <div class="text-[10px] text-primary font-semibold pt-1">✓ Фото фискального чека проверено</div>
-        </div>
-
-        <div class="p-3 rounded-xl bg-surface-container-low border border-surface-container-high space-y-1">
-          <div class="flex justify-between font-bold text-on-surface">
-            <span>🐟 Рыбный порт (Утренний улов)</span>
-            <span>230 000 ₫</span>
-          </div>
-          <p class="text-[11px] text-on-surface-variant">Дикий сибас (1.4 кг), свежий розмарин, лайм</p>
-          <div class="text-[10px] text-primary font-semibold pt-1">✓ Накладная и расчет приняты</div>
-        </div>
-
-        <div class="flex justify-between items-center pt-2 border-t border-surface-container-high text-sm font-bold text-on-surface">
-          <span>Сумма по чекам:</span>
-          <span>842 500 ₫</span>
-        </div>
-      </div>
-
-      <button onclick="toggleReceiptModal()" class="w-full py-2.5 rounded-xl bg-primary text-on-primary font-bold text-xs shadow-sm active:scale-95 transition-all">
-        Понятно, закрыть
+      <button onclick="openOrderDrawer()" id="cartOrderBtn" class="py-2.5 px-4 rounded-xl bg-brand-500 hover:bg-brand-600 active:scale-95 text-white font-bold text-xs transition-all flex items-center gap-1 shadow-sm">
+        <span>Заказать</span>
+        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
       </button>
     </div>
   </div>
 
-  <!-- Модальное окно: Инструкция / Видео -->
-  <div id="infoModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-4">
-    <div class="bg-surface-container-lowest rounded-2xl w-full max-w-sm p-5 space-y-4 shadow-2xl border border-surface-container-high">
-      <div class="flex items-center justify-between border-b border-surface-container-high pb-2">
-        <h3 class="font-headline-sm text-base font-bold text-on-surface" id="infoModalTitle">Инструкция шефа</h3>
-        <button onclick="closeInfoModal()" class="text-on-surface-variant hover:text-on-surface">
-          <span class="material-symbols-outlined">close</span>
+  <!-- ==================== ШТОРКА ОФОРМЛЕНИЯ ЗАКАЗА (BOTTOM SHEET) ==================== -->
+  <div id="orderDrawer" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-end justify-center">
+    <div class="bg-white rounded-t-3xl w-full max-w-md max-h-[90vh] overflow-y-auto p-5 pb-safe space-y-4 shadow-2xl animate-slideUp">
+      
+      <!-- Заголовок шторки -->
+      <div class="flex items-center justify-between border-b border-sand-200 pb-3">
+        <div>
+          <h3 class="font-bold text-base text-sand-900">Оформление рациона</h3>
+          <p class="text-xs text-stone-500">Шеф свяжется с вами для согласования деталей</p>
+        </div>
+        <button onclick="closeOrderDrawer()" class="w-8 h-8 rounded-full bg-sand-100 flex items-center justify-center text-stone-600">
+          <span class="material-symbols-outlined text-[18px]">close</span>
         </button>
       </div>
-      <p class="font-body-sm text-xs text-on-surface leading-relaxed" id="infoModalBody">Текст инструкции...</p>
-      <button onclick="closeInfoModal()" class="w-full py-2.5 rounded-xl bg-primary text-on-primary font-bold text-xs shadow-sm active:scale-95 transition-all">
-        Принято
+
+      <!-- Список выбранных блюд -->
+      <div class="space-y-1.5" id="drawerSelectedList">
+        <!-- Заполняется из JS -->
+      </div>
+
+      <!-- Расчет стоимости -->
+      <div class="p-3.5 rounded-xl bg-sand-50 border border-sand-200 space-y-2 text-xs">
+        <div class="flex justify-between text-stone-600">
+          <span>Ориентировочное время готовки:</span>
+          <span id="drawerHours" class="font-bold text-sand-900">~3.5 часа</span>
+        </div>
+        <div class="flex justify-between text-stone-600">
+          <span>Оплата работы повара (200k/ч):</span>
+          <span id="drawerChefFee" class="font-bold text-sand-900">700 000 ₫</span>
+        </div>
+        <div class="flex justify-between text-stone-600">
+          <span>Продукты (Lotte Mart / Рынок):</span>
+          <span class="font-bold text-brand-700">строго по чекам</span>
+        </div>
+      </div>
+
+      <!-- Поля ввода -->
+      <div class="space-y-3 pt-1">
+        <div>
+          <label class="block text-xs font-bold text-sand-900 mb-1">Ваше имя</label>
+          <input type="text" id="inputName" placeholder="Например: Анна" class="w-full px-3.5 py-2.5 rounded-xl border border-sand-200 text-xs bg-sand-50 focus:bg-white focus:outline-brand-500">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-sand-900 mb-1">Телефон / WhatsApp / Telegram</label>
+          <input type="text" id="inputPhone" placeholder="+84... или @username" class="w-full px-3.5 py-2.5 rounded-xl border border-sand-200 text-xs bg-sand-50 focus:bg-white focus:outline-brand-500">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-sand-900 mb-1">Район / Кондоминиум (Нячанг)</label>
+          <input type="text" id="inputAddress" placeholder="Например: An Vien, вилла 12 или Muong Thanh" class="w-full px-3.5 py-2.5 rounded-xl border border-sand-200 text-xs bg-sand-50 focus:bg-white focus:outline-brand-500">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-sand-900 mb-1">Особые пожелания / Аллергии</label>
+          <input type="text" id="inputNotes" placeholder="Без кинзы, ребенку не острое..." class="w-full px-3.5 py-2.5 rounded-xl border border-sand-200 text-xs bg-sand-50 focus:bg-white focus:outline-brand-500">
+        </div>
+      </div>
+
+      <!-- Кнопка отправки -->
+      <button onclick="submitOrder()" class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-98 text-white font-bold text-sm shadow-md transition-all">
+        Отправить заявку шефу Владиславу
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Модальное окно разогрева -->
+  <div id="reheatModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-xs p-5 space-y-3 shadow-xl">
+      <div class="flex items-center justify-between border-b border-sand-200 pb-2">
+        <h4 class="font-bold text-sm text-sand-900" id="reheatTitle">Разогрев блюда</h4>
+        <button onclick="closeReheat()" class="text-stone-400 hover:text-stone-600">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+      <p class="text-xs text-stone-600 leading-relaxed" id="reheatText"></p>
+      <button onclick="closeReheat()" class="w-full py-2 rounded-xl bg-sand-900 text-white font-bold text-xs">
+        Понятно
       </button>
     </div>
   </div>
 
-  <!-- Фиксированная нижняя навигация (Floating Bottom Bar) -->
-  <div class="fixed bottom-0 inset-x-0 z-50 pb-safe pointer-events-none">
-    <nav class="pointer-events-auto mx-margin mb-3 rounded-full bg-surface-container-lowest/90 backdrop-blur-2xl shadow-[0_12px_40px_-6px_rgba(24,27,30,0.15)] p-1.5 flex items-center justify-between border border-surface-container-high/80">
-      <button onclick="switchTab('dashboard')" class="tab-btn flex-1 flex flex-col items-center justify-center min-h-[44px] py-1 px-1 rounded-full transition-all text-primary font-bold" data-tab="dashboard">
-        <span class="material-symbols-outlined text-[20px]">cottage</span>
-        <span class="font-label-sm text-[10px] mt-0.5 tracking-tight">Кабинет</span>
-      </button>
-      <button onclick="switchTab('menu')" class="tab-btn flex-1 flex flex-col items-center justify-center min-h-[44px] py-1 px-1 rounded-full text-on-surface-variant hover:text-on-surface transition-all" data-tab="menu">
-        <span class="material-symbols-outlined text-[20px]">restaurant_menu</span>
-        <span class="font-label-sm text-[10px] mt-0.5 tracking-tight">Меню и вкусы</span>
-      </button>
-      <button onclick="switchTab('inventory')" class="tab-btn flex-1 flex flex-col items-center justify-center min-h-[44px] py-1 px-1 rounded-full text-on-surface-variant hover:text-on-surface transition-all" data-tab="inventory">
-        <span class="material-symbols-outlined text-[20px]">kitchen</span>
-        <span class="font-label-sm text-[10px] mt-0.5 tracking-tight">Холодильник</span>
-      </button>
-      <button onclick="openChatWithChef()" class="tab-btn flex-1 flex flex-col items-center justify-center min-h-[44px] py-1 px-1 rounded-full text-on-surface-variant hover:text-on-surface transition-all" data-tab="concierge">
-        <span class="material-symbols-outlined text-[20px]">forum</span>
-        <span class="font-label-sm text-[10px] mt-0.5 tracking-tight">Консьерж</span>
-      </button>
-    </nav>
-  </div>
-
+  <!-- ==================== СКРИПТЫ ЛОГИКИ ==================== -->
   <script>
     const tg = window.Telegram?.WebApp;
 
-    // Инициализация Telegram Web App
+    // База реальных коронных блюд шефа в Нячанге
+    const DISHES = [
+      {
+        id: 'borsch',
+        cat: 'soup',
+        title: 'Наваристый домашний борщ',
+        desc: 'На говяжьем бульоне долгого томления, со свеклой, свежей капустой и мягким мясом. Подается со сметаной и зеленью.',
+        portion: 'Кастрюля 5 л (8–9 порций)',
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCfi43SeLTm3RJgXexhe7gqYBi1-gnnWhJFtlF-Woj6elJVaqZ66MWm4nOZekSkJ5eF0OFK3mr2wcmV3iqE7BQS7RKl0DO-9WArnGfmeEy8pWjuEXbmYASFoH2n7f873CtUBr3MWag2sSt0xabTm_Pg4GhJzUBc9kMWR8Bxz7v0IrCIUKRuxlqWt85sPBceUErk0skAUoQ6Qnz6jT73kZMsN_EWBgBWBW_u7kfov07BAxVViRX00uRo',
+        badges: ['👶 Дети любят', '🥩 Говядина', '5 литров']
+      },
+      {
+        id: 'cutlets',
+        cat: 'meat',
+        title: 'Сочные домашние котлеты',
+        desc: 'Пышные котлеты из отборной говядины и свинины (60/40), в тонкой хрустящей корочке. Нежные и сочные внутри.',
+        portion: '12 штук (~1 кг готовых)',
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAgff5UrjjF5e6Qy36VbUIhEsV-z4p3248Vt_xLVabJKD66e87MF0s1_xnMbkXctsjqnaUxn_QFFgjPi9b1i9d32RqtP8sFuU4uTItOOkdLiVUcbIYwT4wVeReuWxK_KHX0AZGKn9h3AN1xsR8nf2N70UjfWG1s70VqSDghcTPEavj2aECTSOR7a4UaU2QU406f1yDoCxS_hKhOvHppTqICVL5f_9nVP6hptc01pPzi5SSgjd9RMpTF',
+        badges: ['👶 Фаворит детей', '12 штук']
+      },
+      {
+        id: 'seabass',
+        cat: 'seafood',
+        title: 'Дикий сибас на гриле с травами',
+        desc: 'Свежайший утренний улов с рыбного порта Нячанга, запеченный с розмарином, тимьяном и лимоном гриль.',
+        portion: '1.2 кг (3–4 персоны)',
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBYzTVDwOsWhdjegKgEbbGEIembFKyjddtJrdXl6JOAnf14Fn66Z_E3eUS_bJGoeOHQ4-azQWt0ATbVAxNwct4zTODrmRbMeO7qDToRJ7jMk8l2fZAfbhq-dHq0IBJ4BOAoI5U6rmvzqPK7H-WDhfhYs0ExLFlpPOR5Yc0vHooVbyBuAXYRNvWp-U72af8b1ANmiifzwKtX0Gj-0zvjljh1zPevK0-YwTwL9ajpz45yzAgHKwuEQbLU',
+        badges: ['🌊 Рыбный порт', 'Омега-3']
+      },
+      {
+        id: 'beef_stew',
+        cat: 'meat',
+        title: 'Томленая говядина с овощами',
+        desc: 'Нежнейшая мякоть Black Angus, томленая 3 часа в собственном соку со сладким перцем, беби-морковью и томатами.',
+        portion: 'Лоток 1.8 кг (7–8 порций)',
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCWzmTGvWCtoejrl4MApBbljmSc0iJDvLKqamupYsYgBE5_IipO-ZDC1B_t4qV7OmDqfIoKTLjVFWElW_f0xO-IbSuBHTLru4sFiTv9nIxjjiaU6RYuqtP9vD68saF9NH2j77aVp4ODP5X81SGqDEf-5ZU2I8Mvvz62pETKtZ-qRylR5PM6wzCJAzScQLDbQNdSRiaT0JGR3U5mqP1Y9GNDMcI9iCs6vNjnLVs0k6CYAOiY1NrBBXv0',
+        badges: ['Французский стиль', 'Без глютена']
+      },
+      {
+        id: 'syrniki',
+        cat: 'kids',
+        title: 'Пышные ванильные сырники',
+        desc: 'Из натурального отборного творога, с золотистой корочкой и нежной текстурой суфле. Идеально к утреннему кофе и детям.',
+        portion: '10 штук + ягодный соус',
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDsQ_uB7hNs5ni9kaWM-IQIvU9mx4Vkl7hShv1fuT-V9fKl5f2rqAOuvZwYPTiNgL24Pkn4aaUIJxoVc4wGLLguy86r7VwrGphYOoSyOpk90r9DBbaMGyAZf4UoMQtV4Bhe6uefooAOkN9bcMVbEV75COrPCdFjfXUcCdCFYkWvTN96zhBEh9ndhrtyPin6HsAjV5DElPxrcWSpiB3gGWPD_orjH8IfBbvp1xv7vEkdSTO812uypB7G',
+        badges: ['👶 Завтрак для всей семьи', '10 шт']
+      },
+      {
+        id: 'puree',
+        cat: 'kids',
+        title: 'Шелковистое картофельное пюре',
+        desc: 'Настоящее домашнее пюре на натуральном сливочном масле 82.5% и молоке, взбитое до кремовой текстуры.',
+        portion: 'Гарнир 1.2 кг (6–7 порций)',
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBCia9s96ELxhbFlOi4iohHmM-x1u7zHga4AJYBnWly-XRfJQ_qFGzqS6tJgEfaqg6cysJZY7bJxYZ5lUytRc4qvYg31JPsHjggsuX1YL2IFqcBLkrdJJkeo7Kh5344TEsSdNt61zBPcuieV9HiPkxKPAkOPamMOieHpbsah_JtUN6RgNsfOLTbZmr9gQRAqCaUNlAx3RFwkA6b9tv4IlVGCEFOngiUNHAcLT_x3R_81s0jMpcjmiNw',
+        badges: ['Идеальный гарнир', 'Фермерское масло']
+      }
+    ];
+
+    // Выбранные блюда в рацион
+    let selectedDishes = new Set(['borsch', 'cutlets']);
+    let currentCategory = 'all';
+
+    // Инициализация Telegram WebApp
     if (tg) {
       tg.ready();
       tg.expand();
-      
-      // Автоподстановка имени если доступно
       if (tg.initDataUnsafe?.user?.first_name) {
-        const userName = tg.initDataUnsafe.user.first_name;
-        document.getElementById('greetingLabel').innerText = `Добрый вечер, ${userName} • VIP Villa Suite`;
-        const avatarEl = document.getElementById('userAvatar');
-        if (avatarEl) avatarEl.innerText = userName.charAt(0).toUpperCase();
+        document.getElementById('inputName').value = tg.initDataUnsafe.user.first_name;
       }
     }
 
-    function closeTelegramApp() {
+    function closeApp() {
       if (tg) {
         tg.close();
       } else {
@@ -626,7 +482,6 @@
     }
 
     function openChatWithChef() {
-      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
       if (tg?.openTelegramLink) {
         tg.openTelegramLink('https://t.me/vladislav');
       } else {
@@ -634,79 +489,193 @@
       }
     }
 
-    function toggleReceiptModal() {
-      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
-      const modal = document.getElementById('receiptModal');
-      modal.classList.toggle('hidden');
+    // Рендер каталога блюд
+    function renderDishes() {
+      const container = document.getElementById('dishesList');
+      container.innerHTML = '';
+
+      const filtered = currentCategory === 'all' 
+        ? DISHES 
+        : DISHES.filter(d => d.cat === currentCategory);
+
+      filtered.forEach(dish => {
+        const isSelected = selectedDishes.has(dish.id);
+        const card = document.createElement('article');
+        card.className = 'bg-white rounded-2xl overflow-hidden shadow-xs border border-sand-200 transition-all';
+        
+        card.innerHTML = `
+          <div class="relative aspect-[16/10] w-full overflow-hidden bg-sand-100">
+            <img class="w-full h-full object-cover" src="${dish.img}" alt="${dish.title}" loading="lazy">
+            <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5 flex-wrap">
+              ${dish.badges.map(b => `<span class="px-2 py-0.5 rounded-full bg-white/95 backdrop-blur-xs text-[10px] font-bold text-sand-900 shadow-2xs">${b}</span>`).join('')}
+            </div>
+            <div class="absolute bottom-2 left-2.5 bg-black/60 backdrop-blur-xs text-white text-[11px] px-2 py-0.5 rounded-md font-medium">
+              ${dish.portion}
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-sm text-sand-900 leading-snug">${dish.title}</h3>
+            <p class="text-xs text-stone-500 mt-1 line-clamp-2 leading-relaxed">${dish.desc}</p>
+            <div class="pt-3 mt-2 border-t border-sand-100 flex items-center justify-between">
+              <span class="text-[11px] text-stone-400 font-medium">Для всей семьи</span>
+              <button onclick="toggleDish('${dish.id}')" class="px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 active:scale-95 ${isSelected ? 'bg-brand-50 text-brand-700 border border-brand-200' : 'bg-sand-900 text-white shadow-xs'}">
+                <span class="material-symbols-outlined text-[16px]">${isSelected ? 'check' : 'add'}</span>
+                <span>${isSelected ? 'В рационе' : 'Выбрать'}</span>
+              </button>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      updateCartBar();
     }
 
-    function showReheatInstructions(title, text) {
+    function toggleDish(dishId) {
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-      document.getElementById('infoModalTitle').innerText = `Разогрев: ${title}`;
-      document.getElementById('infoModalBody').innerText = text;
-      document.getElementById('infoModal').classList.remove('hidden');
+      if (selectedDishes.has(dishId)) {
+        selectedDishes.delete(dishId);
+      } else {
+        selectedDishes.add(dishId);
+      }
+      renderDishes();
     }
 
-    function showVideoModal(title) {
+    function filterCategory(cat) {
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-      document.getElementById('infoModalTitle').innerText = `Подача: ${title}`;
-      document.getElementById('infoModalBody').innerText = `Короткий видео-гайд сервировки для блюда «${title}». Выложите блюдо на подогретую тарелку, полейте соусом круговым движением и украсьте микрозеленью.`;
-      document.getElementById('infoModal').classList.remove('hidden');
+      currentCategory = cat;
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        if (btn.dataset.cat === cat) {
+          btn.className = 'cat-pill active px-3.5 py-1.5 rounded-full text-xs font-bold transition-all bg-brand-600 text-white shadow-xs whitespace-nowrap';
+        } else {
+          btn.className = 'cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-700 border border-sand-200 whitespace-nowrap';
+        }
+      });
+      renderDishes();
     }
 
-    function closeInfoModal() {
-      document.getElementById('infoModal').classList.add('hidden');
-    }
+    function updateCartBar() {
+      const count = selectedDishes.size;
+      const countEl = document.getElementById('cartCount');
+      const estimateEl = document.getElementById('cartEstimate');
+      const orderBtn = document.getElementById('cartOrderBtn');
 
-    function showSessionLiveNote() {
-      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-      alert('Заметка шефа: «Рыба выловлена сегодня в 06:00 утра у островов Нячанга. Овощи доставлены утренней машиной из Далата. Прибуду на виллу точно к 14:00».');
-    }
-
-    function requestNewVisit() {
-      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
-      if (confirm('Хотите забронировать новый визит шефа Владислава на виллу?')) {
-        openChatWithChef();
+      if (count === 0) {
+        countEl.innerText = '0 блюд';
+        estimateEl.innerText = 'Выберите блюда выше';
+        orderBtn.classList.add('opacity-50', 'pointer-events-none');
+      } else {
+        orderBtn.classList.remove('opacity-50', 'pointer-events-none');
+        countEl.innerText = `${count} ${count === 1 ? 'блюдо' : (count < 5 ? 'блюда' : 'блюд')}`;
+        const hours = (1.5 + count * 0.5).toFixed(1);
+        const fee = Math.round(hours * 200000);
+        estimateEl.innerText = `~${hours} ч работы (${fee.toLocaleString('ru-RU')} ₫) + чеки`;
       }
     }
 
-    function addDishIdea() {
-      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-      const idea = prompt('Какое блюдо или ингредиенты вы хотите добавить в следующий рацион?');
-      if (idea) {
-        alert(`Пожелание «${idea}» сохранено и передано шефу Владиславу в гастрономический план!`);
-      }
-    }
-
-    function openSurveyEdit() {
-      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-      alert('Для изменения аллергенов или предпочтений семьи напишите шефу или пройдите анкету в главном меню Telegram-бота.');
-    }
-
-    function showSupportInfo() {
-      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-      alert('Личный кабинет резидента виллы. Шеф Владислав: @vladislav. Все чеки и часы работы обновляются в реальном времени.');
-    }
-
+    // Вкладки приложения
     function switchTab(tab) {
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        if (btn.dataset.tab === tab) {
-          btn.className = 'tab-btn flex-1 flex flex-col items-center justify-center min-h-[44px] py-1 px-1 rounded-full transition-all text-primary font-bold';
+      
+      const tabs = ['menu', 'fridge', 'about'];
+      tabs.forEach(t => {
+        const el = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
+        const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1) + 'Btn');
+        if (t === tab) {
+          el.classList.remove('hidden');
+          btn.className = 'flex-1 py-1.5 rounded-lg text-xs font-bold transition-all bg-sand-900 text-white shadow-xs';
         } else {
-          btn.className = 'tab-btn flex-1 flex flex-col items-center justify-center min-h-[44px] py-1 px-1 rounded-full text-on-surface-variant hover:text-on-surface transition-all';
+          el.classList.add('hidden');
+          btn.className = 'flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all text-stone-600 hover:bg-sand-100';
         }
       });
 
-      if (tab === 'inventory') {
-        const fridgeEl = document.querySelector('section:has(h2:contains("Холодильник"))') || document.querySelectorAll('section')[2];
-        if (fridgeEl) fridgeEl.scrollIntoView({ behavior: 'smooth' });
-      } else if (tab === 'dashboard') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (tab === 'menu') {
-        alert('Раздел «Меню и сезонные вкусы»: открывается каталог блюд шефа.');
+      // Скрывать плавающий бар на вкладках кроме меню
+      const bar = document.getElementById('floatingCart');
+      if (tab === 'menu') {
+        bar.classList.remove('translate-y-24', 'opacity-0');
+      } else {
+        bar.classList.add('translate-y-24', 'opacity-0');
       }
     }
+
+    // Шторка заказа
+    function openOrderDrawer() {
+      if (selectedDishes.size === 0) return;
+      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+
+      const listContainer = document.getElementById('drawerSelectedList');
+      listContainer.innerHTML = '';
+
+      selectedDishes.forEach(id => {
+        const dish = DISHES.find(d => d.id === id);
+        if (dish) {
+          const item = document.createElement('div');
+          item.className = 'flex justify-between items-center text-xs py-1 border-b border-sand-100';
+          item.innerHTML = `<span class="font-bold text-sand-900">${dish.title}</span><span class="text-stone-400 text-[11px]">${dish.portion}</span>`;
+          listContainer.appendChild(item);
+        }
+      });
+
+      const count = selectedDishes.size;
+      const hours = (1.5 + count * 0.5).toFixed(1);
+      const fee = Math.round(hours * 200000);
+      document.getElementById('drawerHours').innerText = `~${hours} часа`;
+      document.getElementById('drawerChefFee').innerText = fee.toLocaleString('ru-RU') + ' ₫';
+
+      document.getElementById('orderDrawer').classList.remove('hidden');
+    }
+
+    function closeOrderDrawer() {
+      document.getElementById('orderDrawer').classList.add('hidden');
+    }
+
+    function submitOrder() {
+      const name = document.getElementById('inputName').value.trim();
+      const phone = document.getElementById('inputPhone').value.trim();
+      const address = document.getElementById('inputAddress').value.trim();
+      const notes = document.getElementById('inputNotes').value.trim();
+
+      if (!name || !phone) {
+        alert('Пожалуйста, укажите имя и контактный телефон!');
+        return;
+      }
+
+      const dishNames = Array.from(selectedDishes).map(id => {
+        const d = DISHES.find(item => item.id === id);
+        return d ? d.title : id;
+      });
+
+      const orderData = {
+        name,
+        phone,
+        address: address || 'Нячанг (уточняется)',
+        notes: notes || 'Без ограничений',
+        format: 'На кухне клиента (200k VND/час)',
+        dishes: dishNames
+      };
+
+      if (tg?.sendData) {
+        tg.sendData(JSON.stringify(orderData));
+      } else {
+        alert(`Спасибо, ${name}! Заявка на ${dishNames.length} блюд отправлена шефу Владиславу. Он свяжется с вами по контакту ${phone}.`);
+        closeOrderDrawer();
+      }
+    }
+
+    function showReheat(title, text) {
+      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+      document.getElementById('reheatTitle').innerText = `Разогрев: ${title}`;
+      document.getElementById('reheatText').innerText = text;
+      document.getElementById('reheatModal').classList.remove('hidden');
+    }
+
+    function closeReheat() {
+      document.getElementById('reheatModal').classList.add('hidden');
+    }
+
+    // Первоначальный запуск
+    renderDishes();
   </script>
 </body>
 </html>
