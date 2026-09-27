@@ -742,14 +742,47 @@
       const notes = document.getElementById('inputNotes').value.trim();
 
       if (!name || !phone) {
-        alert('Пожалуйста, укажите имя и контактный телефон!');
+        if (tg?.showAlert) {
+          tg.showAlert('Пожалуйста, укажите ваше имя и контакт (телефон или Telegram)!');
+        } else {
+          alert('Пожалуйста, укажите ваше имя и контакт (телефон или Telegram)!');
+        }
         return;
       }
 
-      const dishNames = Array.from(selectedDishes).map(id => {
-        const d = DISHES.find(item => item.id === id);
-        return d ? d.title : id;
+      const chosenList = Array.from(selectedDishes).map(id => {
+        return DISHES.find(item => item.id === id);
+      }).filter(Boolean);
+
+      const count = chosenList.length;
+      const hours = (1.5 + count * 0.5).toFixed(1);
+      const fee = Math.round(hours * 200000).toLocaleString('ru-RU');
+
+      // Формируем красивый текст для Telegram
+      let msg = `👋 Здравствуйте, шеф Владислав! Хочу оформить рацион:
+
+`;
+      msg += `👤 Клиент: ${name}
+`;
+      msg += `📱 Контакт: ${phone}
+`;
+      if (address) msg += `📍 Локация/Вилла: ${address}
+`;
+      if (notes) msg += `💬 Пожелания: ${notes}
+`;
+
+      msg += `
+📋 Выбранные блюда (${count}):
+`;
+      chosenList.forEach(d => {
+        msg += `• ${d.title} (${d.portion})
+`;
       });
+
+      msg += `
+⏱ Ориентир работы: ~${hours} ч (~${fee} ₫)
+`;
+      msg += `🛒 Продукты: строго по чекам Lotte Mart / рынка`;
 
       const orderData = {
         name,
@@ -757,15 +790,29 @@
         address: address || 'Нячанг (уточняется)',
         notes: notes || 'Без ограничений',
         format: 'На кухне клиента (200k VND/час)',
-        dishes: dishNames
+        dishes: chosenList.map(d => d.title),
+        hours,
+        fee
       };
 
+      // 1. Отправляем в Telegram Mini App боту
       if (tg?.sendData) {
-        tg.sendData(JSON.stringify(orderData));
-      } else {
-        alert(`Спасибо, ${name}! Заявка на ${dishNames.length} блюд отправлена шефу Владиславу. Он свяжется с вами по контакту ${phone}.`);
-        closeOrderDrawer();
+        try {
+          tg.sendData(JSON.stringify(orderData));
+        } catch (e) {
+          console.warn('sendData error:', e);
+        }
       }
+
+      // 2. Открываем прямой чат с шефом @bossCompote с предзаполненным заказом
+      const directUrl = `https://t.me/bossCompote?text=${encodeURIComponent(msg)}`;
+      if (tg?.openTelegramLink) {
+        tg.openTelegramLink(directUrl);
+      } else {
+        window.open(directUrl, '_blank');
+      }
+
+      closeOrderDrawer();
     }
 
     function showReheat(title, text) {
