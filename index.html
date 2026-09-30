@@ -712,19 +712,28 @@
   </div>
 
   <!-- ==================== ШТОРКА ОФОРМЛЕНИЯ ЗАКАЗА (BOTTOM SHEET) ==================== -->
-  <div id="orderDrawer" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-end justify-center">
-    <div class="bg-white rounded-t-3xl w-full max-w-md max-h-[90vh] overflow-y-auto p-5 pb-safe space-y-4 shadow-2xl animate-slideUp">
+  <div id="orderDrawer" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-end justify-center" onclick="handleDrawerBackdropClick(event)">
+    <div class="bg-white rounded-t-3xl w-full max-w-md max-h-[92vh] flex flex-col shadow-2xl animate-slideUp overflow-hidden" onclick="event.stopPropagation()">
       
-      <!-- Заголовок шторки -->
-      <div class="flex items-center justify-between border-b border-sand-200 pb-3">
-        <div>
-          <h3 class="font-bold text-base text-sand-900">Оформление рациона</h3>
-          <p class="text-xs text-stone-500">Шеф свяжется с вами для согласования деталей</p>
+      <!-- Фиксированная шапка шторки (ВСЕГДА видна вверху экрана даже при скролле) -->
+      <div class="p-4 pb-3 border-b border-sand-200 flex items-center justify-between bg-white shrink-0 z-10 shadow-2xs">
+        <div class="flex items-center gap-2.5">
+          <button type="button" onclick="closeOrderDrawer()" class="w-9 h-9 rounded-full bg-sand-100 hover:bg-sand-200 active:scale-95 flex items-center justify-center text-stone-700 transition-all shadow-2xs" title="Назад">
+            <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+          </button>
+          <div>
+            <h3 class="font-bold text-sm text-sand-900 leading-tight">Оформление заказа</h3>
+            <p class="text-[11px] text-stone-500">Шеф свяжется для согласования</p>
+          </div>
         </div>
-        <button onclick="closeOrderDrawer()" class="w-8 h-8 rounded-full bg-sand-100 flex items-center justify-center text-stone-600">
-          <span class="material-symbols-outlined text-[18px]">close</span>
+        <button type="button" onclick="closeOrderDrawer()" class="px-2.5 py-1.5 rounded-xl bg-sand-100 hover:bg-sand-200 active:scale-95 text-xs font-bold text-stone-700 flex items-center gap-1 transition-all">
+          <span>Закрыть</span>
+          <span class="material-symbols-outlined text-[16px]">close</span>
         </button>
       </div>
+
+      <!-- Скроллируемое тело шторки -->
+      <div class="flex-1 overflow-y-auto p-5 pt-3 pb-safe space-y-4">
 
       <!-- Список выбранных блюд -->
       <div class="space-y-1.5" id="drawerSelectedList">
@@ -919,11 +928,20 @@
         </div>
       </div>
 
-      <!-- Кнопка отправки -->
-      <button onclick="submitOrder()" class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-98 text-white font-bold text-sm shadow-md transition-all">
-        Отправить заявку шефу Владиславу
-      </button>
+      <!-- Кнопки действий: Отправка и Закрытие -->
+      <div class="pt-2 space-y-2">
+        <button onclick="submitOrder()" class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-98 text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2">
+          <span>Отправить заявку шефу Владиславу</span>
+          <span class="material-symbols-outlined text-[18px]">send</span>
+        </button>
 
+        <button type="button" onclick="closeOrderDrawer()" class="w-full py-2.5 rounded-xl bg-sand-100 hover:bg-sand-200 active:scale-98 text-stone-700 font-bold text-xs transition-all flex items-center justify-center gap-1.5 border border-sand-200">
+          <span class="material-symbols-outlined text-[16px]">close</span>
+          <span>Вернуться к выбору блюд</span>
+        </button>
+      </div>
+
+      </div>
     </div>
   </div>
 
@@ -1754,6 +1772,12 @@
       if (selectedDishes.size === 0) return;
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
 
+      // Показываем нативную кнопку «Назад» в Telegram
+      if (tg?.BackButton) {
+        tg.BackButton.show();
+        tg.BackButton.onClick(closeOrderDrawer);
+      }
+
       const listContainer = document.getElementById('drawerSelectedList');
       listContainer.innerHTML = '';
 
@@ -1785,8 +1809,19 @@
       document.getElementById('orderDrawer').classList.remove('hidden');
     }
 
+    function handleDrawerBackdropClick(e) {
+      if (e.target.id === 'orderDrawer') {
+        closeOrderDrawer();
+      }
+    }
+
     function closeOrderDrawer() {
       document.getElementById('orderDrawer').classList.add('hidden');
+      if (tg?.BackButton) {
+        tg.BackButton.hide();
+        tg.BackButton.offClick(closeOrderDrawer);
+      }
+      if (tg?.HapticFeedback) tg.HapticFeedback.selectionChanged();
     }
 
     function submitOrder() {
@@ -1917,6 +1952,15 @@
 
     // Первоначальный запуск
     renderDishes();
-  </script>
+  
+    // Закрытие шторки и модалок по клавише Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeOrderDrawer();
+        closePhotoModal();
+        closeReheat();
+      }
+    });
+</script>
 </body>
 </html>
