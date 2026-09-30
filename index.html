@@ -1643,11 +1643,19 @@
     let selectedBookingDateLabel = '';
     let selectedBookingSlot = 'morning';
 
-    const BOOKING_SLOTS = {
-      morning: { title: '🌅 Утренний слот', time: '09:00 – 12:30', desc: 'к семейному обеду' },
-      day: { title: '☀️ Дневной слот', time: '13:30 – 17:00', desc: 'к семейному ужину' },
-      evening: { title: '🌙 Вечерний слот / BBQ', time: '17:30 – 21:00', desc: 'вечерний ужин или мероприятие' }
-    };
+    // Слоты с временем отсечки (после которого на сегодня слот закрывается)
+    const BOOKING_SLOTS = [
+      { id: 'morning', title: '🌅 Утро', time: '09:00 – 12:30', desc: 'к семейному обеду', cutoffHour: 9 },
+      { id: 'day', title: '☀️ День', time: '13:30 – 17:00', desc: 'к семейному ужину', cutoffHour: 13 },
+      { id: 'evening', title: '🌙 Вечер', time: '17:30 – 21:00', desc: 'BBQ / званый ужин', cutoffHour: 17 }
+    ];
+
+    function getLocalDateStr(d) {
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      return `${yyyy}-${mm}-${dd}`;
+    }
 
     function initBookingCalendar() {
       const container = document.getElementById('bookingDayChips');
@@ -1660,15 +1668,20 @@
       const months = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
       
       const now = new Date();
-      // Set min attribute for date picker
-      const yyyy = now.getFullYear();
-      const mm = String(now.getMonth() + 1).padStart(2, '0');
-      const dd = String(now.getDate()).padStart(2, '0');
+      const todayIso = getLocalDateStr(now);
+      const currentHour = now.getHours();
+      const allTodayPassed = (currentHour >= 17); // После 17:00 все слоты на сегодня уже закрыты
+
       if (dateInput) {
-        dateInput.min = `${yyyy}-${mm}-${dd}`;
+        dateInput.min = todayIso;
       }
 
-      // Generate next 6 days
+      // Если все слоты на сегодня уже закрыты, сбрасываем дату на Завтра
+      if (allTodayPassed && selectedBookingDateStr === todayIso) {
+        selectedBookingDateStr = '';
+      }
+
+      // Генерация ближайших 6 дней
       for (let i = 0; i < 6; i++) {
         const d = new Date();
         d.setDate(now.getDate() + i);
@@ -1676,37 +1689,58 @@
         const dayName = daysOfWeek[d.getDay()];
         const dayNum = d.getDate();
         const monthName = months[d.getMonth()];
-        const iso = d.toISOString().split('T')[0];
+        const iso = getLocalDateStr(d);
 
         let title = '';
+        let isTodayClosed = false;
+
         if (i === 0) {
           title = 'Сегодня';
+          if (allTodayPassed) {
+            isTodayClosed = true;
+          }
         } else if (i === 1) {
           title = 'Завтра';
         } else {
           title = `${dayName}, ${dayNum} ${monthName}`;
         }
 
-        const isDefault = (i === 1); // Default is "Завтра"
-        if (isDefault && !selectedBookingDateStr) {
+        // По умолчанию выбираем Завтра (если сегодня все слоты закрыты), иначе Сегодня (если есть слоты)
+        const shouldBeDefault = allTodayPassed ? (i === 1) : (i === 0);
+        if (shouldBeDefault && !selectedBookingDateStr) {
           selectedBookingDateStr = iso;
-          selectedBookingDateLabel = `Завтра, ${dayNum} ${monthName} (${dayName})`;
+          selectedBookingDateLabel = i === 0 ? `Сегодня, ${dayNum} ${monthName}` : `Завтра, ${dayNum} ${monthName} (${dayName})`;
         }
 
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.setAttribute('data-date', iso);
-        btn.onclick = () => selectBookingDay(iso, `${title} (${dayNum} ${monthName})`);
-        
-        btn.className = (isDefault && selectedBookingDateStr === iso)
-          ? 'day-chip active px-3 py-1.5 rounded-xl text-xs font-bold bg-sand-900 text-white border border-sand-900 shrink-0 shadow-2xs'
-          : 'day-chip px-3 py-1.5 rounded-xl text-xs font-medium bg-white text-stone-700 border border-sand-200 hover:bg-sand-100 shrink-0';
 
-        btn.innerHTML = `<span class="block">${title}</span><span class="text-[10px] opacity-80 block">${dayNum} ${monthName}</span>`;
+        if (isTodayClosed) {
+          // Если сегодня вечер и все слоты закрыты
+          btn.className = 'day-chip px-3 py-1.5 rounded-xl text-xs font-medium bg-stone-100 text-stone-400 border border-stone-200 opacity-60 cursor-not-allowed shrink-0';
+          btn.innerHTML = `<span class="block line-through">${title}</span><span class="text-[9px] text-red-500 font-semibold block">закрыто</span>`;
+          btn.onclick = () => {
+            if (tg?.showAlert) {
+              tg.showAlert('На сегодня все слоты выезда уже завершены. Пожалуйста, выберите завтра или другую дату!');
+            } else {
+              alert('На сегодня все слоты выезда уже завершены. Пожалуйста, выберите завтра или другую дату!');
+            }
+          };
+        } else {
+          const isSelected = (selectedBookingDateStr === iso);
+          btn.className = isSelected
+            ? 'day-chip active px-3 py-1.5 rounded-xl text-xs font-bold bg-sand-900 text-white border border-sand-900 shrink-0 shadow-2xs'
+            : 'day-chip px-3 py-1.5 rounded-xl text-xs font-medium bg-white text-stone-700 border border-sand-200 hover:bg-sand-100 shrink-0';
+
+          btn.innerHTML = `<span class="block">${title}</span><span class="text-[10px] opacity-80 block">${dayNum} ${monthName}</span>`;
+          btn.onclick = () => selectBookingDay(iso, `${title} (${dayNum} ${monthName})`);
+        }
+
         container.appendChild(btn);
       }
 
-      updateBookingBadge();
+      renderBookingSlots();
     }
 
     function selectBookingDay(iso, label) {
@@ -1721,13 +1755,13 @@
         const d = chip.getAttribute('data-date');
         if (d === iso) {
           chip.className = 'day-chip active px-3 py-1.5 rounded-xl text-xs font-bold bg-sand-900 text-white border border-sand-900 shrink-0 shadow-2xs';
-        } else {
+        } else if (!chip.classList.contains('cursor-not-allowed')) {
           chip.className = 'day-chip px-3 py-1.5 rounded-xl text-xs font-medium bg-white text-stone-700 border border-sand-200 hover:bg-sand-100 shrink-0';
         }
       });
 
       if (tg?.HapticFeedback) tg.HapticFeedback.selectionChanged();
-      updateBookingBadge();
+      renderBookingSlots();
     }
 
     function onCustomDateChange(val) {
@@ -1741,30 +1775,103 @@
       selectBookingDay(val, label);
     }
 
-    function selectBookingSlot(slot) {
-      selectedBookingSlot = slot;
-      const chips = document.querySelectorAll('.slot-chip');
-      chips.forEach(chip => {
-        const s = chip.getAttribute('data-slot');
-        if (s === slot) {
-          chip.className = 'slot-chip active p-2 rounded-xl border text-left bg-brand-600 text-white border-brand-600 shadow-2xs transition-all active:scale-95';
-          const subtext = chip.querySelector('.text-stone-500, .text-stone-400');
-          if (subtext) subtext.className = 'text-[10px] opacity-90 mt-0.5';
-        } else {
-          chip.className = 'slot-chip p-2 rounded-xl border text-left bg-white text-stone-700 border-sand-200 hover:bg-sand-100 transition-all active:scale-95';
+    function renderBookingSlots() {
+      const container = document.getElementById('bookingSlotsContainer');
+      const badge = document.getElementById('selectedSlotBadge');
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      const now = new Date();
+      const todayIso = getLocalDateStr(now);
+      const isToday = (selectedBookingDateStr === todayIso);
+      const currentHour = now.getHours();
+
+      let availableSlots = [];
+
+      BOOKING_SLOTS.forEach(s => {
+        // Проверяем: если дата — СЕГОДНЯ, и текущее время превысило порог слота
+        const isPassed = isToday && (currentHour >= s.cutoffHour);
+        if (!isPassed) {
+          availableSlots.push(s.id);
         }
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.setAttribute('data-slot', s.id);
+
+        if (isPassed) {
+          btn.disabled = true;
+          btn.className = 'slot-chip p-2 rounded-xl border text-left bg-stone-100 text-stone-400 border-stone-200 opacity-50 cursor-not-allowed';
+          btn.innerHTML = `
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold line-through">${s.title}</span>
+            </div>
+            <div class="text-[10px] mt-0.5 line-through">${s.time}</div>
+            <div class="text-[9px] text-red-500 font-semibold mt-0.5">время прошло</div>
+          `;
+        } else {
+          const isSelected = (selectedBookingSlot === s.id);
+          btn.className = isSelected
+            ? 'slot-chip active p-2 rounded-xl border text-left bg-brand-600 text-white border-brand-600 shadow-2xs transition-all active:scale-95'
+            : 'slot-chip p-2 rounded-xl border text-left bg-white text-stone-700 border-sand-200 hover:bg-sand-100 transition-all active:scale-95';
+
+          btn.innerHTML = `
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold">${s.title}</span>
+            </div>
+            <div class="text-[10px] ${isSelected ? 'opacity-90' : 'text-stone-500'} mt-0.5">${s.time}</div>
+            <div class="text-[9px] ${isSelected ? 'opacity-80' : 'text-stone-400'}">${s.desc}</div>
+          `;
+          btn.onclick = () => selectBookingSlot(s.id);
+        }
+
+        container.appendChild(btn);
       });
 
-      if (tg?.HapticFeedback) tg.HapticFeedback.selectionChanged();
+      // Автоматическое переключение слота, если выбранный на сегодня уже прошел
+      if (isToday) {
+        if (availableSlots.length === 0) {
+          selectedBookingSlot = '';
+          if (badge) {
+            badge.innerText = 'На сегодня слоты закрыты';
+            badge.className = 'text-[10px] font-bold text-red-700 bg-red-50 px-2 py-0.5 rounded-md border border-red-200';
+          }
+          return;
+        } else if (!availableSlots.includes(selectedBookingSlot)) {
+          selectedBookingSlot = availableSlots[0];
+          renderBookingSlots();
+          return;
+        }
+      } else {
+        if (!selectedBookingSlot) {
+          selectedBookingSlot = 'morning';
+        }
+      }
+
       updateBookingBadge();
+    }
+
+    function selectBookingSlot(slot) {
+      selectedBookingSlot = slot;
+      renderBookingSlots();
+      if (tg?.HapticFeedback) tg.HapticFeedback.selectionChanged();
     }
 
     function updateBookingBadge() {
       const badge = document.getElementById('selectedSlotBadge');
       if (!badge) return;
-      const slotObj = BOOKING_SLOTS[selectedBookingSlot] || BOOKING_SLOTS.morning;
+
+      const slotObj = BOOKING_SLOTS.find(s => s.id === selectedBookingSlot);
+      if (!slotObj) {
+        badge.innerText = 'Выберите доступный слот';
+        badge.className = 'text-[10px] font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200';
+        return;
+      }
+
       const shortDate = selectedBookingDateLabel.split('(')[0].trim() || 'Завтра';
       badge.innerText = `${shortDate} • ${slotObj.time.split('–')[0].trim()}`;
+      badge.className = 'text-[10px] font-bold text-brand-800 bg-brand-50 px-2 py-0.5 rounded-md border border-brand-200';
     }
 
     // Шторка заказа
@@ -1871,9 +1978,20 @@
 `;
       }
 
+      // Проверка: если выбрано сегодня, но слоты уже закрыты
+      const todayIso = getLocalDateStr(new Date());
+      if (selectedBookingDateStr === todayIso && !selectedBookingSlot) {
+        if (tg?.showAlert) {
+          tg.showAlert('На сегодня все слоты выезда шефа уже завершены. Пожалуйста, выберите дату начиная с завтра!');
+        } else {
+          alert('На сегодня все слоты выезда шефа уже завершены. Пожалуйста, выберите дату начиная с завтра!');
+        }
+        return;
+      }
+
       // Дата и временной слот визита
-      const slotInfo = BOOKING_SLOTS[selectedBookingSlot] || BOOKING_SLOTS.morning;
-      msg += `📅 Дата визита: ${selectedBookingDateLabel || 'Завтра (согласовать)'}
+      const slotInfo = BOOKING_SLOTS.find(s => s.id === selectedBookingSlot) || BOOKING_SLOTS[0];
+      msg += `📅 Дата визита: ${selectedBookingDateLabel || 'Завтра'}
 `;
       msg += `⏰ Время визита: ${slotInfo.title} (${slotInfo.time})
 `;
@@ -1913,7 +2031,7 @@
         format: isEvent ? 'Выездное мероприятие / BBQ на вилле' : 'На кухне клиента (от 250k VND/час)',
         dishes: chosenList.map(d => d.title),
         bookingDate: selectedBookingDateLabel || selectedBookingDateStr,
-        bookingSlot: BOOKING_SLOTS[selectedBookingSlot]?.title + ' (' + BOOKING_SLOTS[selectedBookingSlot]?.time + ')',
+        bookingSlot: slotInfo ? (slotInfo.title + ' (' + slotInfo.time + ')') : 'Не указан',
         pantryItems: Array.from(userPantryItems),
         hours,
         fee
