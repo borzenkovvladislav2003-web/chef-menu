@@ -134,7 +134,7 @@
             </div>
             <h2 class="text-base font-bold leading-snug">Семейная еда в вашем холодильнике</h2>
             <p class="text-xs text-stone-300 mt-1 leading-relaxed">
-              Продукты — строго по чекам Lotte Mart и рынка без переплат. Оплата шефа — от <b>200 000 ₫/час</b>.
+              Продукты — строго по чекам Lotte Mart и рынка без переплат. Оплата шефа — <b>от 250 000 ₫/час</b>.
             </p>
           </div>
           <div class="absolute -right-3 -bottom-3 w-28 h-28 opacity-20 pointer-events-none rounded-2xl overflow-hidden">
@@ -339,8 +339,8 @@
                 <h4 class="font-bold text-xs text-sand-900">Готовка на вашей кухне</h4>
               </div>
               <div class="text-right">
-                <span class="font-extrabold text-sm text-sand-900">200 000 ₫</span>
-                <span class="text-[10px] text-stone-500 block">/ час (~8$)</span>
+                <span class="font-extrabold text-sm text-sand-900">от 250 000 ₫</span>
+                <span class="text-[10px] text-stone-500 block">/ час (~10$)</span>
               </div>
             </div>
             <p class="text-[11px] text-stone-600 leading-relaxed">
@@ -355,8 +355,8 @@
                 <h4 class="font-bold text-xs text-sand-900">Вне кухни клиента с доставкой</h4>
               </div>
               <div class="text-right">
-                <span class="font-extrabold text-sm text-sand-900">300 000 ₫</span>
-                <span class="text-[10px] text-stone-500 block">/ час (~12$)</span>
+                <span class="font-extrabold text-sm text-sand-900">от 350 000 ₫</span>
+                <span class="text-[10px] text-stone-500 block">/ час (~14$)</span>
               </div>
             </div>
             <p class="text-[11px] text-stone-600 leading-relaxed">
@@ -457,7 +457,7 @@
           </div>
           <div class="pt-1 flex justify-between items-center text-xs">
             <span class="text-stone-500">Итого оплата работы шефа за 3 дня:</span>
-            <span class="font-extrabold text-sm text-brand-700">~500 000 – 700 000 ₫</span>
+            <span class="font-extrabold text-sm text-brand-700">~600 000 – 900 000 ₫</span>
           </div>
         </div>
       </div>
@@ -776,8 +776,8 @@
           <span id="drawerHours" class="font-bold text-sand-900">~3.5 часа</span>
         </div>
         <div class="flex justify-between text-stone-600">
-          <span>Оплата работы повара (200k/ч):</span>
-          <span id="drawerChefFee" class="font-bold text-sand-900">700 000 ₫</span>
+          <span>Оплата работы повара (от 250k/ч):</span>
+          <span id="drawerChefFee" class="font-bold text-sand-900">875 000 ₫</span>
         </div>
         <div class="flex justify-between text-stone-600">
           <span>Продукты (Lotte Mart / Рыбный порт):</span>
@@ -1234,7 +1234,7 @@
         orderBtn.classList.remove('opacity-50', 'pointer-events-none');
         countEl.innerText = `${count} ${count === 1 ? 'блюдо' : (count < 5 ? 'блюда' : 'блюд')}`;
         const hours = Math.max(2.0, (1.5 + count * 0.5)).toFixed(1);
-        const fee = Math.round(hours * 200000);
+        const fee = Math.round(hours * 250000);
         estimateEl.innerText = `~${hours} ч работы (${fee.toLocaleString('ru-RU')} ₫) + чеки`;
       }
     }
@@ -1793,7 +1793,7 @@
 
       const count = selectedDishes.size;
       const hours = Math.max(2.0, (1.5 + count * 0.5)).toFixed(1);
-      const fee = Math.round(hours * 200000);
+      const fee = Math.round(hours * 250000);
       document.getElementById('drawerHours').innerText = `~${hours} часа`;
       document.getElementById('drawerChefFee').innerText = fee.toLocaleString('ru-RU') + ' ₫';
 
@@ -1845,7 +1845,7 @@
 
       const count = chosenList.length;
       const hours = Math.max(2.0, (1.5 + count * 0.5)).toFixed(1);
-      const fee = Math.round(hours * 200000).toLocaleString('ru-RU');
+      const fee = Math.round(hours * 250000).toLocaleString('ru-RU');
 
       // Формируем красивый текст для Telegram
       const isEvent = orderFormat === 'event';
@@ -1910,7 +1910,7 @@
         phone,
         address: address || 'Нячанг (уточняется)',
         notes: notes || 'Без ограничений',
-        format: isEvent ? 'Выездное мероприятие / BBQ на вилле' : 'На кухне клиента (200k VND/час)',
+        format: isEvent ? 'Выездное мероприятие / BBQ на вилле' : 'На кухне клиента (от 250k VND/час)',
         dishes: chosenList.map(d => d.title),
         bookingDate: selectedBookingDateLabel || selectedBookingDateStr,
         bookingSlot: BOOKING_SLOTS[selectedBookingSlot]?.title + ' (' + BOOKING_SLOTS[selectedBookingSlot]?.time + ')',
