@@ -1364,13 +1364,13 @@
       filtered.forEach(dish => {
         const isSelected = selectedDishes.has(dish.id);
         const card = document.createElement('article');
-        card.className = 'bg-white rounded-2xl p-3 shadow-xs border border-sand-200/90 transition-all flex gap-3.5 items-stretch';
+        card.className = 'bg-white rounded-2xl p-3 shadow-xs border border-sand-200/90 transition-all flex gap-3.5 items-stretch min-h-[174px] sm:min-h-[194px]';
         
         card.innerHTML = `
-          <!-- Полноформатное вертикальное фото слева (без обрезки, естественные пропорции) -->
-          <div onclick="openPhotoModal('${dish.img}', '${dish.title.replace(/'/g, "\\'")}')" class="relative w-28 sm:w-32 shrink-0 bg-[#f4f1ea] rounded-xl overflow-hidden flex items-center justify-center p-1.5 cursor-pointer self-start group">
-            <img class="w-full h-auto max-h-36 object-contain rounded-lg shadow-2xs group-hover:scale-105 transition-transform" src="${dish.img}" alt="${dish.title}" loading="lazy" data-orig="${dish.origImg || ''}" onerror="if(this.dataset.orig && this.src.indexOf(this.dataset.orig)===-1){this.src=this.dataset.orig;}else if(this.src!=='${dish.fallbackImg}'){this.src='${dish.fallbackImg}';}">
-            <span class="absolute bottom-1 right-1 bg-black/60 backdrop-blur-xs text-white p-0.5 rounded opacity-75">
+          <!-- Единое фото блюда 3:4 (референс: салаты и завтраки) -->
+          <div onclick="openPhotoModal('${dish.img}', '${dish.title.replace(/'/g, "\\'")}')" class="relative w-28 sm:w-32 aspect-[3/4] shrink-0 bg-[#f4f1ea] rounded-xl overflow-hidden cursor-pointer group shadow-2xs" style="aspect-ratio: 3/4;">
+            <img class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300" src="${dish.img}" alt="${dish.title}" loading="lazy" data-orig="${dish.origImg || ''}" onerror="if(this.dataset.orig && this.src.indexOf(this.dataset.orig)===-1){this.src=this.dataset.orig;}else if(this.src!=='${dish.fallbackImg}'){this.src='${dish.fallbackImg}';}">
+            <span class="absolute bottom-1 right-1 bg-black/60 backdrop-blur-xs text-white p-0.5 rounded opacity-75 group-hover:opacity-100 transition-opacity">
               <span class="material-symbols-outlined text-[13px] block">zoom_in</span>
             </span>
           </div>
@@ -1378,15 +1378,15 @@
           <!-- Справа сразу: бейджи, название, описание, порция и кнопка выбора -->
           <div class="flex-1 min-w-0 flex flex-col justify-between py-0.5">
             <div>
-              <div class="flex items-center gap-1 flex-wrap mb-1">
-                ${dish.badges.slice(0, 2).map(b => `<span class="px-2 py-0.5 rounded-full bg-sand-100 text-[10px] font-bold text-sand-900">${b}</span>`).join('')}
+              <div class="flex items-center gap-1 flex-wrap mb-1 h-5 overflow-hidden">
+                ${dish.badges.slice(0, 2).map(b => `<span class="px-2 py-0.5 rounded-full bg-sand-100 text-[10px] font-bold text-sand-900 truncate max-w-[130px]">${b}</span>`).join('')}
               </div>
-              <h3 class="font-bold text-sm text-sand-900 leading-snug">${dish.title}</h3>
-              <p class="text-[11px] text-stone-500 mt-1 line-clamp-3 leading-relaxed">${dish.desc}</p>
+              <h3 class="font-bold text-sm text-sand-900 leading-snug line-clamp-2">${dish.title}</h3>
+              <p class="text-[11px] text-stone-500 mt-1 line-clamp-2 sm:line-clamp-3 leading-relaxed">${dish.desc}</p>
             </div>
             
             <div class="pt-2 mt-1.5 border-t border-sand-100 flex items-center justify-between gap-2">
-              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md truncate">${dish.portion}</span>
+              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md truncate max-w-[130px]">${dish.portion}</span>
               <button onclick="toggleDish('${dish.id}')" class="shrink-0 px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1 active:scale-95 ${isSelected ? 'bg-brand-50 text-brand-700 border border-brand-200' : 'bg-sand-900 text-white shadow-xs'}">
                 <span class="material-symbols-outlined text-[15px]">${isSelected ? 'check' : 'add'}</span>
                 <span>${isSelected ? 'В рационе' : 'Выбрать'}</span>
