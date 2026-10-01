@@ -1134,20 +1134,21 @@
         prepMinutes: 30,
         img: 'images/side_puree.jpg',
         origImg: 'images/пюре.jpg',
+        imgPosition: '10% center',
         fallbackImg: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=600&auto=format&fit=crop&q=80',
         badges: ['Воздушное & сливочное', 'Любимое детям']
       },
       {
         id: 'side_rice',
         cat: 'side',
-        title: 'Рассыпчатый жасминовый рис',
-        desc: 'Ароматный жасминовый рис, приготовленный рисинка к рисинке со сливочным маслом. Превосходно впитывает соусы от курицы и томленой говядины.',
+        title: 'Рассыпчатый рис',
+        desc: 'Ароматный рис, приготовленный рисинка к рисинке со сливочным маслом. Превосходно впитывает соусы от курицы и томленой говядины.',
         portion: 'Семейный бокс (~600 г, 4–5 порций)',
         prepMinutes: 25,
         img: 'images/side_rice.jpg',
         origImg: 'images/рис.jpg',
         fallbackImg: 'https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?w=600&auto=format&fit=crop&q=80',
-        badges: ['Жасминовый рис', 'Рассыпчатый']
+        badges: ['Рассыпчатый', 'Сливочное масло']
       },
       {
         id: 'side_buckwheat',
@@ -1369,7 +1370,7 @@
         card.innerHTML = `
           <!-- Единое фото блюда 3:4 (референс: салаты и завтраки) -->
           <div onclick="openPhotoModal('${dish.img}', '${dish.title.replace(/'/g, "\\'")}')" class="relative w-28 sm:w-32 aspect-[3/4] shrink-0 bg-[#f4f1ea] rounded-xl overflow-hidden cursor-pointer group shadow-2xs" style="aspect-ratio: 3/4;">
-            <img class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300" src="${dish.img}" alt="${dish.title}" loading="lazy" data-orig="${dish.origImg || ''}" onerror="if(this.dataset.orig && this.src.indexOf(this.dataset.orig)===-1){this.src=this.dataset.orig;}else if(this.src!=='${dish.fallbackImg}'){this.src='${dish.fallbackImg}';}">
+            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" style="object-position: ${dish.imgPosition || 'center'};" src="${dish.img}" alt="${dish.title}" loading="lazy" data-orig="${dish.origImg || ''}" onerror="if(this.dataset.orig && this.src.indexOf(this.dataset.orig)===-1){this.src=this.dataset.orig;}else if(this.src!=='${dish.fallbackImg}'){this.src='${dish.fallbackImg}';}">
             <span class="absolute bottom-1 right-1 bg-black/60 backdrop-blur-xs text-white p-0.5 rounded opacity-75 group-hover:opacity-100 transition-opacity">
               <span class="material-symbols-outlined text-[13px] block">zoom_in</span>
             </span>
@@ -1897,7 +1898,7 @@
       draniki: ['Картофель', 'Баклажан (опция)', 'Мясной фарш (опция)', 'Куриные яйца', 'Мука', 'Сметана', 'Растительное масло'],
       side_pasta: ['Паста твердых сортов', 'Сливочное масло', 'Оливковое масло'],
       side_puree: ['Картофель', 'Молоко', 'Сливочное масло'],
-      side_rice: ['Жасминовый рис', 'Сливочное масло'],
+      side_rice: ['Рис', 'Сливочное масло'],
       side_buckwheat: ['Гречневая крупа', 'Сливочное масло'],
       salad_cherry: ['Томаты черри', 'Свежие огурцы', 'Базилик / шпинат', 'Сыр моцарелла', 'Оливковое масло / заправка'],
       salad_meat: ['Куриное филе / ветчина', 'Листовой салат', 'Огурцы / томаты'],
