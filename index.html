@@ -149,14 +149,20 @@
           <button onclick="filterCategory('all')" class="cat-pill active px-3.5 py-1.5 rounded-full text-xs font-bold transition-all bg-brand-600 text-white shadow-xs whitespace-nowrap" data-cat="all">
             Все меню
           </button>
+          <button onclick="filterCategory('soup')" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-700 border border-sand-200 whitespace-nowrap" data-cat="soup">
+            🍲 Супы
+          </button>
+          <button onclick="filterCategory('main')" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-700 border border-sand-200 whitespace-nowrap" data-cat="main">
+            🥩 Горячее
+          </button>
+          <button onclick="filterCategory('side')" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-700 border border-sand-200 whitespace-nowrap" data-cat="side">
+            🍝 Гарниры
+          </button>
           <button onclick="filterCategory('salad')" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-700 border border-sand-200 whitespace-nowrap" data-cat="salad">
             🥗 Салаты
           </button>
           <button onclick="filterCategory('breakfast')" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-700 border border-sand-200 whitespace-nowrap" data-cat="breakfast">
-            🥞 Завтраки
-          </button>
-          <button onclick="filterCategory('dessert')" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-stone-700 border border-sand-200 whitespace-nowrap" data-cat="dessert">
-            🧁 Десерты &amp; Выпечка
+            🥞 Завтраки &amp; Выпечка
           </button>
         </div>
       </section>
@@ -250,7 +256,7 @@
           <div class="flex justify-between items-center p-2 rounded-lg bg-sand-50">
             <div>
               <p class="font-bold text-sand-900">🐟 Рыбный порт (Утренний улов)</p>
-              <p class="text-[10px] text-stone-500">Сибас свежий (1.3 кг), креветка</p>
+              <p class="text-[10px] text-stone-500">Лосось свежий, дикие креветки</p>
             </div>
             <span class="font-bold text-sand-900">240 000 ₫</span>
           </div>
@@ -414,7 +420,7 @@
             </div>
             <div class="p-2 rounded-lg bg-white border border-emerald-100">
               <p class="font-bold text-sand-900">🐟 Утренний рыбный порт (Cảng cá)</p>
-              <p class="text-[10px] text-stone-500 mt-0.5">Живой улов на рассвете: сибас, дорадо, дикие креветки, кальмары.</p>
+              <p class="text-[10px] text-stone-500 mt-0.5">Свежая рыба и морепродукты: отборный лосось и дикие креветки.</p>
             </div>
             <div class="p-2 rounded-lg bg-white border border-emerald-100 sm:col-span-2">
               <p class="font-bold text-sand-900">🌿 Местные рынки (Chợ Xóm Mới &amp; Chợ Đầm)</p>
@@ -440,7 +446,7 @@
 
         <div class="p-3.5 rounded-xl bg-sand-50 border border-sand-200 space-y-2.5">
           <div class="flex items-center justify-between">
-            <h4 class="font-bold text-xs text-sand-900">Минимальный выезд — от 2–3 часов</h4>
+            <h4 class="font-bold text-xs text-sand-900">Минимальный выезд — от 3 часов</h4>
             <span class="text-[11px] font-extrabold text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md border border-brand-200">
               рацион на 3–4 дня
             </span>
@@ -449,15 +455,15 @@
             Шеф не выезжает ради одного блюда. Концепция сервиса — <b>полное освобождение семьи от готовки на 3 дня вперед</b>.
           </p>
           <div class="bg-white p-3 rounded-lg border border-sand-200 text-[11px] text-stone-700 space-y-1.5">
-            <p class="font-bold text-sand-900 text-xs">Что шеф успевает приготовить за выезд (2.5–3.5 ч):</p>
+            <p class="font-bold text-sand-900 text-xs">Что шеф успевает приготовить за выезд (3–3.5 ч):</p>
             <div class="flex items-center gap-2"><span>🍲</span><span>Кастрюля домашнего борща или супа (4–5 литров, 8–9 порций)</span></div>
-            <div class="flex items-center gap-2"><span>🥩</span><span>Мясное или рыбное второе блюдо (12 котлет / томленая говядина / свежий сибас)</span></div>
-            <div class="flex items-center gap-2"><span>🍝</span><span>Семейный гарнир (паста твердых сортов / картофельное пюре)</span></div>
+            <div class="flex items-center gap-2"><span>🥩</span><span>Мясное или рыбное второе блюдо (12 котлет / томленая говядина / лосось / креветки)</span></div>
+            <div class="flex items-center gap-2"><span>🍝</span><span>Семейный гарнир на выбор (паста твердых сортов / картофельное пюре / рис / гречка)</span></div>
             <div class="flex items-center gap-2"><span>🥗</span><span>Свежий салат или десерт к завтраку (сырники / синнабоны / ватрушки)</span></div>
           </div>
           <div class="pt-1 flex justify-between items-center text-xs">
             <span class="text-stone-500">Итого оплата работы шефа за 3 дня:</span>
-            <span class="font-extrabold text-sm text-brand-700">~600 000 – 900 000 ₫</span>
+            <span class="font-extrabold text-sm text-brand-700">~750 000 – 1 000 000 ₫</span>
           </div>
         </div>
       </div>
@@ -572,7 +578,7 @@
             <span class="w-5 h-5 rounded-full bg-sand-900 text-white font-bold text-[11px] flex items-center justify-center shrink-0 mt-0.5">2</span>
             <div>
               <p class="font-bold text-sand-900">Утренняя закупка продуктов в выбранных магазинах</p>
-              <p class="text-[11px] text-stone-500 mt-0.5">Шеф лично едет в Lotte Mart, Mega Market, Moonmilk или рыбный порт за свежайшим сибасом и мясом, сохраняя все чеки.</p>
+              <p class="text-[11px] text-stone-500 mt-0.5">Шеф лично закупает продукты в Lotte Mart, Mega Market или Moonmilk: отборный лосось, креветки, мясо и бакалею, сохраняя все чеки.</p>
             </div>
           </div>
 
@@ -752,8 +758,19 @@
           </span>
         </div>
         <p class="text-[11px] text-stone-600 leading-snug">
-          Отметьте продукты, которые уже есть на вашей кухне — шеф исключит их из закупки в магазине:
+          Отметьте продукты, которые уже есть на вашей кухне (специи, масло, бакалея) — шеф исключит их из закупки:
         </p>
+        
+        <!-- Специальное примечание по домашнему творогу (Вьетнам/Нячанг) -->
+        <div id="cottageCheeseNotice" class="hidden p-2.5 rounded-xl bg-amber-100/80 border border-amber-300 text-[11px] text-amber-950 space-y-1">
+          <div class="flex items-center gap-1.5 font-bold">
+            <span>🧀</span>
+            <span>Важно по творогу для сырников:</span>
+          </div>
+          <p class="leading-relaxed text-amber-900">
+            Домашний творог во Вьетнаме — редкий и дорогой продукт. Вы можете <b>купить его сами</b> в Moonmilk / пекарнях (или дать свой), либо <b>шеф сквашивает и готовит свежий домашний творог сам под заказ</b> (потребуется от 12 ч на сквашивание).
+          </p>
+        </div>
         
         <!-- Чипсы ингредиентов для выбранных блюд -->
         <div id="pantryChipsList" class="flex flex-wrap gap-1.5 pt-0.5">
@@ -785,7 +802,7 @@
         </div>
         <div class="pt-2 border-t border-sand-200 flex justify-between text-[11px] text-stone-500">
           <span>Минимальный выезд:</span>
-          <span class="font-semibold text-sand-900">от 2–3 часов (рацион на 3 дня)</span>
+          <span class="font-semibold text-sand-900">от 3 часов (рацион на 3 дня)</span>
         </div>
       </div>
 
@@ -866,6 +883,41 @@
             <span id="taxiNoticeText">Поездка шефа на такси (Grab по чеку в обе стороны) оплачивается заказчиком.</span>
           </div>
         </div>
+
+        <!-- БЛОК: ОСНАЩЕНИЕ КУХНИ (ДУХОВКА) -->
+        <div class="p-3.5 rounded-2xl bg-sand-50 border border-sand-200 space-y-2">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-brand-700 text-[18px]">microwave</span>
+              <label class="block text-xs font-bold text-sand-900">Оснащение кухни: есть духовка?</label>
+            </div>
+            <span class="text-[10px] text-stone-500">для десертов/выпечки</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2" id="ovenOptionsContainer">
+            <button type="button" onclick="selectOvenOption(true)" id="ovenBtnYes" class="oven-chip p-2.5 rounded-xl border text-left bg-white text-stone-700 border-sand-200 hover:bg-sand-100 transition-all active:scale-95">
+              <div class="flex items-center gap-1.5 font-bold text-xs">
+                <span>🔥</span>
+                <span>Да, есть духовка</span>
+              </div>
+              <p class="text-[10px] text-stone-500 mt-0.5">Синнабоны, выпечка, пироги</p>
+            </button>
+            <button type="button" onclick="selectOvenOption(false)" id="ovenBtnNo" class="oven-chip active p-2.5 rounded-xl border text-left bg-brand-600 text-white border-brand-600 shadow-2xs transition-all active:scale-95">
+              <div class="flex items-center gap-1.5 font-bold text-xs">
+                <span>🍳</span>
+                <span>Только плита</span>
+              </div>
+              <p class="text-[10px] opacity-90 mt-0.5">Варка, жарка, томление</p>
+            </button>
+          </div>
+
+          <!-- Подсказка, если в заказе выпечка, а духовки нет -->
+          <div id="ovenWarningNotice" class="hidden p-2 rounded-lg bg-amber-100/90 border border-amber-300 text-[11px] text-amber-950 flex items-start gap-1.5">
+            <span>💡</span>
+            <span>В заказе есть выпечка (синнабоны / ватрушки). Так как духовки нет, шеф испечет десерт заранее на своей базе и привезет свежим в боксах.</span>
+          </div>
+        </div>
+
         <!-- БЛОК: КАЛЕНДАРЬ И ВРЕМЕННОЙ СЛОТ ВЫЕЗДА ШЕФА -->
         <div class="p-3.5 rounded-2xl bg-sand-50 border border-sand-200 space-y-2.5">
           <div class="flex items-center justify-between">
@@ -925,6 +977,41 @@
         <div>
           <label class="block text-xs font-bold text-sand-900 mb-1">Особые пожелания / Аллергии</label>
           <input type="text" id="inputNotes" placeholder="Без кинзы, ребенку не острое..." class="w-full px-3.5 py-2.5 rounded-xl border border-sand-200 text-xs bg-sand-50 focus:bg-white focus:outline-brand-500">
+        </div>
+
+        <!-- БЛОК: СПОСОБ ОПЛАТЫ (ТОЛЬКО ДОНГИ ИЛИ КАРТЫ РФ) -->
+        <div class="p-3.5 rounded-2xl bg-sand-50 border border-sand-200 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-brand-700 text-[18px]">payments</span>
+              <label class="block text-xs font-bold text-sand-900">Удобный способ оплаты</label>
+            </div>
+            <span class="text-[10px] font-bold text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded-md">
+              Оплата по факту
+            </span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2" id="paymentOptionsContainer">
+            <button type="button" onclick="selectPaymentMethod('vnd')" id="payBtnVnd" class="pay-chip active p-2.5 rounded-xl border text-left bg-brand-600 text-white border-brand-600 shadow-2xs transition-all active:scale-95">
+              <div class="flex items-center gap-1.5 font-bold text-xs">
+                <span>💵</span>
+                <span>Вьетнамские донги</span>
+              </div>
+              <p class="text-[10px] opacity-90 mt-0.5">Наличные или QR банка</p>
+            </button>
+            <button type="button" onclick="selectPaymentMethod('rub')" id="payBtnRub" class="pay-chip p-2.5 rounded-xl border text-left bg-white text-stone-700 border-sand-200 hover:bg-sand-100 transition-all active:scale-95">
+              <div class="flex items-center gap-1.5 font-bold text-xs">
+                <span>💳</span>
+                <span>Карта РФ (рубли)</span>
+              </div>
+              <p class="text-[10px] text-stone-500 mt-0.5">Сбер / Т-Банк по курсу</p>
+            </button>
+          </div>
+
+          <div class="pt-1 border-t border-sand-200 text-[10px] text-stone-500 space-y-0.5 leading-snug">
+            <p>• <b>Продукты:</b> строго по чекам магазинов без наценок (донг в донг).</p>
+            <p>• <b>Работа шефа:</b> оплачивается после сдачи чистой кухни (от 250k VND/час).</p>
+          </div>
         </div>
       </div>
 
@@ -1220,22 +1307,57 @@
       renderDishes();
     }
 
-    function updateCartBar() {
+    // Расчет времени работы шефа на основе выбранных блюд
+    function calculateChefTime() {
       const count = selectedDishes.size;
+      if (count === 0) {
+        return { hours: '0.0', fee: 0, count: 0, isValid: false, needMore: 3 };
+      }
+
+      // Базовые 30 минут: подготовка инвентаря, разделка, наведение чистоты и влажная уборка кухни
+      let totalMinutes = 30;
+      selectedDishes.forEach(id => {
+        const dish = DISHES.find(d => d.id === id);
+        totalMinutes += (dish && dish.prepMinutes) ? dish.prepMinutes : 30;
+      });
+
+      // Округление до 0.5 ч, минимум 3.0 часа по условиям выезда
+      const rawHours = totalMinutes / 60;
+      const roundedHours = Math.max(3.0, Math.ceil(rawHours * 2) / 2);
+      const fee = Math.round(roundedHours * 250000);
+
+      return {
+        hours: roundedHours.toFixed(1),
+        fee: fee,
+        count: count,
+        isValid: count >= 3,
+        needMore: Math.max(0, 3 - count)
+      };
+    }
+
+    function updateCartBar() {
+      const timeInfo = calculateChefTime();
+      const count = timeInfo.count;
       const countEl = document.getElementById('cartCount');
       const estimateEl = document.getElementById('cartEstimate');
       const orderBtn = document.getElementById('cartOrderBtn');
 
       if (count === 0) {
         countEl.innerText = '0 блюд';
-        estimateEl.innerText = 'Выберите блюда выше';
+        estimateEl.innerText = 'Мин. заказ — от 3 блюд (семейный рацион)';
         orderBtn.classList.add('opacity-50', 'pointer-events-none');
+        orderBtn.innerHTML = '<span>Выбрать блюда</span>';
+      } else if (!timeInfo.isValid) {
+        countEl.innerText = `${count} из 3 блюд`;
+        const need = timeInfo.needMore;
+        estimateEl.innerText = `Добавьте еще ${need} ${need === 1 ? 'блюдо' : 'блюда'} до минимального рациона`;
+        orderBtn.classList.add('opacity-50', 'pointer-events-none');
+        orderBtn.innerHTML = `<span>Еще ${need} ${need === 1 ? 'блюдо' : 'блюда'}</span>`;
       } else {
         orderBtn.classList.remove('opacity-50', 'pointer-events-none');
-        countEl.innerText = `${count} ${count === 1 ? 'блюдо' : (count < 5 ? 'блюда' : 'блюд')}`;
-        const hours = Math.max(2.0, (1.5 + count * 0.5)).toFixed(1);
-        const fee = Math.round(hours * 250000);
-        estimateEl.innerText = `~${hours} ч работы (${fee.toLocaleString('ru-RU')} ₫) + чеки`;
+        countEl.innerText = `${count} ${count < 5 ? 'блюда' : 'блюд'} (рацион)`;
+        estimateEl.innerText = `~${timeInfo.hours} ч работы (${timeInfo.fee.toLocaleString('ru-RU')} ₫) + чеки`;
+        orderBtn.innerHTML = `<span>Заказать • ~${timeInfo.hours} ч</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>`;
       }
     }
 
@@ -1565,17 +1687,23 @@
     }
 
     // База ингредиентов для генератора закупки «Это есть дома»
+    // База ингредиентов блюд для чек-листа «Это есть дома» (творог исключен, т.к. редкий/дорогой)
     const DISH_INGREDIENTS = {
+      borsch: ['Говядина на кости', 'Свёкла', 'Капуста белокочанная', 'Картофель', 'Морковь', 'Лук репчатый', 'Томатная паста', 'Чеснок', 'Сметана / зелень'],
+      cutlets: ['Мясной фарш (говядина + свинина)', 'Белый хлеб / батон', 'Молоко', 'Лук репчатый', 'Панировочные сухари', 'Растительное масло'],
+      beef_stew: ['Мякоть говядины', 'Болгарский перец', 'Томаты в собственном соку', 'Морковь', 'Лук репчатый', 'Томатная паста'],
+      salmon_shrimp: ['Свежий лосось / дикие креветки', 'Лимон', 'Чеснок', 'Оливковое масло', 'Свежая зелень'],
+      sides: ['Паста твердых сортов', 'Картофель', 'Рис', 'Гречка', 'Сливочное масло'],
       salad_cherry: ['Томаты черри', 'Свежие огурцы', 'Базилик / шпинат', 'Сыр моцарелла', 'Оливковое масло / заправка'],
       salad_meat: ['Куриное филе / ветчина', 'Листовой салат', 'Огурцы / томаты', 'Соус шефа'],
       salad_beetroot: ['Свекла', 'Болгарский перец', 'Творожный сыр', 'Свежая зелень', 'Оливковое масло'],
       salad_olives_cheese: ['Спелые томаты', 'Оливки / маслины', 'Сыр фета / брынза', 'Оливковое масло'],
       salad_corn_pepper: ['Сладкая кукуруза', 'Болгарский перец', 'Томаты', 'Зелень'],
-      syrniki: ['Домашний творог', 'Куриные яйца', 'Мука', 'Сливочное масло', 'Ягоды к подаче', 'Сахар / ваниль'],
+      syrniki: ['Куриные яйца', 'Мука', 'Сливочное масло', 'Ягоды к подаче', 'Сахар / ваниль'], // Домашний творог не вносится в авто-список
       pancakes: ['Мука', 'Молоко', 'Куриные яйца', 'Сливочное масло', 'Фрукты к подаче', 'Сахар'],
       crepes: ['Молоко', 'Мука', 'Куриные яйца', 'Растительное масло', 'Сахар'],
       cinnabons: ['Мука', 'Сливочное масло', 'Корица', 'Сливочный сыр для глазури', 'Сахар'],
-      berry_brioche: ['Мука сдобная', 'Творог / заварной крем', 'Клубника свежая', 'Куриные яйца', 'Сахар'],
+      berry_brioche: ['Мука сдобная', 'Заварной крем', 'Клубника свежая', 'Куриные яйца', 'Сахар'],
       muffins: ['Мука', 'Шоколад / какао', 'Сливочное масло', 'Куриные яйца', 'Сахар'],
       cookies: ['Сливочное масло', 'Шоколадные дропсы', 'Мука', 'Куриные яйца', 'Сахар тростниковый']
     };
@@ -1898,11 +2026,19 @@
         }
       });
 
-      const count = selectedDishes.size;
-      const hours = Math.max(2.0, (1.5 + count * 0.5)).toFixed(1);
-      const fee = Math.round(hours * 250000);
-      document.getElementById('drawerHours').innerText = `~${hours} часа`;
-      document.getElementById('drawerChefFee').innerText = fee.toLocaleString('ru-RU') + ' ₫';
+      const timeInfo = calculateChefTime();
+      document.getElementById('drawerHours').innerText = `~${timeInfo.hours} часа`;
+      document.getElementById('drawerChefFee').innerText = timeInfo.fee.toLocaleString('ru-RU') + ' ₫';
+
+      // Показ предупреждения о твороге, если выбраны сырники
+      const cottageNotice = document.getElementById('cottageCheeseNotice');
+      if (cottageNotice) {
+        if (selectedDishes.has('syrniki')) {
+          cottageNotice.classList.remove('hidden');
+        } else {
+          cottageNotice.classList.add('hidden');
+        }
+      }
 
       // Сбор ингредиентов для выбранных блюд
       currentNeededIngredients.clear();
@@ -1912,8 +2048,74 @@
       });
       renderPantryChips();
       initBookingCalendar();
+      checkOvenWarning();
 
       document.getElementById('orderDrawer').classList.remove('hidden');
+    }
+
+    // Состояние оснащения кухни (духовка) и способа оплаты
+    let clientHasOven = false; // По умолчанию: только плита (самый частый вариант в кондо Нячанга)
+    let selectedPaymentMethod = 'vnd'; // По умолчанию: донги (наличные/QR)
+
+    function selectOvenOption(hasOven) {
+      clientHasOven = hasOven;
+      const btnYes = document.getElementById('ovenBtnYes');
+      const btnNo = document.getElementById('ovenBtnNo');
+      if (btnYes && btnNo) {
+        if (hasOven) {
+          btnYes.className = 'oven-chip active p-2.5 rounded-xl border text-left bg-brand-600 text-white border-brand-600 shadow-2xs transition-all active:scale-95';
+          btnNo.className = 'oven-chip p-2.5 rounded-xl border text-left bg-white text-stone-700 border-sand-200 hover:bg-sand-100 transition-all active:scale-95';
+          const pYes = btnYes.querySelector('p');
+          const pNo = btnNo.querySelector('p');
+          if (pYes) pYes.className = 'text-[10px] opacity-90 mt-0.5';
+          if (pNo) pNo.className = 'text-[10px] text-stone-500 mt-0.5';
+        } else {
+          btnNo.className = 'oven-chip active p-2.5 rounded-xl border text-left bg-brand-600 text-white border-brand-600 shadow-2xs transition-all active:scale-95';
+          btnYes.className = 'oven-chip p-2.5 rounded-xl border text-left bg-white text-stone-700 border-sand-200 hover:bg-sand-100 transition-all active:scale-95';
+          const pNo = btnNo.querySelector('p');
+          const pYes = btnYes.querySelector('p');
+          if (pNo) pNo.className = 'text-[10px] opacity-90 mt-0.5';
+          if (pYes) pYes.className = 'text-[10px] text-stone-500 mt-0.5';
+        }
+      }
+      checkOvenWarning();
+      if (tg?.HapticFeedback) tg.HapticFeedback.selectionChanged();
+    }
+
+    function checkOvenWarning() {
+      const warnEl = document.getElementById('ovenWarningNotice');
+      if (!warnEl) return;
+      const bakingDishIds = ['cinnabons', 'berry_brioche', 'muffins', 'cookies'];
+      const hasBaking = Array.from(selectedDishes).some(id => bakingDishIds.includes(id));
+      if (!clientHasOven && hasBaking) {
+        warnEl.classList.remove('hidden');
+      } else {
+        warnEl.classList.add('hidden');
+      }
+    }
+
+    function selectPaymentMethod(method) {
+      selectedPaymentMethod = method;
+      const btnVnd = document.getElementById('payBtnVnd');
+      const btnRub = document.getElementById('payBtnRub');
+      if (btnVnd && btnRub) {
+        if (method === 'vnd') {
+          btnVnd.className = 'pay-chip active p-2.5 rounded-xl border text-left bg-brand-600 text-white border-brand-600 shadow-2xs transition-all active:scale-95';
+          btnRub.className = 'pay-chip p-2.5 rounded-xl border text-left bg-white text-stone-700 border-sand-200 hover:bg-sand-100 transition-all active:scale-95';
+          const pVnd = btnVnd.querySelector('p');
+          const pRub = btnRub.querySelector('p');
+          if (pVnd) pVnd.className = 'text-[10px] opacity-90 mt-0.5';
+          if (pRub) pRub.className = 'text-[10px] text-stone-500 mt-0.5';
+        } else {
+          btnRub.className = 'pay-chip active p-2.5 rounded-xl border text-left bg-brand-600 text-white border-brand-600 shadow-2xs transition-all active:scale-95';
+          btnVnd.className = 'pay-chip p-2.5 rounded-xl border text-left bg-white text-stone-700 border-sand-200 hover:bg-sand-100 transition-all active:scale-95';
+          const pRub = btnRub.querySelector('p');
+          const pVnd = btnVnd.querySelector('p');
+          if (pRub) pRub.className = 'text-[10px] opacity-90 mt-0.5';
+          if (pVnd) pVnd.className = 'text-[10px] text-stone-500 mt-0.5';
+        }
+      }
+      if (tg?.HapticFeedback) tg.HapticFeedback.selectionChanged();
     }
 
     function handleDrawerBackdropClick(e) {
@@ -1951,8 +2153,9 @@
       }).filter(Boolean);
 
       const count = chosenList.length;
-      const hours = Math.max(2.0, (1.5 + count * 0.5)).toFixed(1);
-      const fee = Math.round(hours * 250000).toLocaleString('ru-RU');
+      const timeInfo = calculateChefTime();
+      const hours = timeInfo.hours;
+      const fee = timeInfo.fee.toLocaleString('ru-RU');
 
       // Формируем красивый текст для Telegram
       const isEvent = orderFormat === 'event';
@@ -1977,6 +2180,12 @@
         msg += `🎉 Формат: Выездное мероприятие / Барбекю на вилле
 `;
       }
+
+      // Оснащение кухни и способ оплаты
+      msg += `🔥 Духовка на кухне: ${clientHasOven ? 'Да, есть духовка' : 'Только плита (без духовки)'}
+`;
+      msg += `💳 Способ оплаты: ${selectedPaymentMethod === 'rub' ? 'Перевод на карту РФ (рубли: Сбер / Т-Банк)' : 'Вьетнамские донги (наличные или QR банка)'}
+`;
 
       // Проверка: если выбрано сегодня, но слоты уже закрыты
       const todayIso = getLocalDateStr(new Date());
@@ -2021,7 +2230,7 @@
       msg += `
 ⏱ Ориентир работы: ~${hours} ч (~${fee} ₫)
 `;
-      msg += `🛒 Продукты: строго по чекам Lotte Mart / рынка`;
+      msg += `🛒 Продукты: строго по чекам Lotte Mart / рынка (0% наценки)`;
 
       const orderData = {
         name,
@@ -2030,8 +2239,11 @@
         notes: notes || 'Без ограничений',
         format: isEvent ? 'Выездное мероприятие / BBQ на вилле' : 'На кухне клиента (от 250k VND/час)',
         dishes: chosenList.map(d => d.title),
+        oven: clientHasOven ? 'Есть духовка' : 'Только плита (без духовки)',
+        paymentMethod: selectedPaymentMethod === 'rub' ? 'Карта РФ (рубли: Сбер / Т-Банк)' : 'Вьетнамские донги (наличные / QR)',
         bookingDate: selectedBookingDateLabel || selectedBookingDateStr,
         bookingSlot: slotInfo ? (slotInfo.title + ' (' + slotInfo.time + ')') : 'Не указан',
+        stores: storesList || 'Lotte Mart / Рынок',
         pantryItems: Array.from(userPantryItems),
         hours,
         fee
