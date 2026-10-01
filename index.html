@@ -102,18 +102,15 @@
     </div>
 
     <!-- Переключатель вкладок -->
-    <div class="px-4 pb-2 flex gap-1">
+    <div class="px-4 pb-2 flex gap-1.5">
       <button onclick="switchTab('menu')" id="tabMenuBtn" class="flex-1 py-1.5 rounded-lg text-xs font-bold transition-all bg-sand-900 text-white shadow-xs">
         🍽 Меню
       </button>
-      <button onclick="switchTab('fridge')" id="tabFridgeBtn" class="flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all text-stone-600 hover:bg-sand-100">
-        🧊 Холодильник
+      <button onclick="switchTab('about')" id="tabAboutBtn" class="flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all text-stone-600 hover:bg-sand-100">
+        👨‍🍳 О шефе &amp; Тарифы
       </button>
       <button onclick="switchTab('reviews')" id="tabReviewsBtn" class="flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all text-stone-600 hover:bg-sand-100">
         ⭐ Отзывы
-      </button>
-      <button onclick="switchTab('about')" id="tabAboutBtn" class="flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all text-stone-600 hover:bg-sand-100">
-        👨‍🍳 О шефе
       </button>
     </div>
   </header>
@@ -124,21 +121,47 @@
     <!-- 1. ВКЛАДКА: МЕНЮ И ВЫБОР РАЦИОНА -->
     <div id="tabMenu" class="block animate-fadeIn">
       
-      <!-- Прозрачный финансовый баннер -->
-      <section class="p-4 pb-2">
+      <!-- Прозрачный финансовый баннер и выбор формата готовки -->
+      <section class="p-4 pb-2 space-y-2.5">
         <div class="bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 text-white rounded-2xl p-4 shadow-sm relative overflow-hidden">
           <div class="relative z-10">
-            <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/10 text-emerald-400 text-[11px] font-bold uppercase tracking-wider mb-2">
+            <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/10 text-emerald-400 text-[11px] font-bold uppercase tracking-wider mb-1.5">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
               Честная модель без наценок
             </div>
             <h2 class="text-base font-bold leading-snug">Семейная еда в вашем холодильнике</h2>
             <p class="text-xs text-stone-300 mt-1 leading-relaxed">
-              Продукты — строго по чекам Lotte Mart и рынка без переплат. Оплата шефа — <b>от 250 000 ₫/час</b>.
+              Продукты — строго по магазинным чекам без наценки. Закупка утром или за день до заказа.
             </p>
           </div>
           <div class="absolute -right-3 -bottom-3 w-28 h-28 opacity-20 pointer-events-none rounded-2xl overflow-hidden">
             <img src="images/logo.svg" alt="CHEF VLADISLAV" class="w-full h-full object-contain">
+          </div>
+        </div>
+
+        <!-- Переключатель формата: На кухне vs Доставка -->
+        <div class="bg-white p-2 rounded-2xl border border-sand-200 shadow-2xs">
+          <div class="flex items-center justify-between px-1 mb-1.5">
+            <span class="text-[11px] font-bold text-sand-900">Формат приготовления:</span>
+            <span id="currentFormatBadge" class="text-[10px] font-bold text-brand-800 bg-brand-50 px-2 py-0.5 rounded-md border border-brand-200">
+              На вашей кухне • от 250k/ч
+            </span>
+          </div>
+          <div class="grid grid-cols-2 gap-1.5">
+            <button type="button" onclick="setCookingFormat('kitchen')" id="menuFormatKitchenBtn" class="p-2 rounded-xl border text-left bg-brand-600 text-white border-brand-600 shadow-2xs transition-all active:scale-95">
+              <div class="flex items-center gap-1.5 font-bold text-xs">
+                <span>🍳</span>
+                <span>На вашей кухне</span>
+              </div>
+              <p class="text-[10px] opacity-90 mt-0.5">от 250 000 ₫ / час</p>
+            </button>
+            <button type="button" onclick="setCookingFormat('delivery')" id="menuFormatDeliveryBtn" class="p-2 rounded-xl border text-left bg-sand-50 text-stone-700 border-sand-200 hover:bg-sand-100 transition-all active:scale-95">
+              <div class="flex items-center gap-1.5 font-bold text-xs">
+                <span>🛵</span>
+                <span>С доставкой</span>
+              </div>
+              <p class="text-[10px] text-stone-500 mt-0.5">300k ₫/ч + 100k ₫/день</p>
+            </button>
           </div>
         </div>
       </section>
@@ -173,103 +196,7 @@
       </section>
     </div>
 
-    <!-- 2. ВКЛАДКА: ХОЛОДИЛЬНИК & ЧЕКИ -->
-    <div id="tabFridge" class="hidden animate-fadeIn p-4 space-y-4">
-      
-      <!-- Карточка инвентаря -->
-      <div class="bg-white rounded-2xl p-4 shadow-xs border border-sand-200">
-        <div class="flex items-center justify-between mb-2">
-          <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-brand-600">kitchen</span>
-            <h3 class="font-bold text-sm text-sand-900">Холодильник резидента (#101)</h3>
-          </div>
-          <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
-            Свежие запасы
-          </span>
-        </div>
-        <p class="text-xs text-stone-500 mb-3">Блюда герметично упакованы в стеклянные боксы шефа. Нажмите для подсказки по разогреву:</p>
-
-        <div class="space-y-2.5">
-          <!-- Бокс 1 -->
-          <div class="p-3 rounded-xl bg-sand-50 border border-sand-200 flex items-center justify-between">
-            <div>
-              <div class="flex items-center gap-1.5">
-                <span class="font-bold text-xs text-sand-900">🥞 Сырники из домашнего творога</span>
-                <span class="text-[10px] text-emerald-600 font-semibold">• до вс</span>
-              </div>
-              <p class="text-[11px] text-stone-500 mt-0.5">5 крупных сырников в стеклянном боксе + ягоды</p>
-            </div>
-            <button onclick="showReheat('Сырники', 'Прогреть 40–50 секунд в СВЧ или 2 минуты на сухой сковороде под крышкой. Подавать с охлажденным кремом и ягодами.')" class="px-2.5 py-1 rounded-lg bg-white border border-sand-200 text-[11px] font-bold text-stone-700 shadow-2xs active:scale-95">
-              Разогрев
-            </button>
-          </div>
-
-          <!-- Бокс 2 -->
-          <div class="p-3 rounded-xl bg-sand-50 border border-sand-200 flex items-center justify-between">
-            <div>
-              <div class="flex items-center gap-1.5">
-                <span class="font-bold text-xs text-sand-900">🧁 Синнабоны с корицей</span>
-                <span class="text-[10px] text-emerald-600 font-semibold">• свежая выпечка</span>
-              </div>
-              <p class="text-[11px] text-stone-500 mt-0.5">В форме под сливочной глазурью</p>
-            </div>
-            <button onclick="showReheat('Синнабоны', 'Подогреть 25–30 секунд в микроволновке — сливочная глазурь станет нежной и тающей, как из печи.')" class="px-2.5 py-1 rounded-lg bg-white border border-sand-200 text-[11px] font-bold text-stone-700 shadow-2xs active:scale-95">
-              Разогрев
-            </button>
-          </div>
-
-          <!-- Бокс 3 -->
-          <div class="p-3 rounded-xl bg-sand-50 border border-sand-200 flex items-center justify-between">
-            <div>
-              <div class="flex items-center gap-1.5">
-                <span class="font-bold text-xs text-sand-900">🍓 Ватрушки со свежей клубникой</span>
-                <span class="text-[10px] text-amber-600 font-semibold">• съесть сегодня-завтра</span>
-              </div>
-              <p class="text-[11px] text-stone-500 mt-0.5">С заварным кремом и клубникой</p>
-            </div>
-            <button onclick="showReheat('Ватрушки с клубникой', 'Идеальны при комнатной температуре. Не перегревать в СВЧ, чтобы ягоды оставались свежими и упругими.')" class="px-2.5 py-1 rounded-lg bg-white border border-sand-200 text-[11px] font-bold text-stone-700 shadow-2xs active:scale-95">
-              Подсказка
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Книга чеков без наценок -->
-      <div class="bg-white rounded-2xl p-4 shadow-xs border border-sand-200 space-y-3">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-1.5">
-            <span class="material-symbols-outlined text-brand-600 text-[20px]">receipt_long</span>
-            <h3 class="font-bold text-sm text-sand-900">Чеки закупки продуктов</h3>
-          </div>
-          <span class="text-[10px] font-bold text-stone-500 uppercase">Строго по чеку</span>
-        </div>
-
-        <div class="space-y-2 text-xs">
-          <div class="flex justify-between items-center p-2 rounded-lg bg-sand-50">
-            <div>
-              <p class="font-bold text-sand-900">🛒 Lotte Mart Nha Trang</p>
-              <p class="text-[10px] text-stone-500">Чек #LT-4491 • Говядина, овощи, зелень</p>
-            </div>
-            <span class="font-bold text-sand-900">462 000 ₫</span>
-          </div>
-
-          <div class="flex justify-between items-center p-2 rounded-lg bg-sand-50">
-            <div>
-              <p class="font-bold text-sand-900">🐟 Рыбный порт (Утренний улов)</p>
-              <p class="text-[10px] text-stone-500">Лосось свежий, дикие креветки</p>
-            </div>
-            <span class="font-bold text-sand-900">240 000 ₫</span>
-          </div>
-        </div>
-
-        <div class="pt-2 border-t border-sand-200 flex justify-between items-center text-xs">
-          <span class="text-stone-500">Итого по чекам магазинов:</span>
-          <span class="font-extrabold text-sm text-brand-700">702 000 ₫</span>
-        </div>
-      </div>
-    </div>
-
-            <!-- 3. ВКЛАДКА: О ШЕФЕ, ТАРИФЫ, МАГАЗИНЫ И УСЛОВИЯ -->
+    <!-- 2. ВКЛАДКА: О ШЕФЕ, ТАРИФЫ, МАГАЗИНЫ И УСЛОВИЯ -->
     <div id="tabAbout" class="hidden animate-fadeIn p-4 space-y-4">
       
       <!-- Профиль шефа -->
@@ -293,7 +220,7 @@
 
         <!-- Краткое позиционирование / кредо -->
         <p class="text-xs text-stone-600 leading-relaxed text-left bg-sand-50 p-3.5 rounded-xl border border-sand-100">
-          «Базируюсь на севере Нячанга (район Đường Đệ / Ngô Văn Sở). В радиусе 500 метров дохожу пешком бесплатно. На все остальные локации города и виллы выезжаю со своим инвентарем на такси Grab по чеку (входит в организацию работы). Закупка продуктов — строго по чекам Lotte Mart, Mega Market, Moonmilk или рыбного порта без наценок».
+          «Базируюсь на севере Нячанга (район Đường Đệ / Ngô Văn Sở). В радиусе 500 метров дохожу пешком бесплатно. На все остальные локации города и виллы выезжаю со своим инвентарем на такси Grab по чеку (входит в организацию работы). Закупка продуктов — строго по чекам Lotte Mart, Mega Market, Moonmilk или супермаркетов без наценок».
         </p>
 
         <!-- 4 стандарта работы -->
@@ -357,23 +284,23 @@
           <div class="p-3.5 rounded-xl bg-sand-50 border border-sand-200 space-y-2">
             <div class="flex items-start justify-between">
               <div>
-                <span class="inline-block px-2 py-0.5 rounded-md bg-stone-200 text-stone-700 text-[10px] font-bold uppercase tracking-wider mb-1">Альтернатива</span>
+                <span class="inline-block px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase tracking-wider mb-1">Доставка</span>
                 <h4 class="font-bold text-xs text-sand-900">Вне кухни клиента с доставкой</h4>
               </div>
               <div class="text-right">
-                <span class="font-extrabold text-sm text-sand-900">от 350 000 ₫</span>
-                <span class="text-[10px] text-stone-500 block">/ час (~14$)</span>
+                <span class="font-extrabold text-sm text-sand-900">300 000 ₫</span>
+                <span class="text-[10px] text-stone-500 block">/ час + 100k ₫ за день</span>
               </div>
             </div>
             <p class="text-[11px] text-stone-600 leading-relaxed">
-              Приготовление на базе шефа, фасовка в герметичные боксы и бережная доставка готового рациона к вашей двери.
+              Приготовление на базе шефа, фасовка в герметичные боксы и бережная доставка готового рациона к вашей двери (+100 000 ₫ за рабочий день на организацию доставки).
             </p>
           </div>
 
-          <div class="p-3.5 rounded-xl bg-purple-50/70 border border-purple-200/80 space-y-2">
+          <div class="p-3.5 rounded-xl bg-purple-50/70 border border-purple-200/80 space-y-2.5">
             <div class="flex items-start justify-between">
               <div>
-                <span class="inline-block px-2 py-0.5 rounded-md bg-purple-100 text-purple-800 text-[10px] font-bold uppercase tracking-wider mb-1">Праздники &amp; BBQ</span>
+                <span class="inline-block px-2 py-0.5 rounded-md bg-purple-100 text-purple-800 text-[10px] font-bold uppercase tracking-wider mb-1">Отдельный формат</span>
                 <h4 class="font-bold text-xs text-sand-900">Выездные мероприятия &amp; Барбекю</h4>
               </div>
               <div class="text-right">
@@ -382,8 +309,12 @@
               </div>
             </div>
             <p class="text-[11px] text-stone-600 leading-relaxed">
-              Организация званых ужинов, дней рождения и барбекю на частных виллах. Банкетное меню, сервировка стола и обслуживание.
+              Организация званых ужинов, дней рождения и барбекю на частных виллах. Меню, закупка и время согласовываются индивидуально (не пересекается с обычным домашним заказом).
             </p>
+            <button onclick="openChatWithChef('Здравствуйте, шеф Владислав! Хочу обсудить банкет / выездное BBQ на вилле')" class="w-full py-2.5 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs shadow-2xs active:scale-95 transition-all flex items-center justify-center gap-1.5">
+              <span class="material-symbols-outlined text-[16px]">chat</span>
+              <span>Согласовать мероприятие / BBQ лично</span>
+            </button>
           </div>
         </div>
 
@@ -418,10 +349,7 @@
               <p class="font-bold text-sand-900">🏪 WinMart / WinMart+</p>
               <p class="text-[10px] text-stone-500 mt-0.5">Свежая зелень и продукты первой необходимости рядом с домом.</p>
             </div>
-            <div class="p-2 rounded-lg bg-white border border-emerald-100">
-              <p class="font-bold text-sand-900">🐟 Утренний рыбный порт (Cảng cá)</p>
-              <p class="text-[10px] text-stone-500 mt-0.5">Свежая рыба и морепродукты: отборный лосось и дикие креветки.</p>
-            </div>
+
             <div class="p-2 rounded-lg bg-white border border-emerald-100 sm:col-span-2">
               <p class="font-bold text-sand-900">🌿 Местные рынки (Chợ Xóm Mới &amp; Chợ Đầm)</p>
               <p class="text-[10px] text-stone-500 mt-0.5">Свежайшая зелень, травы, спелые манго, маракуйя и фермерские овощи.</p>
@@ -429,7 +357,7 @@
           </div>
 
           <p class="text-[10px] text-emerald-800 font-medium pt-1 border-t border-emerald-200/60">
-            🧾 Все чеки магазинов и портов шеф фотографирует в ваш личный профиль и отдает оригиналы. Оплата — строго по чекам донг в донг!
+            🧾 Все чеки магазинов шеф фотографирует в ваш личный профиль и отдает оригиналы. Оплата — строго по чекам донг в донг!
           </p>
         </div>
       </div>
@@ -518,7 +446,7 @@
                 <span class="text-base">🌊</span>
                 <h4 class="font-bold text-xs text-sand-900">Scenia Bay &amp; Север (>500 м)</h4>
               </div>
-              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">такси по чеку</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-200">такси по чеку</span>
             </div>
             <p class="text-[11px] text-stone-500 leading-snug">
               Комплекс Scenia Bay, Винь Хай, район пляжей севера и виллы Amiana Resort (~30–50k ₫ такси Grab).
@@ -532,7 +460,7 @@
                 <span class="text-base">🏙</span>
                 <h4 class="font-bold text-xs text-sand-900">Центр Нячанга</h4>
               </div>
-              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">такси по чеку</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-200">такси по чеку</span>
             </div>
             <p class="text-[11px] text-stone-500 leading-snug">
               Лок Тхо, комплексы Panorama, Gold Coast, Marina Suites, The Costa, Muong Thanh (~70–90k ₫ такси Grab).
@@ -546,7 +474,7 @@
                 <span class="text-base">🌴</span>
                 <h4 class="font-bold text-xs text-sand-900">An Vien, Виллы &amp; Мероприятия</h4>
               </div>
-              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-purple-100 text-purple-800">такси по чеку</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-200">такси по чеку</span>
             </div>
             <p class="text-[11px] text-stone-500 leading-snug">
               Виллы Ан Вьен, частные резиденции, выездные мероприятия и барбекю с оборудованием шефа.
@@ -577,8 +505,8 @@
           <div class="flex items-start gap-2.5 p-2.5 rounded-xl bg-sand-50 border border-sand-100">
             <span class="w-5 h-5 rounded-full bg-sand-900 text-white font-bold text-[11px] flex items-center justify-center shrink-0 mt-0.5">2</span>
             <div>
-              <p class="font-bold text-sand-900">Утренняя закупка продуктов в выбранных магазинах</p>
-              <p class="text-[11px] text-stone-500 mt-0.5">Шеф лично закупает продукты в Lotte Mart, Mega Market или Moonmilk: отборный лосось, креветки, мясо и бакалею, сохраняя все чеки.</p>
+              <p class="font-bold text-sand-900">Закупка продуктов шефом (утром или за день до заказа)</p>
+              <p class="text-[11px] text-stone-500 mt-0.5">Шеф лично закупает свежие продукты в Lotte Mart, Mega Market, Go! или Moonmilk утром в день готовки либо накануне за день до заказа, сохраняя все чеки.</p>
             </div>
           </div>
 
@@ -586,7 +514,7 @@
             <span class="w-5 h-5 rounded-full bg-sand-900 text-white font-bold text-[11px] flex items-center justify-center shrink-0 mt-0.5">3</span>
             <div>
               <p class="font-bold text-sand-900">Приготовление на кухне &amp; фасовка</p>
-              <p class="text-[11px] text-stone-500 mt-0.5">Шеф готовит блюда, раскладывает по стеклянным боксам с маркировкой сроков и рекомендациями по разогреву.</p>
+              <p class="text-[11px] text-stone-500 mt-0.5">Шеф готовит блюда и раскладывает по стеклянным боксам с маркировкой сроков хранения.</p>
             </div>
           </div>
 
@@ -793,11 +721,11 @@
           <span id="drawerHours" class="font-bold text-sand-900">~3.5 часа</span>
         </div>
         <div class="flex justify-between text-stone-600">
-          <span>Оплата работы повара (от 250k/ч):</span>
-          <span id="drawerChefFee" class="font-bold text-sand-900">875 000 ₫</span>
+          <span id="drawerChefFeeLabel">Оплата работы повара (от 250k/ч):</span>
+          <span id="drawerChefFee" class="font-bold text-sand-900">750 000 ₫</span>
         </div>
         <div class="flex justify-between text-stone-600">
-          <span>Продукты (Lotte Mart / Рыбный порт):</span>
+          <span>Продукты (Lotte Mart / Супермаркеты):</span>
           <span class="font-bold text-brand-700">строго по чекам (0% наценки)</span>
         </div>
         <div class="pt-2 border-t border-sand-200 flex justify-between text-[11px] text-stone-500">
@@ -808,24 +736,32 @@
 
       <!-- Поля ввода -->
       <div class="space-y-3 pt-1">
-        <!-- Выбор формата заказа -->
+        <!-- Выбор формата приготовления (На кухне / Доставка) -->
         <div>
-          <label class="block text-xs font-bold text-sand-900 mb-1.5">Формат заказа</label>
-          <div class="grid grid-cols-2 gap-1.5">
-            <button type="button" id="btnFormatRation" onclick="setOrderFormat('ration')" class="py-2 px-3 rounded-xl text-xs font-bold transition-all border text-center bg-sand-900 text-white border-sand-900 shadow-2xs">
-              🍲 Семейный рацион
+          <label class="block text-xs font-bold text-sand-900 mb-1.5">Где готовить еду?</label>
+          <div class="grid grid-cols-2 gap-2" id="drawerCookingFormatContainer">
+            <button type="button" id="btnFormatKitchen" onclick="setCookingFormat('kitchen')" class="p-2.5 rounded-xl border text-left bg-brand-600 text-white border-brand-600 shadow-2xs transition-all active:scale-95">
+              <div class="flex items-center gap-1.5 font-bold text-xs">
+                <span>🍳</span>
+                <span>На вашей кухне</span>
+              </div>
+              <p class="text-[10px] opacity-90 mt-0.5">от 250 000 ₫ / час</p>
             </button>
-            <button type="button" id="btnFormatEvent" onclick="setOrderFormat('event')" class="py-2 px-3 rounded-xl text-xs font-semibold transition-all border text-center bg-white text-stone-700 border-sand-200 hover:bg-sand-50">
-              🥂 Мероприятие / BBQ
+            <button type="button" id="btnFormatDelivery" onclick="setCookingFormat('delivery')" class="p-2.5 rounded-xl border text-left bg-white text-stone-700 border-sand-200 hover:bg-sand-100 transition-all active:scale-95">
+              <div class="flex items-center gap-1.5 font-bold text-xs">
+                <span>🛵</span>
+                <span>Вне кухни (доставка)</span>
+              </div>
+              <p class="text-[10px] text-stone-500 mt-0.5">300k ₫/ч + 100k ₫/день</p>
             </button>
           </div>
         </div>
 
-        <!-- Выбор магазинов Нячанга для закупки -->
+        <!-- Выбор магазинов Нячанга для закупки (утром или за день до заказа) -->
         <div>
           <div class="flex items-center justify-between mb-1.5">
             <label class="block text-xs font-bold text-sand-900">Где закупать продукты?</label>
-            <span class="text-[10px] text-stone-500">выберите точки:</span>
+            <span class="text-[10px] text-stone-500">утром или за день до заказа</span>
           </div>
           <div class="flex flex-wrap gap-1.5" id="storeChipsList">
             <button type="button" onclick="toggleStore('chef_choice')" data-store="chef_choice" class="store-chip active px-2.5 py-1 rounded-lg text-[11px] font-bold bg-brand-600 text-white border border-brand-600 transition-all active:scale-95 shadow-2xs">
@@ -845,9 +781,6 @@
             </button>
             <button type="button" onclick="toggleStore('winmart')" data-store="winmart" class="store-chip px-2.5 py-1 rounded-lg text-[11px] font-medium bg-sand-100 text-stone-700 border border-sand-200 hover:bg-sand-200 transition-all active:scale-95">
               🏪 WinMart+
-            </button>
-            <button type="button" onclick="toggleStore('port')" data-store="port" class="store-chip px-2.5 py-1 rounded-lg text-[11px] font-medium bg-sand-100 text-stone-700 border border-sand-200 hover:bg-sand-200 transition-all active:scale-95">
-              🐟 Рыбный порт
             </button>
             <button type="button" onclick="toggleStore('market')" data-store="market" class="store-chip px-2.5 py-1 rounded-lg text-[11px] font-medium bg-sand-100 text-stone-700 border border-sand-200 hover:bg-sand-200 transition-all active:scale-95">
               🌿 Chợ Xóm Mới / Đầm
@@ -1032,21 +965,7 @@
     </div>
   </div>
 
-  <!-- Модальное окно разогрева -->
-  <div id="reheatModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl w-full max-w-xs p-5 space-y-3 shadow-xl">
-      <div class="flex items-center justify-between border-b border-sand-200 pb-2">
-        <h4 class="font-bold text-sm text-sand-900" id="reheatTitle">Разогрев блюда</h4>
-        <button onclick="closeReheat()" class="text-stone-400 hover:text-stone-600">
-          <span class="material-symbols-outlined text-[18px]">close</span>
-        </button>
-      </div>
-      <p class="text-xs text-stone-600 leading-relaxed" id="reheatText"></p>
-      <button onclick="closeReheat()" class="w-full py-2 rounded-xl bg-sand-900 text-white font-bold text-xs">
-        Понятно
-      </button>
-    </div>
-  </div>
+
 
   <!-- Модальное окно просмотра полноразмерного фото -->
   <div id="photoModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4" onclick="closePhotoModal()">
@@ -1307,7 +1226,73 @@
       renderDishes();
     }
 
-    // Расчет времени работы шефа на основе выбранных блюд
+    // Формат приготовления: 'kitchen' (на кухне клиента) или 'delivery' (вне кухни с доставкой)
+    let cookingFormat = 'kitchen';
+
+    function setCookingFormat(fmt) {
+      cookingFormat = fmt;
+      
+      // Обновляем кнопки в шторке
+      const btnK = document.getElementById('btnFormatKitchen');
+      const btnD = document.getElementById('btnFormatDelivery');
+      if (btnK && btnD) {
+        if (fmt === 'kitchen') {
+          btnK.className = 'p-2.5 rounded-xl border text-left bg-brand-600 text-white border-brand-600 shadow-2xs transition-all active:scale-95';
+          btnD.className = 'p-2.5 rounded-xl border text-left bg-white text-stone-700 border-sand-200 hover:bg-sand-100 transition-all active:scale-95';
+          btnK.querySelector('p').className = 'text-[10px] opacity-90 mt-0.5';
+          btnD.querySelector('p').className = 'text-[10px] text-stone-500 mt-0.5';
+        } else {
+          btnD.className = 'p-2.5 rounded-xl border text-left bg-brand-600 text-white border-brand-600 shadow-2xs transition-all active:scale-95';
+          btnK.className = 'p-2.5 rounded-xl border text-left bg-white text-stone-700 border-sand-200 hover:bg-sand-100 transition-all active:scale-95';
+          btnD.querySelector('p').className = 'text-[10px] opacity-90 mt-0.5';
+          btnK.querySelector('p').className = 'text-[10px] text-stone-500 mt-0.5';
+        }
+      }
+
+      // Обновляем кнопки в баннере меню
+      const menuK = document.getElementById('menuFormatKitchenBtn');
+      const menuD = document.getElementById('menuFormatDeliveryBtn');
+      const badge = document.getElementById('currentFormatBadge');
+      if (menuK && menuD) {
+        if (fmt === 'kitchen') {
+          menuK.className = 'p-2 rounded-xl border text-left bg-brand-600 text-white border-brand-600 shadow-2xs transition-all active:scale-95';
+          menuD.className = 'p-2 rounded-xl border text-left bg-sand-50 text-stone-700 border-sand-200 hover:bg-sand-100 transition-all active:scale-95';
+          menuK.querySelector('p').className = 'text-[10px] opacity-90 mt-0.5';
+          menuD.querySelector('p').className = 'text-[10px] text-stone-500 mt-0.5';
+          if (badge) {
+            badge.innerText = 'На вашей кухне • от 250k/ч';
+            badge.className = 'text-[10px] font-bold text-brand-800 bg-brand-50 px-2 py-0.5 rounded-md border border-brand-200';
+          }
+        } else {
+          menuD.className = 'p-2 rounded-xl border text-left bg-brand-600 text-white border-brand-600 shadow-2xs transition-all active:scale-95';
+          menuK.className = 'p-2 rounded-xl border text-left bg-sand-50 text-stone-700 border-sand-200 hover:bg-sand-100 transition-all active:scale-95';
+          menuD.querySelector('p').className = 'text-[10px] opacity-90 mt-0.5';
+          menuK.querySelector('p').className = 'text-[10px] text-stone-500 mt-0.5';
+          if (badge) {
+            badge.innerText = 'С доставкой • 300k/ч + 100k/день';
+            badge.className = 'text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200';
+          }
+        }
+      }
+
+      updateCartBar();
+      updateDrawerPricing();
+      if (tg?.HapticFeedback) tg.HapticFeedback.selectionChanged();
+    }
+
+    function updateDrawerPricing() {
+      const timeInfo = calculateChefTime();
+      const feeEl = document.getElementById('drawerChefFee');
+      const feeLabel = document.getElementById('drawerChefFeeLabel');
+      if (feeEl) feeEl.innerText = timeInfo.fee.toLocaleString('ru-RU') + ' ₫';
+      if (feeLabel) {
+        feeLabel.innerText = (cookingFormat === 'delivery')
+          ? 'Оплата (300k/ч + 100k доставка):'
+          : 'Оплата работы повара (от 250k/ч):';
+      }
+    }
+
+    // Расчет времени работы шефа на основе выбранных блюд и формата
     function calculateChefTime() {
       const count = selectedDishes.size;
       if (count === 0) {
@@ -1324,7 +1309,11 @@
       // Округление до 0.5 ч, минимум 3.0 часа по условиям выезда
       const rawHours = totalMinutes / 60;
       const roundedHours = Math.max(3.0, Math.ceil(rawHours * 2) / 2);
-      const fee = Math.round(roundedHours * 250000);
+      
+      // Тариф: 250k/ч на кухне клиента ИЛИ 300k/ч + 100k фикс за день при доставке
+      const fee = (cookingFormat === 'delivery')
+        ? Math.round(roundedHours * 300000) + 100000
+        : Math.round(roundedHours * 250000);
 
       return {
         hours: roundedHours.toFixed(1),
@@ -1365,7 +1354,7 @@
     function switchTab(tab) {
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
       
-      const tabs = ['menu', 'fridge', 'reviews', 'about'];
+      const tabs = ['menu', 'about', 'reviews'];
       tabs.forEach(t => {
         const el = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
         const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1) + 'Btn');
@@ -1614,7 +1603,6 @@
       go: '🛍 Go! (Big C)',
       moonmilk: '🧀 Moonmilk',
       winmart: '🏪 WinMart+',
-      port: '🐟 Утренний рыбный порт',
       market: '🌿 Рынок Chợ Xóm Mới'
     };
 
@@ -1695,7 +1683,7 @@
       salmon_shrimp: ['Свежий лосось / дикие креветки', 'Лимон', 'Чеснок', 'Оливковое масло', 'Свежая зелень'],
       sides: ['Паста твердых сортов', 'Картофель', 'Рис', 'Гречка', 'Сливочное масло'],
       salad_cherry: ['Томаты черри', 'Свежие огурцы', 'Базилик / шпинат', 'Сыр моцарелла', 'Оливковое масло / заправка'],
-      salad_meat: ['Куриное филе / ветчина', 'Листовой салат', 'Огурцы / томаты', 'Соус шефа'],
+      salad_meat: ['Куриное филе / ветчина', 'Листовой салат', 'Огурцы / томаты'],
       salad_beetroot: ['Свекла', 'Болгарский перец', 'Творожный сыр', 'Свежая зелень', 'Оливковое масло'],
       salad_olives_cheese: ['Спелые томаты', 'Оливки / маслины', 'Сыр фета / брынза', 'Оливковое масло'],
       salad_corn_pepper: ['Сладкая кукуруза', 'Болгарский перец', 'Томаты', 'Зелень'],
@@ -2028,7 +2016,7 @@
 
       const timeInfo = calculateChefTime();
       document.getElementById('drawerHours').innerText = `~${timeInfo.hours} часа`;
-      document.getElementById('drawerChefFee').innerText = timeInfo.fee.toLocaleString('ru-RU') + ' ₫';
+      updateDrawerPricing();
 
       // Показ предупреждения о твороге, если выбраны сырники
       const cottageNotice = document.getElementById('cottageCheeseNotice');
@@ -2158,27 +2146,18 @@
       const fee = timeInfo.fee.toLocaleString('ru-RU');
 
       // Формируем красивый текст для Telegram
-      const isEvent = orderFormat === 'event';
-      let msg = isEvent 
-        ? `🥂 Здравствуйте, шеф Владислав! Хочу заказать выездное мероприятие / BBQ на вилле:
+      const isDelivery = (cookingFormat === 'delivery');
+      const formatTitle = isDelivery 
+        ? 'Вне кухни клиента с доставкой (300 000 ₫/час + 100 000 ₫/день)' 
+        : 'На вашей кухне (от 250 000 ₫/час)';
 
-`
-        : `👋 Здравствуйте, шеф Владислав! Хочу оформить домашний рацион:
-
-`;
-
-      msg += `👤 Клиент: ${name}
-`;
-      msg += `📱 Контакт: ${phone}
-`;
+      let msg = `👋 Здравствуйте, шеф Владислав! Хочу оформить домашний рацион:\n\n`;
+      msg += `👤 Клиент: ${name}\n`;
+      msg += `📱 Контакт: ${phone}\n`;
+      msg += `🏠 Формат готовки: ${formatTitle}\n`;
       if (address) {
         const isWalk = address.toLowerCase().includes('500 м') || address.toLowerCase().includes('đường đệ') || address.toLowerCase().includes('пешком');
-        msg += `📍 Локация: ${address}${isWalk ? ' (🚶 пешком в радиусе 500 м — бесплатно)' : ' (🚕 свыше 500 м: такси Grab по чеку в обе стороны)'}
-`;
-      }
-      if (isEvent) {
-        msg += `🎉 Формат: Выездное мероприятие / Барбекю на вилле
-`;
+        msg += `📍 Локация/Кондо: ${address}${isWalk ? ' (🚶 пешком в пределах 500 м — бесплатно)' : ' (🚕 такси Grab по чеку в обе стороны)'}\n`;
       }
 
       // Оснащение кухни и способ оплаты
@@ -2230,20 +2209,20 @@
       msg += `
 ⏱ Ориентир работы: ~${hours} ч (~${fee} ₫)
 `;
-      msg += `🛒 Продукты: строго по чекам Lotte Mart / рынка (0% наценки)`;
+      msg += `🛒 Продукты: строго по чекам супермаркетов без наценки (закупка утром или за день до заказа)`;
 
       const orderData = {
         name,
         phone,
         address: address || 'Нячанг (уточняется)',
         notes: notes || 'Без ограничений',
-        format: isEvent ? 'Выездное мероприятие / BBQ на вилле' : 'На кухне клиента (от 250k VND/час)',
+        format: formatTitle,
         dishes: chosenList.map(d => d.title),
         oven: clientHasOven ? 'Есть духовка' : 'Только плита (без духовки)',
         paymentMethod: selectedPaymentMethod === 'rub' ? 'Карта РФ (рубли: Сбер / Т-Банк)' : 'Вьетнамские донги (наличные / QR)',
         bookingDate: selectedBookingDateLabel || selectedBookingDateStr,
         bookingSlot: slotInfo ? (slotInfo.title + ' (' + slotInfo.time + ')') : 'Не указан',
-        stores: storesList || 'Lotte Mart / Рынок',
+        stores: storesList || 'Lotte Mart / Супермаркеты',
         pantryItems: Array.from(userPantryItems),
         hours,
         fee
@@ -2269,16 +2248,7 @@
       closeOrderDrawer();
     }
 
-    function showReheat(title, text) {
-      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-      document.getElementById('reheatTitle').innerText = `Разогрев: ${title}`;
-      document.getElementById('reheatText').innerText = text;
-      document.getElementById('reheatModal').classList.remove('hidden');
-    }
 
-    function closeReheat() {
-      document.getElementById('reheatModal').classList.add('hidden');
-    }
 
     // Первоначальный запуск
     renderDishes();
