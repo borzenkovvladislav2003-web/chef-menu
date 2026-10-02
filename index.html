@@ -110,7 +110,7 @@
         👨‍🍳 О шефе &amp; Тарифы
       </button>
       <button onclick="switchTab('reviews')" id="tabReviewsBtn" class="flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all text-stone-600 hover:bg-sand-100">
-        ⭐ Отзывы
+        ⭐ Отзывы (1)
       </button>
     </div>
   </header>
@@ -1793,16 +1793,32 @@
       if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
     }
 
+    // База проверенных публичных отзывов реальных клиентов
+    const PUBLIC_REVIEWS = [
+      {
+        id: 'rev_1',
+        name: 'Alex',
+        location: 'Виллы An Vien, Нячанг',
+        rating: 5,
+        text: 'Шеф Владислав — настоящий мастер своего дела! Всё было приготовлено очень вкусно, красиво и с душой. Особенно приятно, что блюда учитывали наши пожелания. Спасибо за прекрасный ужин и отличный сервис — с удовольствием обратимся снова!',
+        photo: '',
+        date: '2 окт'
+      }
+    ];
+
     function renderReviews() {
       const container = document.getElementById('reviewsContainer');
       if (!container) return;
 
-      let reviews = [];
+      let localReviews = [];
       try {
-        reviews = JSON.parse(localStorage.getItem('chef_reviews') || '[]');
+        localReviews = JSON.parse(localStorage.getItem('chef_reviews') || '[]');
       } catch (err) {
-        reviews = [];
+        localReviews = [];
       }
+
+      // Объединяем подтвержденные публичные отзывы с локальными
+      const reviews = [...localReviews, ...PUBLIC_REVIEWS];
 
       if (reviews.length === 0) {
         container.innerHTML = `
