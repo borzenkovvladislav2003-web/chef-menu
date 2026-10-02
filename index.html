@@ -113,7 +113,7 @@
         👨‍🍳 О шефе &amp; Тарифы
       </button>
       <button onclick="switchTab('reviews')" id="tabReviewsBtn" class="flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all text-stone-600 hover:bg-sand-100">
-        ⭐ Отзывы (1)
+        ⭐ Отзывы (2)
       </button>
     </div>
   </header>
@@ -1799,6 +1799,15 @@
     // База проверенных публичных отзывов реальных клиентов
     const PUBLIC_REVIEWS = [
       {
+        id: 'rev_2',
+        name: 'Олег',
+        location: 'Marina, Нячанг',
+        rating: 5,
+        text: 'круто! спасибо Владиславу за прекрасный вечер',
+        photo: '',
+        date: '2 окт'
+      },
+      {
         id: 'rev_1',
         name: 'Alex',
         location: 'Виллы An Vien, Нячанг',
@@ -1822,6 +1831,11 @@
 
       // Объединяем подтвержденные публичные отзывы с локальными
       const reviews = [...localReviews, ...PUBLIC_REVIEWS];
+
+      const tabBtn = document.getElementById('tabReviewsBtn');
+      if (tabBtn) {
+        tabBtn.innerText = `⭐ Отзывы (${reviews.length})`;
+      }
 
       if (reviews.length === 0) {
         container.innerHTML = `
