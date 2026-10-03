@@ -1,0 +1,9 @@
+{
+  "name": "chef-menu-bot",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node scripts/telegramBot.js",
+    "bot": "node scripts/telegramBot.js"
+  }
+}
