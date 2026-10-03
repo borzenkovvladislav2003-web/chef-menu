@@ -2666,6 +2666,9 @@
       const slotInfo = BOOKING_SLOTS.find(s => s.id === selectedBookingSlot) || BOOKING_SLOTS[0];
       const storesList = Array.from(selectedStores).map(id => STORE_NAMES[id] || id).join(', ');
 
+      // Красивый отформатированный текст выбранных блюд для Make.com / Telegram
+      const dishesListText = chosenList.map(d => `• ${d.title} (${d.portion})`).join('\n');
+
       const formData = {
         name,
         phone,
@@ -2673,6 +2676,7 @@
         notes: notes || 'Без ограничений',
         format: formatTitle,
         dishes: chosenList.map(d => ({ title: d.title, portion: d.portion })),
+        dishesListText,
         oven: clientHasOven ? 'Да, есть духовка' : 'Только плита (без духовки)',
         paymentMethod: selectedPaymentMethod === 'rub' ? 'Карта РФ (рубли: Сбер / Т-Банк)' : 'Вьетнамские донги (наличные / QR)',
         bookingDate: selectedBookingDateLabel || selectedBookingDateStr,
