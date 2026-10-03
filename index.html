@@ -2462,7 +2462,6 @@
     async function submitOrder(e) {
       if (e && e.preventDefault) e.preventDefault();
       if (isSubmitting) return;
-      isSubmitting = true;
 
       const name = document.getElementById('inputName').value.trim();
       const phone = document.getElementById('inputPhone').value.trim();
@@ -2478,34 +2477,6 @@
         return;
       }
 
-      const chosenList = Array.from(selectedDishes).map(id => {
-        return DISHES.find(item => item.id === id);
-      }).filter(Boolean);
-
-      const count = chosenList.length;
-      const timeInfo = calculateChefTime();
-      const hours = timeInfo.hours;
-      const fee = timeInfo.fee.toLocaleString('ru-RU');
-
-      // Формируем красивый текст для Telegram
-      const isDelivery = (cookingFormat === 'delivery');
-      const formatTitle = isDelivery 
-        ? 'Вне кухни клиента с доставкой (450 000 ₫/час + 100 000 ₫/день)' 
-        : 'На вашей кухне (от 400 000 ₫/час)';
-
-      let msg = `👋 Здравствуйте, шеф Владислав! Хочу оформить домашний рацион:\n\n`;
-      msg += `👤 Клиент: ${name}\n`;
-      msg += `📱 Контакт: ${phone}\n`;
-      msg += `🏠 Формат готовки: ${formatTitle}\n`;
-      if (address) {
-        const isWalk = address.toLowerCase().includes('500 м') || address.toLowerCase().includes('đường đệ') || address.toLowerCase().includes('пешком');
-        msg += `📍 Локация/Кондо: ${address}${isWalk ? ' (🚶 пешком в пределах 500 м — бесплатно)' : ' (🚕 такси Grab по чеку в обе стороны)'}\n`;
-      }
-
-      // Оснащение кухни и способ оплаты
-      msg += `🔥 Духовка на кухне: ${clientHasOven ? 'Да, есть духовка' : 'Только плита (без духовки)'}\n`;
-      msg += `💳 Способ оплаты: ${selectedPaymentMethod === 'rub' ? 'Перевод на карту РФ (рубли: Сбер / Т-Банк)' : 'Вьетнамские донги (наличные или QR банка)'}\n`;
-
       // Проверка: если выбрано сегодня, но слоты уже закрыты
       const todayIso = getLocalDateStr(new Date());
       if (selectedBookingDateStr === todayIso && !selectedBookingSlot) {
@@ -2517,28 +2488,23 @@
         return;
       }
 
-      // Дата и временной слот визита
+      isSubmitting = true;
+
+      const chosenList = Array.from(selectedDishes).map(id => {
+        return DISHES.find(item => item.id === id);
+      }).filter(Boolean);
+
+      const timeInfo = calculateChefTime();
+      const hours = timeInfo.hours;
+      const fee = timeInfo.fee.toLocaleString('ru-RU');
+
+      const isDelivery = (cookingFormat === 'delivery');
+      const formatTitle = isDelivery 
+        ? 'Вне кухни клиента с доставкой (450 000 ₫/час + 100 000 ₫/день)' 
+        : 'На вашей кухне (от 400 000 ₫/час)';
+
       const slotInfo = BOOKING_SLOTS.find(s => s.id === selectedBookingSlot) || BOOKING_SLOTS[0];
-      msg += `📅 Дата визита: ${selectedBookingDateLabel || 'Завтра'}\n`;
-      msg += `⏰ Время визита: ${slotInfo.title} (${slotInfo.time})\n`;
-
-      // Выбранные магазины
       const storesList = Array.from(selectedStores).map(id => STORE_NAMES[id] || id).join(', ');
-      msg += `🛒 Где закупать: ${storesList} (0% наценки, строго по чеку)\n`;
-
-      if (notes) msg += `💬 Пожелания: ${notes}\n`;
-
-      msg += `\n📋 Выбранные блюда (${count}):\n`;
-      chosenList.forEach(d => {
-        msg += `• ${d.title} (${d.portion})\n`;
-      });
-
-      if (userPantryItems.size > 0) {
-        msg += `\n🏠 Есть дома (шефу не покупать): ${Array.from(userPantryItems).join(', ')}\n`;
-      }
-
-      msg += `\n⏱ Ориентир работы: ~${hours} ч (~${fee} ₫)\n`;
-      msg += `🛒 Продукты: строго по чекам супермаркетов без наценки (закупка утром или за день до заказа)`;
 
       const formData = {
         name,
@@ -2555,7 +2521,6 @@
         pantryItems: Array.from(userPantryItems),
         estimatedHours: hours,
         estimatedFee: `${fee} ₫`,
-        telegramMessage: msg,
         submittedAt: new Date().toISOString()
       };
 
@@ -2597,7 +2562,7 @@
 
         if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
 
-        const successNotice = 'Заявка успешно отправлена шефу Владиславу! Мы свяжемся с вами в Telegram или по телефону в ближайшее время.';
+        const successNotice = 'Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.';
         if (tg?.showAlert) {
           tg.showAlert(successNotice);
         } else {
@@ -2610,19 +2575,11 @@
         console.error('Ошибка отправки заявки через webhook:', err);
         if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('error');
 
-        const failNotice = 'Не удалось отправить заявку автоматически. Пожалуйста, напишите шефу напрямую в Telegram: @Compotikman';
+        const failNotice = 'Произошла ошибка при отправке заявки. Пожалуйста, проверьте подключение к интернету или попробуйте позже.';
         if (tg?.showAlert) {
           tg.showAlert(failNotice);
         } else {
           alert(failNotice);
-        }
-
-        // Запасной канал: открываем чат шефа в Telegram с уже сформированным текстом заказа
-        const directUrl = `https://t.me/Compotikman?text=${encodeURIComponent(msg)}`;
-        if (tg?.openTelegramLink) {
-          tg.openTelegramLink(directUrl);
-        } else {
-          window.open(directUrl, '_blank');
         }
 
       } finally {
