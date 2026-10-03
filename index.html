@@ -617,7 +617,7 @@
           </div>
         </div>
 
-        <button onclick="submitReview()" class="w-full py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-xs active:scale-98 transition-all flex items-center justify-center gap-1.5">
+        <button type="button" id="btnSubmitReview" onclick="submitReview()" class="w-full py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-xs active:scale-98 transition-all flex items-center justify-center gap-1.5 cursor-pointer">
           <span class="material-symbols-outlined text-[16px]">send</span>
           <span>Опубликовать и отправить шефу</span>
         </button>
@@ -1809,7 +1809,7 @@
       if (tg?.HapticFeedback) tg.HapticFeedback.selectionChanged();
     }
 
-    function submitReview() {
+    async function submitReview() {
       const nameInput = document.getElementById('revName');
       const locInput = document.getElementById('revLocation');
       const textInput = document.getElementById('revText');
@@ -1829,56 +1829,103 @@
         return;
       }
 
-      const newReview = {
-        id: Date.now(),
+      const btn = document.getElementById('btnSubmitReview');
+      const originalText = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.classList.add('opacity-70', 'pointer-events-none');
+        btn.innerHTML = '<span>Отправка...</span>';
+      }
+
+      const starStr = '⭐'.repeat(reviewRating);
+
+      const reviewPayload = {
         name: name,
         location: loc || 'Нячанг',
         rating: reviewRating,
+        stars: starStr,
         text: text,
-        photo: reviewPhotoBase64,
-        date: new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' })
+        photo: reviewPhotoBase64 || null,
+        date: new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' }),
+        telegramUser: tg?.initDataUnsafe?.user ? {
+          id: tg.initDataUnsafe.user.id,
+          username: tg.initDataUnsafe.user.username ? `@${tg.initDataUnsafe.user.username}` : '',
+          firstName: tg.initDataUnsafe.user.first_name || '',
+          lastName: tg.initDataUnsafe.user.last_name || ''
+        } : null,
+        submittedAt: new Date().toISOString()
       };
 
-      let reviews = [];
       try {
-        reviews = JSON.parse(localStorage.getItem('chef_reviews') || '[]');
+        await fetch('https://hook.eu1.make.com/c2rktdmk355fo6j6egps23pit4ipvmac', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(reviewPayload)
+        });
+
+        // Сохраняем локально, чтобы автор сразу видел свой отзыв на вкладке
+        const newReview = {
+          id: Date.now(),
+          name: name,
+          location: loc || 'Нячанг',
+          rating: reviewRating,
+          text: text,
+          photo: reviewPhotoBase64,
+          date: new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' })
+        };
+
+        let reviews = [];
+        try {
+          reviews = JSON.parse(localStorage.getItem('chef_reviews') || '[]');
+        } catch (err) {
+          reviews = [];
+        }
+        reviews.unshift(newReview);
+        try {
+          localStorage.setItem('chef_reviews', JSON.stringify(reviews));
+        } catch (err) {
+          console.warn('Storage quota exceeded');
+        }
+
+        // Сброс формы
+        nameInput.value = '';
+        locInput.value = '';
+        textInput.value = '';
+        removePhoto();
+        setStars(5);
+        toggleReviewForm();
+        renderReviews();
+
+        if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
+
+        const successNotice = 'Спасибо за ваш отзыв! Он успешно отправлен шефу Владиславу.';
+        if (tg?.showAlert) {
+          tg.showAlert(successNotice);
+        } else {
+          alert(successNotice);
+        }
+
       } catch (err) {
-        reviews = [];
+        console.error('Ошибка отправки отзыва:', err);
+        alert('Не удалось отправить отзыв. Пожалуйста, проверьте интернет.');
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.classList.remove('opacity-70', 'pointer-events-none');
+          if (originalText) btn.innerHTML = originalText;
+        }
       }
-      reviews.unshift(newReview);
-      try {
-        localStorage.setItem('chef_reviews', JSON.stringify(reviews));
-      } catch (err) {
-        console.warn('Storage quota exceeded, storing without photo or trimmed');
-      }
+    }
 
-      // Отправка шефу в Telegram @Compotikman
-      const starStr = '⭐'.repeat(reviewRating);
-      let tgMsg = `🌟 Новый честный отзыв о шефе!\n\n`;
-      tgMsg += `👤 Автор: ${name} (${loc || 'Нячанг'})\n`;
-      tgMsg += `⭐️ Оценка: ${starStr}\n`;
-      tgMsg += `💬 Отзыв: ${text}\n`;
-      if (reviewPhotoBase64) {
-        tgMsg += `📷 Прикреплено 1 фото блюда (сохранено в Mini App)\n`;
-      }
-
-      const url = `https://t.me/Compotikman?text=${encodeURIComponent(tgMsg)}`;
-      if (window.Telegram?.WebApp?.openTelegramLink) {
-        window.Telegram.WebApp.openTelegramLink(url);
-      } else {
-        window.open(url, '_blank');
-      }
-
-      // Сброс формы
-      nameInput.value = '';
-      locInput.value = '';
-      textInput.value = '';
-      removePhoto();
-      setStars(5);
-      toggleReviewForm();
-      renderReviews();
-
-      if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
+    function removePhoto() {
+      reviewPhotoBase64 = null;
+      const input = document.getElementById('revPhotoInput');
+      const wrap = document.getElementById('photoPreviewWrap');
+      const btnText = document.getElementById('photoBtnText');
+      if (input) input.value = '';
+      if (wrap) wrap.classList.add('hidden');
+      if (btnText) btnText.innerText = 'Выбрать 1 фото';
+      if (tg?.HapticFeedback) tg.HapticFeedback.selectionChanged();
     }
 
     // База проверенных публичных отзывов реальных клиентов
