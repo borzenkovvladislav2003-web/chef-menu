@@ -2669,6 +2669,11 @@
       // Красивый отформатированный текст выбранных блюд для Make.com / Telegram
       const dishesListText = chosenList.map(d => `• ${d.title} (${d.portion})`).join('\n');
 
+      // Форматированный текст продуктов в наличии дома у клиента
+      const pantryListText = userPantryItems.size > 0 
+        ? Array.from(userPantryItems).join(', ') 
+        : 'Ничего не указано (покупать всё)';
+
       const formData = {
         name,
         phone,
@@ -2677,12 +2682,13 @@
         format: formatTitle,
         dishes: chosenList.map(d => ({ title: d.title, portion: d.portion })),
         dishesListText,
+        pantryItems: Array.from(userPantryItems),
+        pantryListText,
         oven: clientHasOven ? 'Да, есть духовка' : 'Только плита (без духовки)',
         paymentMethod: selectedPaymentMethod === 'rub' ? 'Карта РФ (рубли: Сбер / Т-Банк)' : 'Вьетнамские донги (наличные / QR)',
         bookingDate: selectedBookingDateLabel || selectedBookingDateStr,
         bookingSlot: slotInfo ? `${slotInfo.title} (${slotInfo.time})` : 'Не указан',
         stores: storesList || 'Lotte Mart / Супермаркеты',
-        pantryItems: Array.from(userPantryItems),
         estimatedHours: hours,
         estimatedFee: `${fee} ₫`,
         submittedAt: new Date().toISOString()
