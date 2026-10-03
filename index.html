@@ -813,12 +813,20 @@
           </div>
         </div>
         <div>
-          <label class="block text-xs font-bold text-sand-900 mb-1">Ваше имя</label>
-          <input type="text" id="inputName" placeholder="Например: Анна" class="w-full px-3.5 py-2.5 rounded-xl border border-sand-200 text-xs bg-sand-50 focus:bg-white focus:outline-brand-500">
+          <label class="block text-xs font-bold text-sand-900 mb-1">Ваше имя *</label>
+          <input type="text" id="inputName" placeholder="Например: Анна" class="w-full px-3.5 py-2.5 rounded-xl border border-sand-200 text-xs bg-sand-50 focus:bg-white focus:outline-brand-500 transition-all outline-none">
+          <div id="errorName" class="hidden text-[11px] text-red-500 font-semibold mt-1 flex items-center gap-1">
+            <span class="material-symbols-outlined text-[13px]">error</span>
+            <span>Обязательное поле</span>
+          </div>
         </div>
         <div>
-          <label class="block text-xs font-bold text-sand-900 mb-1">Телефон / WhatsApp / Telegram</label>
-          <input type="text" id="inputPhone" placeholder="+84... или @username" class="w-full px-3.5 py-2.5 rounded-xl border border-sand-200 text-xs bg-sand-50 focus:bg-white focus:outline-brand-500">
+          <label class="block text-xs font-bold text-sand-900 mb-1">Телефон / WhatsApp / Telegram *</label>
+          <input type="text" id="inputPhone" placeholder="+84... или @username" class="w-full px-3.5 py-2.5 rounded-xl border border-sand-200 text-xs bg-sand-50 focus:bg-white focus:outline-brand-500 transition-all outline-none">
+          <div id="errorPhone" class="hidden text-[11px] text-red-500 font-semibold mt-1 flex items-center gap-1">
+            <span class="material-symbols-outlined text-[13px]">error</span>
+            <span>Обязательное поле</span>
+          </div>
         </div>
         <div>
           <div class="flex items-center justify-between mb-1">
@@ -1004,6 +1012,50 @@
       <div class="rounded-2xl overflow-hidden bg-black/60 flex items-center justify-center max-h-[82vh]">
         <img id="photoModalImg" src="" alt="Фото блюда" class="w-full h-auto max-h-[82vh] object-contain">
       </div>
+    </div>
+  </div>
+
+  <!-- ==================== МОДАЛЬНОЕ ОКНО УСПЕХА ЗАКАЗА ==================== -->
+  <div id="orderSuccessModal" class="hidden fixed inset-0 z-50 bg-stone-950/70 backdrop-blur-md flex items-center justify-center p-4 transition-all duration-300">
+    <div class="relative max-w-sm w-full bg-white rounded-3xl p-6 sm:p-7 text-center shadow-2xl border border-sand-200 transform transition-all scale-100 animate-in fade-in zoom-in-95">
+      
+      <!-- Иконка галочки -->
+      <div class="w-20 h-20 rounded-full bg-emerald-50 text-emerald-600 border-4 border-emerald-100 flex items-center justify-center mx-auto mb-4 shadow-inner">
+        <span class="material-symbols-outlined text-[42px]">check_circle</span>
+      </div>
+
+      <!-- Заголовок -->
+      <h3 class="text-xl font-bold text-stone-900 tracking-tight mb-2">
+        Заявка принята!
+      </h3>
+
+      <!-- Текст сообщения -->
+      <p class="text-xs sm:text-sm text-stone-600 leading-relaxed mb-5">
+        Шеф Владислав получил ваш рацион и пожелания. Мы свяжемся с вами в Telegram или по телефону в ближайшее время для согласования деталей.
+      </p>
+
+      <!-- Информационная плашка сервиса -->
+      <div class="bg-sand-50 rounded-2xl p-3 border border-sand-200 text-left text-xs text-stone-600 space-y-1.5 mb-6">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-brand-600 text-[18px]">receipt_long</span>
+          <span class="font-semibold text-stone-800">Продукты:</span>
+          <span>строго по чеку супермаркета</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-brand-600 text-[18px]">cleaning_services</span>
+          <span class="font-semibold text-stone-800">Чистота:</span>
+          <span>сдаем сияющую кухню после готовки</span>
+        </div>
+      </div>
+
+      <!-- Кнопка подтверждения -->
+      <button type="button" 
+              onclick="closeSuccessModal()" 
+              class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-98 text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer">
+        <span>Отлично, жду визита</span>
+        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+      </button>
+
     </div>
   </div>
 
@@ -1493,6 +1545,7 @@
         selectedDishes.add(dishId);
       }
       renderDishes();
+      if (typeof saveCartState === 'function') saveCartState();
     }
 
     function filterCategory(cat) {
@@ -2214,6 +2267,7 @@
 
       if (tg?.HapticFeedback) tg.HapticFeedback.selectionChanged();
       renderBookingSlots();
+      if (typeof saveCartState === 'function') saveCartState();
     }
 
     function onCustomDateChange(val) {
@@ -2308,6 +2362,7 @@
       selectedBookingSlot = slot;
       renderBookingSlots();
       if (tg?.HapticFeedback) tg.HapticFeedback.selectionChanged();
+      if (typeof saveCartState === 'function') saveCartState();
     }
 
     function updateBookingBadge() {
@@ -2457,43 +2512,148 @@
       if (tg?.HapticFeedback) tg.HapticFeedback.selectionChanged();
     }
 
+    // ==================== СОХРАНЕНИЕ КОРЗИНЫ В LOCALSTORAGE ====================
+    const CART_STORAGE_KEY = 'chef_cart_state_v1';
+
+    function saveCartState() {
+      try {
+        const state = {
+          selectedDishes: Array.from(selectedDishes),
+          selectedBookingDateStr,
+          selectedBookingDateLabel,
+          selectedBookingSlot,
+          cookingFormat,
+          clientHasOven,
+          selectedPaymentMethod,
+          selectedStores: Array.from(selectedStores),
+          userPantryItems: Array.from(userPantryItems)
+        };
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        console.warn('Не удалось сохранить состояние корзины:', e);
+      }
+    }
+
+    function loadCartState() {
+      try {
+        const raw = localStorage.getItem(CART_STORAGE_KEY);
+        if (!raw) return;
+        const state = JSON.parse(raw);
+
+        if (Array.isArray(state.selectedDishes) && state.selectedDishes.length > 0) {
+          selectedDishes.clear();
+          state.selectedDishes.forEach(id => selectedDishes.add(id));
+        }
+        if (state.selectedBookingDateStr) selectedBookingDateStr = state.selectedBookingDateStr;
+        if (state.selectedBookingDateLabel) selectedBookingDateLabel = state.selectedBookingDateLabel;
+        if (state.selectedBookingSlot) selectedBookingSlot = state.selectedBookingSlot;
+        if (state.cookingFormat) cookingFormat = state.cookingFormat;
+        if (typeof state.clientHasOven === 'boolean') clientHasOven = state.clientHasOven;
+        if (state.selectedPaymentMethod) selectedPaymentMethod = state.selectedPaymentMethod;
+
+        if (Array.isArray(state.selectedStores)) {
+          selectedStores.clear();
+          state.selectedStores.forEach(s => selectedStores.add(s));
+        }
+        if (Array.isArray(state.userPantryItems)) {
+          userPantryItems.clear();
+          state.userPantryItems.forEach(p => userPantryItems.add(p));
+        }
+      } catch (e) {
+        console.warn('Не удалось восстановить корзину:', e);
+      }
+    }
+
+    function clearCartState() {
+      try {
+        localStorage.removeItem(CART_STORAGE_KEY);
+      } catch (e) {
+        console.warn('Ошибка очистки localStorage:', e);
+      }
+    }
+
+    // ==================== ВАЛИДАЦИЯ ПОЛЕЙ ====================
+    function setFieldError(inputEl, errorEl, hasError) {
+      if (!inputEl || !errorEl) return;
+      if (hasError) {
+        inputEl.classList.add('border-red-500', 'ring-1', 'ring-red-500', 'bg-red-50/30');
+        inputEl.classList.remove('border-sand-200', 'bg-sand-50');
+        errorEl.classList.remove('hidden');
+      } else {
+        inputEl.classList.remove('border-red-500', 'ring-1', 'ring-red-500', 'bg-red-50/30');
+        inputEl.classList.add('border-sand-200', 'bg-sand-50');
+        errorEl.classList.add('hidden');
+      }
+    }
+
+    // ==================== МОДАЛЬНОЕ ОКНО УСПЕХА ====================
+    function openSuccessModal() {
+      const modal = document.getElementById('orderSuccessModal');
+      if (modal) modal.classList.remove('hidden');
+      if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
+    }
+
+    function closeSuccessModal() {
+      const modal = document.getElementById('orderSuccessModal');
+      if (modal) modal.classList.add('hidden');
+
+      // Полное обнуление корзины
+      selectedDishes.clear();
+      userPantryItems.clear();
+      renderDishes();
+      updateCartBar();
+      closeOrderDrawer();
+    }
+
     let isSubmitting = false;
 
     async function submitOrder(e) {
       if (e && e.preventDefault) e.preventDefault();
       if (isSubmitting) return;
 
-      const name = document.getElementById('inputName').value.trim();
-      const phone = document.getElementById('inputPhone').value.trim();
-      const address = document.getElementById('inputAddress').value.trim();
-      const notes = document.getElementById('inputNotes').value.trim();
+      const nameInput = document.getElementById('inputName');
+      const phoneInput = document.getElementById('inputPhone');
+      const errorName = document.getElementById('errorName');
+      const errorPhone = document.getElementById('errorPhone');
 
-      if (!name || !phone) {
-        if (tg?.showAlert) {
-          tg.showAlert('Пожалуйста, укажите ваше имя и контакт (телефон или Telegram)!');
-        } else {
-          alert('Пожалуйста, укажите ваше имя и контакт (телефон или Telegram)!');
-        }
+      const name = nameInput ? nameInput.value.trim() : '';
+      const phone = phoneInput ? phoneInput.value.trim() : '';
+      const address = document.getElementById('inputAddress')?.value.trim() || '';
+      const notes = document.getElementById('inputNotes')?.value.trim() || '';
+
+      let hasValidationError = false;
+      if (!name) {
+        setFieldError(nameInput, errorName, true);
+        hasValidationError = true;
+      } else {
+        setFieldError(nameInput, errorName, false);
+      }
+
+      if (!phone) {
+        setFieldError(phoneInput, errorPhone, true);
+        hasValidationError = true;
+      } else {
+        setFieldError(phoneInput, errorPhone, false);
+      }
+
+      if (hasValidationError) {
+        if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('warning');
+        if (!name && nameInput) nameInput.focus();
+        else if (!phone && phoneInput) phoneInput.focus();
         return;
       }
 
       // Проверка: если выбрано сегодня, но слоты уже закрыты
       const todayIso = getLocalDateStr(new Date());
       if (selectedBookingDateStr === todayIso && !selectedBookingSlot) {
-        if (tg?.showAlert) {
-          tg.showAlert('На сегодня все слоты выезда шефа уже завершены. Пожалуйста, выберите дату начиная с завтра!');
-        } else {
-          alert('На сегодня все слоты выезда шефа уже завершены. Пожалуйста, выберите дату начиная с завтра!');
-        }
+        const warn = 'На сегодня все слоты выезда шефа уже завершены. Пожалуйста, выберите дату начиная с завтра!';
+        if (tg?.showAlert) tg.showAlert(warn); else alert(warn);
         return;
       }
 
       isSubmitting = true;
 
-      const chosenList = Array.from(selectedDishes).map(id => {
-        return DISHES.find(item => item.id === id);
-      }).filter(Boolean);
-
+      const chosenList = Array.from(selectedDishes).map(id => DISHES.find(item => item.id === id)).filter(Boolean);
       const timeInfo = calculateChefTime();
       const hours = timeInfo.hours;
       const fee = timeInfo.fee.toLocaleString('ru-RU');
@@ -2524,7 +2684,6 @@
         submittedAt: new Date().toISOString()
       };
 
-      // Блокировка кнопки и состояние загрузки
       const btn = document.getElementById('btnSubmitOrder');
       const btnText = document.getElementById('btnSubmitOrderText');
       const btnIcon = document.getElementById('btnSubmitOrderIcon');
@@ -2550,37 +2709,29 @@
           throw new Error(`HTTP error: ${response.status}`);
         }
 
-        // Очистка формы после успешной отправки
-        document.getElementById('inputName').value = '';
-        document.getElementById('inputPhone').value = '';
-        document.getElementById('inputAddress').value = '';
-        document.getElementById('inputNotes').value = '';
-        selectedDishes.clear();
-        userPantryItems.clear();
-        renderDishes();
-        updateCartBar();
+        // 1. Очищаем localStorage после подтверждения вебхука
+        clearCartState();
 
-        if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
+        // 2. Очистка формы
+        if (nameInput) nameInput.value = '';
+        if (phoneInput) phoneInput.value = '';
+        const addrEl = document.getElementById('inputAddress');
+        if (addrEl) addrEl.value = '';
+        const notesEl = document.getElementById('inputNotes');
+        if (notesEl) notesEl.value = '';
 
-        const successNotice = 'Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.';
-        if (tg?.showAlert) {
-          tg.showAlert(successNotice);
-        } else {
-          alert(successNotice);
-        }
-
+        // 3. Закрываем шторку заказа
         closeOrderDrawer();
+
+        // 4. Открываем фирменное модальное окно успеха
+        openSuccessModal();
 
       } catch (err) {
         console.error('Ошибка отправки заявки через webhook:', err);
         if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('error');
 
-        const failNotice = 'Произошла ошибка при отправке заявки. Пожалуйста, проверьте подключение к интернету или попробуйте позже.';
-        if (tg?.showAlert) {
-          tg.showAlert(failNotice);
-        } else {
-          alert(failNotice);
-        }
+        const failNotice = 'Произошла ошибка при отправке заявки. Пожалуйста, проверьте интернет или попробуйте позже.';
+        if (tg?.showAlert) tg.showAlert(failNotice); else alert(failNotice);
 
       } finally {
         isSubmitting = false;
@@ -2593,10 +2744,29 @@
       }
     }
 
+    // Слушатели автоматического снятия ошибки при вводе
+    const nameInputEl = document.getElementById('inputName');
+    const nameErrEl = document.getElementById('errorName');
+    if (nameInputEl && nameErrEl) {
+      nameInputEl.addEventListener('input', () => {
+        if (nameInputEl.value.trim()) setFieldError(nameInputEl, nameErrEl, false);
+      });
+    }
 
+    const phoneInputEl = document.getElementById('inputPhone');
+    const phoneErrEl = document.getElementById('errorPhone');
+    if (phoneInputEl && phoneErrEl) {
+      phoneInputEl.addEventListener('input', () => {
+        if (phoneInputEl.value.trim()) setFieldError(phoneInputEl, phoneErrEl, false);
+      });
+    }
+
+    // Восстанавливаем состояние корзины из localStorage
+    loadCartState();
 
     // Первоначальный запуск
     renderDishes();
+    updateCartBar();
 
     // Слушатель клика для кнопки отправки заказа
     const submitBtn = document.getElementById('btnSubmitOrder');
