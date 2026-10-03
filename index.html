@@ -975,7 +975,7 @@
 
       <!-- Кнопки действий: Отправка и Закрытие -->
       <div class="pt-2 space-y-2">
-        <button id="btnSubmitOrder" onclick="submitOrder()" class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-98 text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2">
+        <button type="button" id="btnSubmitOrder" onclick="submitOrder()" class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-98 text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2">
           <span id="btnSubmitOrderText">Отправить заявку шефу Владиславу</span>
           <span id="btnSubmitOrderIcon" class="material-symbols-outlined text-[18px]">send</span>
         </button>
@@ -2457,7 +2457,13 @@
       if (tg?.HapticFeedback) tg.HapticFeedback.selectionChanged();
     }
 
-    async function submitOrder() {
+    let isSubmitting = false;
+
+    async function submitOrder(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      if (isSubmitting) return;
+      isSubmitting = true;
+
       const name = document.getElementById('inputName').value.trim();
       const phone = document.getElementById('inputPhone').value.trim();
       const address = document.getElementById('inputAddress').value.trim();
@@ -2620,6 +2626,7 @@
         }
 
       } finally {
+        isSubmitting = false;
         if (btn) {
           btn.disabled = false;
           btn.classList.remove('opacity-70', 'pointer-events-none');
@@ -2633,6 +2640,12 @@
 
     // Первоначальный запуск
     renderDishes();
+
+    // Слушатель клика для кнопки отправки заказа
+    const submitBtn = document.getElementById('btnSubmitOrder');
+    if (submitBtn) {
+      submitBtn.addEventListener('click', submitOrder);
+    }
   
     // Закрытие шторки и модалок по клавише Escape
     document.addEventListener('keydown', function(e) {
