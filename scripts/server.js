@@ -9,7 +9,11 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = process.env.PORT || 3000;
-const WEBAPP_DIR = path.join(__dirname, '..', 'webapp');
+
+// Автоматическое определение папки webapp (работает как из корня проекта, так и из webapp/)
+const WEBAPP_DIR = fs.existsSync(path.join(__dirname, '..', 'index.html'))
+  ? path.join(__dirname, '..')
+  : path.join(__dirname, '..', 'webapp');
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -18,7 +22,10 @@ const MIME_TYPES = {
   '.json': 'application/json; charset=utf-8',
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
-  '.svg': 'image/svg+xml'
+  '.jpeg': 'image/jpeg',
+  '.svg': 'image/svg+xml',
+  '.webp': 'image/webp',
+  '.ico': 'image/x-icon'
 };
 
 const server = http.createServer((req, res) => {
@@ -32,21 +39,43 @@ const server = http.createServer((req, res) => {
     return res.end();
   }
 
-  let filePath = path.join(WEBAPP_DIR, req.url === '/' ? 'index.html' : req.url.split('?')[0]);
+  let decodedPath = '';
+  try {
+    decodedPath = decodeURIComponent(req.url.split('?')[0]);
+  } catch (e) {
+    decodedPath = req.url.split('?')[0];
+  }
+
+  let filePath = path.join(WEBAPP_DIR, decodedPath === '/' ? 'index.html' : decodedPath);
   const ext = path.extname(filePath).toLowerCase();
   const contentType = MIME_TYPES[ext] || 'application/octet-stream';
 
   fs.readFile(filePath, (err, content) => {
     if (err) {
       if (err.code === 'ENOENT') {
-        // Fallback на index.html для SPA
-        fs.readFile(path.join(WEBAPP_DIR, 'index.html'), (err2, fallback) => {
-          if (err2) {
-            res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
-            res.end('404: Файл не найден');
+        // Если запрошен конкретный статический ассет с расширением (картинка, js, css), отдаем чистый 404
+        if (ext && ext !== '.html') {
+          res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+          return res.end(`404: Файл ${path.basename(filePath)} не найден`);
+        }
+
+        // Если запрошен несуществующий раздел/роут, отдаем брендированную страницу 404.html со статусом 404
+        const notFoundFile = path.join(WEBAPP_DIR, '404.html');
+        fs.readFile(notFoundFile, (err404, notFoundContent) => {
+          if (!err404) {
+            res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+            res.end(notFoundContent);
           } else {
-            res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-            res.end(fallback);
+            // Если 404.html отсутствует, fallback на index.html
+            fs.readFile(path.join(WEBAPP_DIR, 'index.html'), (errIndex, indexContent) => {
+              if (!errIndex) {
+                res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+                res.end(indexContent);
+              } else {
+                res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+                res.end('404: Страница не найдена');
+              }
+            });
           }
         });
       } else {
@@ -62,4 +91,5 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, () => {
   console.log(`✨ Telegram Mini App успешно запущен: http://localhost:${PORT}`);
+  console.log(`📂 Корневая папка: ${WEBAPP_DIR}`);
 });

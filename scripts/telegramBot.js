@@ -49,7 +49,7 @@ loadEnv();
 const TOKEN = process.env.TELEGRAM_BOT_TOKEN || process.env.VITE_TELEGRAM_BOT_TOKEN || '';
 const ADMIN_CHAT_ID = process.env.ADMIN_CHAT_ID || process.env.VITE_TELEGRAM_CHAT_ID || '1047014528';
 const BASE_URL = `https://api.telegram.org/bot${TOKEN}`;
-const WEBAPP_URL = 'https://borzenkovvladislav2003-web.github.io/chef-menu/?v=15';
+const WEBAPP_URL = 'https://borzenkovvladislav2003-web.github.io/chef-menu/?v=16';
 
 // Локальная база данных (сохраняется в файл)
 const DB_FILE = path.join(__dirname, '..', 'bot_data.json');
